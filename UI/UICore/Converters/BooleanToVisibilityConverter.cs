@@ -1,26 +1,25 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
 namespace UICore.Converters
 {
-    [ValueConversion(typeof(bool), typeof(Visibility), ParameterType = typeof(bool))]
-    public class BooleanToVisibilityConverter : IValueConverter
+    [ValueConversion(typeof(bool), typeof(Visibility))]
+    public class BooleanToVisibilityConverter : ConverterBase
     {
-        object IValueConverter.Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public bool Invert { get; set; }
+
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var b = (bool) value;
-
-            if (parameter != null)
-                if (parameter.ToString().Equals("true", StringComparison.InvariantCultureIgnoreCase))
-                    b = !b;
-
-            return b ? Visibility.Visible : Visibility.Collapsed;
+            var flag = (value is bool && (bool)value);
+            return (flag ^ Invert) ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        protected override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            var result = value is Visibility && (Visibility)value == Visibility.Visible;
+            return result ^ Invert;
         }
     }
 }
