@@ -1,0 +1,96 @@
+﻿using CoreLib.ExchangeProviders;
+using CoreLib.Models.Configuration;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+
+namespace UICore.ViewModels
+{
+    public class BaseDeviceViewModel : BaseViewModel
+    {
+        #region Public properties
+
+        /// <summary>
+        /// Номер устройства
+        /// </summary>
+        [Category("Общее")]
+        [DisplayName("Номер устройства")]
+        [Description("Номер устройства")]
+        public UInt32 DeviceGuid
+        {
+            get { return Device.DeviceGuid; }
+        }
+
+        /// <summary>
+        /// Наименование устройства
+        /// </summary>
+        [Category("Общее")]
+        [DisplayName("Имя устройства")]
+        [Description("Качество значения тега")]
+        public string DeviceName
+        {
+            get { return Device.DeviceGuid + "@" + Device.DeviceTypeName; }
+        }
+
+        /// <summary>
+        /// Наименование присоединения устройства
+        /// </summary>
+        [Category("Общее")]
+        [DisplayName("Присоединение")]
+        [Description("Описание присоединения устройства")]
+        public string DeviceDescription
+        {
+            get { return Device.DeviceDescription; }
+            set { Device.DeviceDescription = value; }
+        }
+
+        /// <summary>
+        /// Список всех групп
+        /// </summary>
+        [Browsable(false)]
+        public List<BaseGroupViewModel> Groups { get; set; }
+
+        /// <summary>
+        /// Список всех тегов устройства
+        /// </summary>
+        [Browsable(false)]
+        public List<BaseTagViewModel> Tags { get; set; } 
+
+        #endregion
+
+        #region Private fields
+
+        /// <summary>
+        /// Ссылка на модель данных устройства
+        /// </summary>
+        protected readonly Device Device;
+
+        /// <summary>
+        /// Провайдер обмена с сервером данных
+        /// </summary>
+        protected readonly IExchangeProvider ExchangeProvider;
+
+        #endregion
+
+        #region Constructor
+
+        public BaseDeviceViewModel(Device device, IExchangeProvider exchangeProvider)
+        {
+            Device = device;
+            ExchangeProvider = exchangeProvider;
+
+            Groups = new List<BaseGroupViewModel>();
+            Tags = new List<BaseTagViewModel>();
+            foreach (var group in Device.Groups)
+            {
+                var groupViewModel = new BaseGroupViewModel(group, exchangeProvider);
+                Groups.Add(groupViewModel);
+
+                if (groupViewModel.Tags != null)
+                    Tags.AddRange(groupViewModel.Tags);
+            }
+        }
+
+        #endregion
+    }
+}

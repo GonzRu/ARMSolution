@@ -1,0 +1,196 @@
+﻿<Window x:Class="ARMConfigurator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewModels="clr-namespace:ARMConfigurator.ViewModels"
+        xmlns:converters="clr-namespace:ARMConfigurator.Converters"
+        xmlns:commonConverters="clr-namespace:UICore.Converters;assembly=UICore"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"        
+        xmlns:wpg="clr-namespace:System.Windows.Controls"
+        xmlns:xceedtoolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:commonViewModels="clr-namespace:UICore.ViewModels;assembly=UICore"
+        Title="MainWindow" Height="776" Width="1232" WindowState="Maximized"
+        x:Name="Window">
+
+    <!--<controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <Button Content="Сделать резервную копию" />
+            <Button Content="Настройки" />
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>-->
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Path=LoadConfigurationCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Window.Resources>
+
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <commonConverters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <converters:GroupCategoryToStringConverter x:Key="GroupCategoryToStringConverter"/>
+
+        </ResourceDictionary>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- menu -->
+        <Menu Grid.Row="0">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Сохранить" Command="{Binding Path=SaveConfigurationAsyncCommand}" />
+            </MenuItem>
+            <!--<MenuItem Header="Резервная копия">
+                <MenuItem Header="Сделать резервную копию" Command="{Binding Path=DoBackUpAsyncCommand}" />
+                <MenuItem Header="Список резервных копий" Command="" />
+            </MenuItem>-->
+        </Menu>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="26*" />
+                <ColumnDefinition Width="218*"/>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="733*" />
+                <ColumnDefinition Width="244*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- TreeView -->
+            <TreeView Grid.Row="0"
+                      ItemsSource="{Binding Path=DataServers}"
+                      x:Name="TreeView"
+                      SelectedItemChanged="TreeView_SelectedItemChanged"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.ColumnSpan="2">
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectedItemChanged">
+                        <i:InvokeCommandAction Command="{Binding Path=SubscribeToTagsValueUpdateAsyncCommand}" CommandParameter="{Binding ElementName=TreeView, Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+                <TreeView.Resources>
+
+                    <HierarchicalDataTemplate  DataType="{x:Type commonViewModels:BaseDataServerViewModel}" ItemsSource="{Binding Path=Devices}">
+                        <TextBlock Text="{Binding Path=ObjectName}" Margin="3,1,1,3" />
+                    </HierarchicalDataTemplate>
+
+                    <HierarchicalDataTemplate DataType="{x:Type commonViewModels:BaseDeviceViewModel}" ItemsSource="{Binding Path=Groups}">
+                        <StackPanel Orientation="Horizontal" Margin="0,1,1,0">
+                            <TextBlock Text="{Binding Path=DeviceName}" Margin="3,0,0,3" />
+                            <TextBlock Text="{Binding Path=DeviceDescription}" Margin="3,0,0,3" Foreground="BlueViolet" />
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+
+                    <HierarchicalDataTemplate DataType="{x:Type commonViewModels:BaseGroupViewModel}" ItemsSource="{Binding Path=SubGroups}">
+                        <StackPanel Orientation="Horizontal" Margin="0,1,1,0">
+                            <CheckBox IsChecked="{Binding Path=Enable}" />
+                            <TextBlock Text="{Binding Path=GroupName}" Margin="3,0,0,3" Foreground="CadetBlue" />
+                            <TextBlock Text="{Binding Path=GroupCategory, Converter={StaticResource GroupCategoryToStringConverter}}" Margin="3,0,0,3" Foreground="Red" />
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+
+                </TreeView.Resources>
+
+            </TreeView>
+
+            <!-- Gridspletter -->
+            <GridSplitter Grid.Column="2"
+                          Width="3"
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Center"
+                          ShowsPreview="False" />
+
+            <!-- Tags Grid -->
+            <DataGrid Grid.Column="3"
+                      ItemsSource="{Binding ElementName=TreeView, Path=SelectedItem.Tags}"
+                      AutoGenerateColumns="False"
+                      SelectionMode="Single"
+                      SelectionChanged="DataGrid_SelectionChanged"
+                      Name="DataGrid">
+
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn Header="Enable" Binding="{Binding Path=Enable}" />
+                    <DataGridTextColumn Header="TagGuid" Binding="{Binding Path=TagGuid}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="TagName" Binding="{Binding Path=TagName}" Width="70" />
+                    <DataGridTextColumn Header="raw-значение" Binding="{Binding Path=TagValueAsObject}" />
+                    <DataGridTextColumn Header="string-значение" Binding="{Binding Path=TagValueAsString}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Качество" Binding="{Binding Path=TagValueQuality}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Время изменения" Binding="{Binding Path=TimeStamp, StringFormat=s}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="ReadOnly" Binding="{Binding Path=ReadOnly}" IsReadOnly="True" />
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+            <StackPanel Grid.Column="4">
+                <xceedtoolkit:PropertyGrid x:Name="PropertyGrid"
+                                       AutoGenerateProperties="True"
+                                       Background="White"
+                                       BorderThickness="0">
+                </xceedtoolkit:PropertyGrid>
+
+                <Button Content="Применить настройки тренда"
+                        DataContext="{Binding ElementName=DataGrid, Path=SelectedItem}"
+                        Visibility="{Binding Path=TrendSettingsChanged, FallbackValue=Hidden, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Command="{Binding Path=SetTrendSettingsAsyncCommand}">
+                </Button>
+
+                <!--<wpg:WpfPropertyGrid Grid.Column="3"
+                                 x:Name="PropertyGrid"
+                                 HelpVisible="True"
+                                 ToolbarVisible="False" >
+            </wpg:WpfPropertyGrid>-->
+            </StackPanel>
+
+        </Grid>
+
+        <!-- StatusBar -->
+        <StatusBar Grid.Row="2">
+
+            <StatusBarItem HorizontalAlignment="Left" Visibility="{Binding Path=IsConnectionStateOpened, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="15" Height="15">
+                        <Rectangle.Fill>
+                            <VisualBrush Visual="{StaticResource appbar_check}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label>Связь с сервером установлена</Label>
+                </StackPanel>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Left" Visibility="{Binding Path=IsConnectionStateOpened, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=True}">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="15" Height="15">
+                        <Rectangle.Fill>
+                            <VisualBrush Visual="{StaticResource appbar_checkmark_cross}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label>Связь с сервером отсутствует</Label>
+                </StackPanel>
+            </StatusBarItem>
+
+            <StatusBarItem HorizontalAlignment="Left">
+                <Label Content="{Binding Path=DsRouterIpAddress}" />
+            </StatusBarItem>
+
+            <StatusBarItem HorizontalAlignment="Right" Visibility="{Binding Path=IsBlockCommandActive, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Подождите" />
+                    <ProgressBar IsIndeterminate="True" Width="100" Height="20" />
+                </StackPanel>
+            </StatusBarItem>
+
+        </StatusBar>
+
+    </Grid>
+</Window>

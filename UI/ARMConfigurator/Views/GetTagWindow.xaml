@@ -1,0 +1,20 @@
+﻿<Window x:Class="ARMConfigurator.Views.GetTagWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="GetTagWindow" Height="134" Width="381" ResizeMode="NoResize">
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label Content="Введите идентификатор тега" HorizontalAlignment="Center" FontSize="17" />
+
+        <TextBox Grid.Row="1" Name="TextBox" />
+
+        <Button Grid.Row="2" Content="Ок" Click="ButtonBase_OnClick" HorizontalAlignment="Right" Width="100" Margin="5" />
+
+    </Grid>
+</Window>

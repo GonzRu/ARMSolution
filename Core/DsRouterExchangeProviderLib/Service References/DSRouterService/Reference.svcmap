@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="c2277864-a24b-4331-b126-ece5553ef9c3" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/DSRouter.DSRouterService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="DSRouterService.xsd" MetadataType="Schema" ID="469a5b97-7b7a-4bef-99f5-d8c04efef71e" SourceId="1" SourceUrl="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd5" />
+    <MetadataFile FileName="DSRouterService.disco" MetadataType="Disco" ID="b43f9762-031d-47e7-9866-91a109b39331" SourceId="1" SourceUrl="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?disco" />
+    <MetadataFile FileName="DSRouterService1.xsd" MetadataType="Schema" ID="19cd1918-9199-49a5-a49f-3439e309080b" SourceId="1" SourceUrl="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd2" />
+    <MetadataFile FileName="DSRouterService2.xsd" MetadataType="Schema" ID="3b3472de-4504-43bb-bd01-abb630feeba7" SourceId="1" SourceUrl="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd6" />
+    <MetadataFile FileName="DSRouterService3.xsd" MetadataType="Schema" ID="efb1e541-f98e-4185-a9e4-4e28e2000fa8" SourceId="1" SourceUrl="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd4" />
+    <MetadataFile FileName="DSRouterService4.xsd" MetadataType="Schema" ID="90fd226c-d47d-47ef-92cf-a723ba87e9a2" SourceId="1" SourceUrl="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd3" />
+    <MetadataFile FileName="DSRouterService5.xsd" MetadataType="Schema" ID="7b5c7305-2b4f-4d53-8074-d8c70bccb8ed" SourceId="1" SourceUrl="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd1" />
+    <MetadataFile FileName="DSRouterService6.xsd" MetadataType="Schema" ID="ebd910de-1fee-475a-85ad-daa35c8f9b2a" SourceId="1" SourceUrl="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd0" />
+    <MetadataFile FileName="DSRouterService.wsdl" MetadataType="Wsdl" ID="37ee9f08-4686-46c7-8cb8-73ab57ef2ed4" SourceId="1" SourceUrl="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

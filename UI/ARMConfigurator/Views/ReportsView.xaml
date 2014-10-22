@@ -1,0 +1,129 @@
+﻿<Window x:Class="ARMConfigurator.Views.ReportsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:StyleAlias="clr-namespace:CoreLib.Models.Common.Reports;assembly=CoreLib"
+        xmlns:commonConverters="clr-namespace:UICore.Converters;assembly=UICore"
+        Title="ReportsView" Height="315" Width="468"
+        ResizeMode="NoResize">
+
+    <Window.Resources>
+        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="StyleAlias:ReportExtension"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <commonConverters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal">
+            <RadioButton Name="DailyReportRadioButton" Content="Суточный отчет" Margin="0 0 10 0" IsChecked="True" />
+            <RadioButton Name="EventsReportRadioButton" Content="Отчет по событиям" Margin="0 0 10 0"  IsChecked="True"/>
+            <RadioButton Name="TagsReportRadioButton" Content="Отчет по тегам" Margin="0 0 35 0" IsChecked="True" />
+
+            <ComboBox Text="Формат отчета" ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
+                      SelectedValue="{Binding Path=ReportExtension}" />
+
+        </StackPanel>
+
+        <Grid Grid.Row="1" Visibility="{Binding ElementName=DailyReportRadioButton, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+        </Grid>
+
+        <Grid Grid.Row="1" Visibility="{Binding ElementName=EventsReportRadioButton, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Vertical" Grid.Column="0">
+                <Label Content="Терминал" HorizontalAlignment="Center" FontSize="17" />
+                <TextBox Text="{Binding Path=EventsReport.DeviceGuid, Mode=TwoWay}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Column="1">
+                <Label Content="Время" HorizontalAlignment="Center" FontSize="17" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Начало" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+
+                    <Label Content="Конец" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+
+                    <DatePicker SelectedDate="{Binding Path=TagsReport.StartDateTime, Mode=TwoWay}" Grid.Row="1" Grid.Column="0" />
+
+                    <DatePicker SelectedDate="{Binding Path=TagsReport.EndDateTime, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" />
+
+                </Grid>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" Visibility="{Binding ElementName=TagsReportRadioButton, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Vertical" Grid.Column="0">
+                <Label Content="Теги" HorizontalAlignment="Center" FontSize="17" />
+                <ListBox ItemsSource="{Binding Path=Tags}" Height="150" Width="200" BorderBrush="Gainsboro" BorderThickness="1" Name="ListBox" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Добавить" Margin="0 0 20 0" Command="{Binding Path=AddTagCommand}" />
+                    <Button Content="Удалить" Margin="20 0 0 0" Command="{Binding Path=DeleteTagsCommand}" CommandParameter="{Binding ElementName=ListBox, Path=SelectedItems}" />
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Column="1">
+                <Label Content="Диапазон значений" HorizontalAlignment="Center" FontSize="17" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Начало" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+
+                    <Label Content="Конец" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+
+                    <DatePicker SelectedDate="{Binding Path=TagsReport.StartDateTime, Mode=TwoWay}" Grid.Row="1" Grid.Column="0" />
+
+                    <DatePicker SelectedDate="{Binding Path=TagsReport.EndDateTime, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" />
+
+                </Grid>
+                <Label Content="Тип отчета" HorizontalAlignment="Center" FontSize="17" />
+                <ComboBox Name="ComboBox">
+                    <ComboBoxItem IsSelected="True">Обычный отчет по тегам</ComboBoxItem>
+                    <ComboBoxItem>Сравнительный отчет для 4х тегов</ComboBoxItem>
+                </ComboBox>
+                <Label Content="Интервал вывода значений" HorizontalAlignment="Center" FontSize="17" ToolTip="(сек.)" />
+                <TextBox Text="{Binding Path=TagsReport.Interval, Mode=TwoWay}" />
+            </StackPanel>
+
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right">
+            <Button Content="Получить отчет" Margin="0 0 5 5" Click="GetReportButtonClickHandler" />
+        </StackPanel>
+
+    </Grid>
+</Window>
