@@ -414,6 +414,15 @@ namespace ArmWpfUI.ViewModels
 
                 #endregion
 
+                #region Индикация ручного ввода - ASUControlISManualSetProperty
+
+                if (cc.ASUCommutationDeviceStateManualSetEnabled)
+                {
+                    CreateBinding(cc, CBaseControl.ASUControlISManualSetProperty, cc.ASUTagIDState, new HandledQualityToBooleanConverter(), null);
+                }
+
+                #endregion
+
                 #region Context menu
 
                 cc.ContextMenu = new ContextMenu();
