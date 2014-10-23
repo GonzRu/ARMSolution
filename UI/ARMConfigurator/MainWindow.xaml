@@ -33,9 +33,6 @@
                 <ResourceDictionary Source="Resources/Icons.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <commonConverters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-            <converters:GroupCategoryToStringConverter x:Key="GroupCategoryToStringConverter"/>
-
         </ResourceDictionary>
 
     </Window.Resources>
@@ -97,7 +94,7 @@
                         <StackPanel Orientation="Horizontal" Margin="0,1,1,0">
                             <CheckBox IsChecked="{Binding Path=Enable}" />
                             <TextBlock Text="{Binding Path=GroupName}" Margin="3,0,0,3" Foreground="CadetBlue" />
-                            <TextBlock Text="{Binding Path=GroupCategory, Converter={StaticResource GroupCategoryToStringConverter}}" Margin="3,0,0,3" Foreground="Red" />
+                            <TextBlock Text="{Binding Path=GroupCategory, Converter={converters:GroupCategoryToStringConverter}}" Margin="3,0,0,3" Foreground="Red" />
                         </StackPanel>
                     </HierarchicalDataTemplate>
 
@@ -142,7 +139,7 @@
 
                 <Button Content="Применить настройки тренда"
                         DataContext="{Binding ElementName=DataGrid, Path=SelectedItem}"
-                        Visibility="{Binding Path=TrendSettingsChanged, FallbackValue=Hidden, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Visibility="{Binding Path=TrendSettingsChanged, FallbackValue=Hidden, Converter={commonConverters:BooleanToVisibilityConverter}}"
                         Command="{Binding Path=SetTrendSettingsAsyncCommand}">
                 </Button>
 
@@ -158,7 +155,7 @@
         <!-- StatusBar -->
         <StatusBar Grid.Row="2">
 
-            <StatusBarItem HorizontalAlignment="Left" Visibility="{Binding Path=IsConnectionStateOpened, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StatusBarItem HorizontalAlignment="Left" Visibility="{Binding Path=IsConnectionStateOpened, Converter={commonConverters:BooleanToVisibilityConverter}}">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="15" Height="15">
                         <Rectangle.Fill>
@@ -168,7 +165,7 @@
                     <Label>Связь с сервером установлена</Label>
                 </StackPanel>
             </StatusBarItem>
-            <StatusBarItem HorizontalAlignment="Left" Visibility="{Binding Path=IsConnectionStateOpened, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=True}">
+            <StatusBarItem HorizontalAlignment="Left" Visibility="{Binding Path=IsConnectionStateOpened, Converter={commonConverters:BooleanToVisibilityConverter Invert=True}}">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="15" Height="15">
                         <Rectangle.Fill>
@@ -183,7 +180,7 @@
                 <Label Content="{Binding Path=DsRouterIpAddress}" />
             </StatusBarItem>
 
-            <StatusBarItem HorizontalAlignment="Right" Visibility="{Binding Path=IsBlockCommandActive, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StatusBarItem HorizontalAlignment="Right" Visibility="{Binding Path=IsBlockCommandActive, Converter={commonConverters:BooleanToVisibilityConverter}}">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Подождите" />
                     <ProgressBar IsIndeterminate="True" Width="100" Height="20" />

@@ -13,8 +13,6 @@
                 <x:Type TypeName="StyleAlias:ReportExtension"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
-
-        <commonConverters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>
 
     <Grid Margin="5">
@@ -35,11 +33,11 @@
 
         </StackPanel>
 
-        <Grid Grid.Row="1" Visibility="{Binding ElementName=DailyReportRadioButton, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <Grid Grid.Row="1" Visibility="{Binding ElementName=DailyReportRadioButton, Path=IsChecked, Converter={commonConverters:BooleanToVisibilityConverter}}">
 
         </Grid>
 
-        <Grid Grid.Row="1" Visibility="{Binding ElementName=EventsReportRadioButton, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <Grid Grid.Row="1" Visibility="{Binding ElementName=EventsReportRadioButton, Path=IsChecked, Converter={commonConverters:BooleanToVisibilityConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -74,7 +72,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="1" Visibility="{Binding ElementName=TagsReportRadioButton, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <Grid Grid.Row="1" Visibility="{Binding ElementName=TagsReportRadioButton, Path=IsChecked, Converter={commonConverters:BooleanToVisibilityConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />

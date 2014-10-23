@@ -1,14 +1,15 @@
-﻿using System;
-using System.Windows;
+﻿using CoreLib.Models.Configuration;
+using System;
+using System.Globalization;
 using System.Windows.Data;
-using CoreLib.Models.Configuration;
+using UICore.Converters;
 
 namespace ARMConfigurator.Converters
 {
-    //[ValueConversion(typeof(GroupCategory), typeof(string))]
-    public class GroupCategoryToStringConverter : IValueConverter
+    [ValueConversion(typeof(GroupCategory), typeof(string))]
+    public class GroupCategoryToStringConverter : ConverterBase
     {
-        object IValueConverter.Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var groupCategory = (GroupCategory)value;
 
@@ -27,11 +28,6 @@ namespace ARMConfigurator.Converters
             }
 
             return String.Empty;
-        }
-
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
         }
     }
 }
