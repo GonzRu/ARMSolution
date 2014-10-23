@@ -1,13 +1,11 @@
-﻿using System;
+﻿using CoreLib.Models.Configuration;
+using DsRouterExchangeProviderLib.WcfProvider;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
-using CoreLib.Models.Configuration;
-using DsRouterExchangeProviderLib.WcfProvider;
 
 namespace ConfigurationParsersLib
 {
@@ -74,12 +72,10 @@ namespace ConfigurationParsersLib
 
         void IConfigurationProvider.SaveConfiguration()
         {
-            //throw new NotImplementedException();
-
             if (_configuration == null)
                 return;
 
-            //SaveConfiguration();
+            SaveConfiguration();
         }
 
         Configuration IConfigurationProvider.GetConfiguration()
@@ -381,6 +377,162 @@ namespace ConfigurationParsersLib
                     return GroupCategory.Commands;
                 default:
                     throw new ArgumentException("ASULightConfigurationProvider:GetGroupCategory() : неизвестная категория группы - " + categoryXAttribute.Value);
+            }
+        }
+
+        #endregion
+
+        #region Save
+
+        private void SaveConfiguration()
+        {
+            var dsConfigXDocument = XDocument.Load(PathToDSConfig);
+
+            SaveProjectInfo(dsConfigXDocument.Element("MTRA").Element("ProjectInfo"));
+
+            SaveProjectConfiguration(dsConfigXDocument.Element("MTRA").Element("Configuration"));
+
+            dsConfigXDocument.Save(PathToDSConfig);
+        }
+
+        private void SaveProjectInfo(XElement projectInfoXElement)
+        {
+            projectInfoXElement.Element("NamePTK").Value = _configuration.ProjectName;
+        }
+
+        private void SaveProjectConfiguration(XElement configurationXElement)
+        {
+            foreach (var objectXElement in configurationXElement.Elements("Object"))
+            {
+                var dsGuid = UInt16.Parse(objectXElement.Attribute("UniDS_GUID").Value);
+                var ds = _configuration.DataServers[dsGuid];
+
+                objectXElement.Attribute("name").Value = ds.ObjectName;
+
+                foreach (var deviceXElement in objectXElement.Elements("Device"))
+                {
+                    var devGuid = uint.Parse(deviceXElement.Attribute("objectGUID").Value);
+                    var device = ds.Devices[devGuid];
+
+                    SaveDevice(deviceXElement, device);
+                }
+            }
+        }
+
+        private void SaveDevice(XElement deviceXElement, Device device)
+        {
+            deviceXElement.Element("DescriptInfo").Element("DeviceAttachmentDescribe").Value = device.DeviceDescription;
+
+            SaveGroups(deviceXElement.Element("Groups").Elements("Group"), device.Groups);
+        }
+
+        private void SaveGroups(IEnumerable<XElement> groupsXElements, List<Group> groups)
+        {
+            if (groupsXElements == null || !groupsXElements.Any())
+                return;
+
+            foreach (var groupXElement in groupsXElements)
+            {
+                var groupId = groupXElement.Attribute("GroupGUID").Value;
+                var group = (from gr in groups where gr.GroupGuid.Equals(groupId) select gr).FirstOrDefault();
+
+                SaveGroup(groupXElement, group);
+            }
+        }
+
+        private void SaveGroup(XElement groupXElement, Group group)
+        {
+            if (groupXElement.Attribute("category") != null && groupXElement.Attribute("category").Value.Equals("7"))
+                return;
+
+            groupXElement.Attribute("enbl").Value = group.Enable.ToString(CultureInfo.InvariantCulture);
+            groupXElement.Attribute("nm").Value = group.GroupName;
+
+            SaveGroups(groupXElement.Elements("Group"), group.SubGroups);
+
+            var tagsXElement = groupXElement.Element("Tags");
+            if (tagsXElement != null)
+                foreach (var tagXElement in tagsXElement.Elements("Tag"))
+                {
+                    var tagGuid = uint.Parse(tagXElement.Attribute("tg").Value);
+                    var tag = group.Tags.FirstOrDefault(tg => tg.TagGuid == tagGuid);
+
+                    SaveTag(tagXElement, tag);
+                }
+        }
+
+        private void SaveTag(XElement tagXElement, Tag tag)
+        {
+            // Общая часть
+            tagXElement.Attribute("enbl").Value = tag.Enable.ToString(CultureInfo.InvariantCulture);
+            tagXElement.Attribute("acc").Value = tag.ReadOnly.ToString(CultureInfo.InvariantCulture);
+            tagXElement.Attribute("tg").Value = tag.TagGuid.ToString(CultureInfo.InvariantCulture);
+            tagXElement.Attribute("nm").Value = tag.TagName;
+
+            var tagType = tagXElement.Attribute("tp").Value;
+            switch (tagType)
+            {
+                case "Analog":
+                    #region Init TagAnalog's properties
+
+                    var analogTag = (tag as TagAnalog);
+
+                    tagXElement.Attribute("uom").Value = analogTag.Dim;
+
+                    // Min value
+                    tagXElement.Attribute("min").Value = analogTag.MinValue.HasValue
+                        ? analogTag.MinValue.Value.ToString(CultureInfo.InvariantCulture)
+                        : String.Empty;
+
+                    // Max Value
+                    tagXElement.Attribute("max").Value = analogTag.MinValue.HasValue
+                        ? analogTag.MinValue.Value.ToString(CultureInfo.InvariantCulture)
+                        : String.Empty;
+
+                    #endregion
+                    break;
+                case "Discret":
+                    #region Init TagDiscret's properties
+                    #endregion
+                    break;
+                case "Enum":
+                    #region Init TagEnum's properties
+                    #endregion
+                    break;
+                case "DateTime":
+                    #region Init TagDateTime's properties
+                    #endregion
+                    break;
+                case "String":
+                    #region Init TagString's properties
+                    #endregion
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        string GroupCategoryToString(GroupCategory groupCategory)
+        {
+            switch (groupCategory)
+            {
+                case GroupCategory.Identification:
+                    return "1";
+                case GroupCategory.CurrentData:
+                    return "2";
+                case GroupCategory.Crush:
+                    return "3";
+                case GroupCategory.Ustavki:
+                    return "4";
+                case GroupCategory.Service:
+                    return "5";
+                case GroupCategory.Specific:
+                    return "6";
+                case GroupCategory.Commands:
+                    return "7";
+                case GroupCategory.None:
+                default:
+                    return String.Empty;
             }
         }
 
