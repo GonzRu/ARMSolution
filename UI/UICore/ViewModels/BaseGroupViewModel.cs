@@ -87,11 +87,11 @@ namespace UICore.ViewModels
             {
                 Tags = new List<BaseTagViewModel>();
                 foreach (var tag in Group.Tags)
-                    //if (tag is TagAnalog)
-                    //    Tags.Add(new BaseTagAnalogViewModel(tag as TagAnalog, exchangeProvider));
-                    //else if (tag is TagDiscret)
-                    //    Tags.Add(new BaseTagDiscretViewModel(tag as TagDiscret, exchangeProvider));
-                    //else
+                    if (tag is TagAnalog)
+                        Tags.Add(new BaseTagAnalogViewModel(tag as TagAnalog, exchangeProvider));
+                    else if (tag is TagDiscret)
+                        Tags.Add(new BaseTagDiscretViewModel(tag as TagDiscret, exchangeProvider));
+                    else
                         Tags.Add(new BaseTagViewModel(tag, exchangeProvider));
             }
         }
