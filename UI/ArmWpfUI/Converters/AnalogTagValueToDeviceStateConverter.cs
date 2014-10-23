@@ -1,13 +1,16 @@
-﻿using CoreLib.Models.Configuration;
+﻿using System.Globalization;
+using CoreLib.Models.Configuration;
 using SilverlightControlsLibrary;
 using System;
 using System.Windows.Data;
+using UICore.Converters;
 
 namespace ArmWpfUI.Converters
 {
-    class DeviceStateConverter : IValueConverter
+    [ValueConversion(typeof(Tuple<object, TagValueQuality>), typeof(ASUCommutationDeviceStates))]
+    class AnalogTagValueToDeviceStateConverter : ConverterBase
     {
-        public object Convert(object value, Type typeTarget, object param, System.Globalization.CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var result = ASUCommutationDeviceStates.UnDefined;
 
@@ -16,7 +19,7 @@ namespace ArmWpfUI.Converters
                 var tagValue = value as Tuple<object, TagValueQuality>;
 
                 if (tagValue.Item2 != TagValueQuality.vqGood || tagValue.Item2 != TagValueQuality.vqHandled)
-                    switch ((int) (float) tagValue.Item1)
+                    switch ((int)(float)tagValue.Item1)
                     {
                         case 1:
                             result = ASUCommutationDeviceStates.On;
@@ -31,10 +34,6 @@ namespace ArmWpfUI.Converters
             }
 
             return result;
-        }
-        public object ConvertBack(object value, Type typeTarget, object param, System.Globalization.CultureInfo culture)
-        {
-            return new Tuple<object, TagValueQuality>(0, TagValueQuality.vqUndefined);
         }
     }
 }

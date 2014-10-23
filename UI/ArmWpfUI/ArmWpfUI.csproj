@@ -58,7 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converters\DeviceStateConverter.cs" />
+    <Compile Include="Converters\AnalogTagValueToDeviceStateConverter.cs" />
     <Compile Include="Converters\DeviceStateToVisibilityConverter.cs" />
     <Compile Include="Converters\HandledQualityToBooleanConverter.cs" />
     <Compile Include="ViewModels\AnalogMnemoTagViewModel.cs" />
