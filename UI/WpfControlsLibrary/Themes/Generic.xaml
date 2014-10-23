@@ -205,7 +205,19 @@
 
                         </Grid>
                         <TextBlock Opacity="0" x:Name="UnDefinedQuestion" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="{TemplateBinding ASUVoltageColor}"><Run Text="?"/></TextBlock>
-
+                        <Path Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,10,0,-10" Opacity="0.4" 
+                                  Visibility="{TemplateBinding ASUManualSetVisibility}" Width="20" Height="20" Stretch="Fill" Stroke="Black" Fill="Green" StrokeThickness="0.8" x:Name="Hand"                                   
+                                   Data="M1.5,9 L2,8 L3,8 L6.5,12 
+                                      L6,2 L7,1.5 L8,2
+                                      L8.5,8 L9,8 
+                                      L9,1 L10,0.5 L11,1 
+                                      L11,8 L11.5,8.5
+                                      L12,2 L13,1.5 L14,2 
+                                      L13.5,9 L14,9 
+                                      L15,4 L16,3.5 L17,4 L16,11
+                                      L16,16 L15,18 L8,18 z" ToolTipService.ToolTip="Положение введено вручную"/>
+                        
+                        
                         <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="{TemplateBinding ASUGridRowContent}" Grid.Column="{TemplateBinding ASUGridColumnContent}"  x:Name="contentPresenter1" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Margin="{TemplateBinding ASUMarginContent}" Opacity="1"/>
                         <Canvas Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="{TemplateBinding ASUGridRowASUTextContent}" Grid.Column="{TemplateBinding ASUGridColumnASUTextContent}" >
                             <TextBlock FontSize="{TemplateBinding ASUTextContentFontSize}" Height="Auto" Width="{TemplateBinding ASUTextContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="{TemplateBinding ASUTextContentVisible}" x:Name="ASUTextContentPresenter" Foreground="{TemplateBinding ASUTextColorBrush}" Text="{TemplateBinding ASUTextContent}" Margin="{TemplateBinding ASUMarginText}" TextAlignment="Center" TextWrapping="Wrap" />
