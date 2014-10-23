@@ -47,7 +47,7 @@
         <!-- menu -->
         <Menu Grid.Row="0">
             <MenuItem Header="Файл">
-                <MenuItem Header="Сохранить" Command="{Binding Path=SaveConfigurationAsyncCommand}" />
+                <MenuItem Header="Сохранить" Command="{Binding Path=SaveConfigurationCommand}" />
             </MenuItem>
             <!--<MenuItem Header="Резервная копия">
                 <MenuItem Header="Сделать резервную копию" Command="{Binding Path=DoBackUpAsyncCommand}" />
