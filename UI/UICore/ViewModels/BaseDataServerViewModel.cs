@@ -15,7 +15,11 @@ namespace UICore.ViewModels
         public string ObjectName
         {
             get { return DataServer.ObjectName; }
-            set { DataServer.ObjectName = value; }
+            set
+            {
+                DataServer.ObjectName = value;
+                NotifyPropertyChanged("ObjectName");
+            }
         }
 
         [Category("Общее")]
