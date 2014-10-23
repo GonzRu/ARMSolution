@@ -11,6 +11,24 @@ namespace UICore.ViewModels
 {
     public abstract class BaseConfigurationViewModel : BaseViewModel
     {
+        #region CONSTS
+
+        #region Константы состояния выключателя для ручного режима
+
+        /// <summary>
+        /// Значение тега, соответствующее включенному положению
+        /// </summary>
+        protected float DEVICE_STATE_ON = 1;
+
+        /// <summary>
+        /// Значение тега, соответствующее отключенному положению
+        /// </summary>
+        protected float DEVICE_STATE_OFF = 2;
+
+        #endregion
+
+        #endregion
+
         #region Public properties
 
         #region Properties
@@ -156,7 +174,7 @@ namespace UICore.ViewModels
             if (tag == null)
                 return;
 
-            Configuration.DsRouterProvider.SetTagValueFromHMI(tag.Device.DataServer.DsGuid, tag.Device.DeviceGuid, tag.TagGuid, 1);
+            Configuration.DsRouterProvider.SetTagValueFromHMI(tag.Device.DataServer.DsGuid, tag.Device.DeviceGuid, tag.TagGuid, DEVICE_STATE_ON);
         }
 
         /// <summary>
@@ -172,7 +190,7 @@ namespace UICore.ViewModels
             if (tag == null)
                 return;
 
-            Configuration.DsRouterProvider.SetTagValueFromHMI(tag.Device.DataServer.DsGuid, tag.Device.DeviceGuid, tag.TagGuid, 0);
+            Configuration.DsRouterProvider.SetTagValueFromHMI(tag.Device.DataServer.DsGuid, tag.Device.DeviceGuid, tag.TagGuid, DEVICE_STATE_OFF);
         }
 
         /// <summary>
