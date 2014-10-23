@@ -1,25 +1,22 @@
-﻿using System.Windows;
+﻿using System.Globalization;
+using System.Windows;
 using CoreLib.Models.Configuration;
 using System;
 using System.Windows.Data;
+using UICore.Converters;
 
 namespace ArmWpfUI.Converters
 {
-    class DeviceStateToVisibilityConverter : IValueConverter
+    [ValueConversion(typeof(Tuple<object, TagValueQuality>), typeof(Visibility))]
+    class DeviceStateToVisibilityConverter : ConverterBase
     {
-        object IValueConverter.Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public int DeviceState { get; set; }
+
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is Tuple<object, TagValueQuality>) || parameter == null)
-                return false;
+            var deviceState = (int) (float) ((value as Tuple<object, TagValueQuality>).Item1);
 
-            var deviceState = (int)(float)((Tuple<object, TagValueQuality>) value).Item1;
-
-            return deviceState == (int) parameter ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
+            return deviceState == DeviceState ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }
