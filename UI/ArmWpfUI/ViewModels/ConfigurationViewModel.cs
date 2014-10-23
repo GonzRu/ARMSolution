@@ -221,6 +221,8 @@ namespace ArmWpfUI.ViewModels
                 if (cc == null)
                     continue;
 
+                cc.ASUControlISSelected = false;
+
                 MenuItem handleDeviceStateMenuItem = null;
                 MenuItem deviceCommandsMenuItem = null;
                 MenuItem bannersMenuItem = null;
