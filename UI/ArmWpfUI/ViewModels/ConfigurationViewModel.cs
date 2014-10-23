@@ -250,12 +250,19 @@ namespace ArmWpfUI.ViewModels
                         handleDeviceStateMenuItem = new MenuItem();
                         handleDeviceStateMenuItem.Header = "Ручное управление";
 
+                        #region Включить
+
                         var setHandleStateOnMenuItem = new MenuItem
                         {
                             Header = "Ручной режим: Вкл",
                             Command = HandleSetOnDeviceStateCommand,
                             CommandParameter = cc.ASUTagIDState
                         };
+                        CreateBinding(setHandleStateOnMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 2, InvertHandleQuality = true}, null);
+
+                        #endregion
+
+                        #region Отключить
 
                         var setHandleStateOffMenuItem = new MenuItem
                         {
@@ -263,6 +270,11 @@ namespace ArmWpfUI.ViewModels
                             Command = HandleSetOffDeviceStateCommand,
                             CommandParameter = cc.ASUTagIDState
                         };
+                        CreateBinding(setHandleStateOffMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 1, InvertHandleQuality = true }, null);
+
+                        #endregion
+
+                        #region Сбросить
 
                         var resetHandleStatefMenuItem = new MenuItem
                         {
@@ -270,6 +282,9 @@ namespace ArmWpfUI.ViewModels
                             Command = ReSetHandleDeviceStateCommand,
                             CommandParameter = cc.ASUTagIDState
                         };
+                        CreateBinding(resetHandleStatefMenuItem, MenuItem.IsEnabledProperty, cc.ASUTagIDState, new HandledQualityToBooleanConverter(), null);
+
+                        #endregion
 
                         handleDeviceStateMenuItem.Items.Add(setHandleStateOnMenuItem);
                         handleDeviceStateMenuItem.Items.Add(setHandleStateOffMenuItem);
@@ -283,32 +298,32 @@ namespace ArmWpfUI.ViewModels
                     deviceCommandsMenuItem = new MenuItem();
                     deviceCommandsMenuItem.Header = "Комманды";
 
-                    if (cc.ASUTagIDCommandOn.Equals("-1"))
+                    if (!cc.ASUTagIDCommandOn.Equals("-1"))
                     {
                         var deviceCommandOnMenuItem = new MenuItem();
                         deviceCommandOnMenuItem.Header = "Включить выключатель";
-                        CreateBinding(deviceCommandOnMenuItem, MenuItem.IsEnabledProperty, cc.ASUTagIDState, new HandledQualityToBooleanConverter(), null);
-                        CreateBinding(deviceCommandOnMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, new DeviceStateToVisibilityConverter { DeviceState = 2 }, null);
+                        CreateBinding(deviceCommandOnMenuItem, MenuItem.IsEnabledProperty, cc.ASUTagIDState, new HandledQualityToBooleanConverter { Invert = true }, null);
+                        CreateBinding(deviceCommandOnMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 2 }, null);
 
                         deviceCommandsMenuItem.Items.Add(deviceCommandOnMenuItem);
                     }
 
-                    if (cc.ASUTagIDCommandOff.Equals("-1"))
+                    if (!cc.ASUTagIDCommandOff.Equals("-1"))
                     {
                         var deviceCommandOffMenuItem = new MenuItem();
                         deviceCommandOffMenuItem.Header = "Отключить выключатель";
-                        CreateBinding(deviceCommandOffMenuItem, MenuItem.IsEnabledProperty, cc.ASUTagIDState, new HandledQualityToBooleanConverter(), null);
-                        CreateBinding(deviceCommandOffMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, new DeviceStateToVisibilityConverter { DeviceState = 1 }, null);
+                        CreateBinding(deviceCommandOffMenuItem, MenuItem.IsEnabledProperty, cc.ASUTagIDState, new HandledQualityToBooleanConverter { Invert = true }, null);
+                        CreateBinding(deviceCommandOffMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 1 }, null);
 
                         deviceCommandsMenuItem.Items.Add(deviceCommandOffMenuItem);
                     }
 
-                    if (cc.ASUTagIDCommandReady.Equals("-1"))
+                    if (!cc.ASUTagIDCommandReady.Equals("-1"))
                     {
 
                     }
 
-                    if (cc.ASUTagIDCommandReceipt.Equals("-1"))
+                    if (!cc.ASUTagIDCommandReceipt.Equals("-1"))
                     {
 
                     }
