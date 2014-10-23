@@ -239,7 +239,7 @@ namespace ArmWpfUI.ViewModels
 
                 if (!cc.ASUTagIDState.Equals("-1"))
                 {
-                    CreateBinding(cc, CBaseControl.ASUCommutationDeviceStateProperty, cc.ASUTagIDState, new DeviceStateConverter(), null);
+                    CreateBinding(cc, CBaseControl.ASUCommutationDeviceStateProperty, cc.ASUTagIDState, new AnalogTagValueToDeviceStateConverter(), null);
                     if (!tagsToSubscribe.Contains(cc.ASUTagIDState))
                         tagsToSubscribe.Add(cc.ASUTagIDState);
 
@@ -288,7 +288,7 @@ namespace ArmWpfUI.ViewModels
                         var deviceCommandOnMenuItem = new MenuItem();
                         deviceCommandOnMenuItem.Header = "Включить выключатель";
                         CreateBinding(deviceCommandOnMenuItem, MenuItem.IsEnabledProperty, cc.ASUTagIDState, new HandledQualityToBooleanConverter(), null);
-                        CreateBinding(deviceCommandOnMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, new DeviceStateToVisibilityConverter(), 2);
+                        CreateBinding(deviceCommandOnMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, new DeviceStateToVisibilityConverter { DeviceState = 2 }, null);
 
                         deviceCommandsMenuItem.Items.Add(deviceCommandOnMenuItem);
                     }
@@ -298,7 +298,7 @@ namespace ArmWpfUI.ViewModels
                         var deviceCommandOffMenuItem = new MenuItem();
                         deviceCommandOffMenuItem.Header = "Отключить выключатель";
                         CreateBinding(deviceCommandOffMenuItem, MenuItem.IsEnabledProperty, cc.ASUTagIDState, new HandledQualityToBooleanConverter(), null);
-                        CreateBinding(deviceCommandOffMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, new DeviceStateToVisibilityConverter(), 1);
+                        CreateBinding(deviceCommandOffMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, new DeviceStateToVisibilityConverter { DeviceState = 1 }, null);
 
                         deviceCommandsMenuItem.Items.Add(deviceCommandOffMenuItem);
                     }
