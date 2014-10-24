@@ -153,9 +153,24 @@ namespace CoreLib.ExchangeProviders
         #region Методы для загрузки документов
 
         /// <summary>
-        /// Загрузить файла на сервер
+        /// Иницилизировать передачу файлов
         /// </summary>
-        bool LoadFile(UInt16 dsGuid, Int32 devGuid, string fileName, string comment);
+        bool InitUploadFileSession(UInt16 dsGuid, UInt32 devGuid, string fileName, string comment);
+
+        /// <summary>
+        /// Загрузить кусок файла
+        /// </summary>
+        bool UploadFileChunk(byte[] fileChunkBytes);
+
+        /// <summary>
+        /// Сохранить загруженный файл
+        /// </summary>
+        string SaveUploadedFile();
+
+        /// <summary>
+        /// Сбрасывает передачу файла
+        /// </summary>
+        void TerminateUploadFileSession();
 
         #endregion
 
