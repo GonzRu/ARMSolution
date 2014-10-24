@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Windows;
 using System.Windows.Input;
 using CoreLib.ExchangeProviders;
 using CoreLib.Models.Common;
 using CoreLib.Models.Configuration;
 using System.ComponentModel;
+using Microsoft.Win32;
 using UICore.Commands;
 using UICore.ViewModels;
 
@@ -14,6 +18,15 @@ namespace ArmWpfUI.ViewModels
 {
     class DeviceViewModel : BaseDeviceViewModel
     {
+        #region CONSTS
+
+        /// <summary>
+        /// Размер части файла, которая за раз загружается на сервер
+        /// </summary>
+        private const int UPLOAD_FILE_CHUNK_LENGTH = 20480;
+
+        #endregion
+
         #region Public properties
 
         #region Properties
@@ -91,6 +104,20 @@ namespace ArmWpfUI.ViewModels
         }
         private List<Document> _documents;
 
+        /// <summary>
+        /// Прогресс загрузки документа
+        /// </summary>
+        public float UploadDocumentProgress
+        {
+            get { return _uploadDocumentProgress; }
+            set
+            {
+                _uploadDocumentProgress = value;
+                NotifyPropertyChanged("UploadDocumentProgress");
+            }
+        }
+        private float _uploadDocumentProgress;
+
         #endregion
 
         #endregion
@@ -110,7 +137,7 @@ namespace ArmWpfUI.ViewModels
         /// <summary>
         /// Загружает документ устройства
         /// </summary>
-        public ICommand LoadDocumentCommand { get; set; }
+        public ICommand UploadDocumentCommand { get; set; }
 
         #endregion
 
@@ -125,7 +152,7 @@ namespace ArmWpfUI.ViewModels
 
             LoadEventsCommand = new AsyncCommand(LoadEvents);
             LoadDocumentsListCommand = new AsyncCommand(LoadDocumentsList);
-            LoadDocumentCommand = new Command(LoadDocument);
+            UploadDocumentCommand = new AsyncCommand(UploadDocument);
         }
 
         #endregion
@@ -154,14 +181,58 @@ namespace ArmWpfUI.ViewModels
         /// <summary>
         /// Загружает конкретный документ
         /// </summary>
-        private void LoadDocument(object param)
+        private void UploadDocument(object param)
         {
-            if (param == null || !(param is EventValue))
+            var openFileDialog = new OpenFileDialog();
+            if (!openFileDialog.ShowDialog(Application.Current.MainWindow).Value)
                 return;
 
-            var eventValue = param as EventValue;
-            if (eventValue.EventDataID == -1)
+            // Проверяем - можно ли инициировать загрузку файла
+            if (!ExchangeProvider.InitUploadFileSession(Device.DataServer.DsGuid, DeviceGuid, Path.GetFileName(openFileDialog.FileName), "sdfsdf"))
                 return;
+
+            using (var fileStream = openFileDialog.OpenFile())
+            {
+                int chunkCount = 0;
+                byte[] fileChunlBuffer;
+
+                while (fileStream.Length > UPLOAD_FILE_CHUNK_LENGTH * (chunkCount + 1))
+                {
+                    fileChunlBuffer = new byte[UPLOAD_FILE_CHUNK_LENGTH];
+                    fileStream.Read(fileChunlBuffer, 0, UPLOAD_FILE_CHUNK_LENGTH);
+
+                    // Проверяем - не отменил ли пользователь загрузку файла
+                    if ((UploadDocumentCommand is AsyncCommand) && (UploadDocumentCommand as AsyncCommand).IsCancellationRequested)
+                    {
+                        ExchangeProvider.TerminateUploadFileSession();
+                        return;
+                    }
+
+                    ExchangeProvider.UploadFileChunk(fileChunlBuffer);
+                    chunkCount++;
+                }
+
+                // Загружаем последний кусок
+                if (fileStream.Length > UPLOAD_FILE_CHUNK_LENGTH*chunkCount)
+                {
+                    fileChunlBuffer = new byte[fileStream.Length - UPLOAD_FILE_CHUNK_LENGTH * chunkCount];
+                    fileStream.Read(fileChunlBuffer, 0, fileChunlBuffer.Length);
+
+                    ExchangeProvider.UploadFileChunk(fileChunlBuffer);
+                }
+
+                // Проверяем - не отменил ли пользователь загрузку файла
+                if ((UploadDocumentCommand is AsyncCommand) && (UploadDocumentCommand as AsyncCommand).IsCancellationRequested)
+                {
+                    ExchangeProvider.TerminateUploadFileSession();
+                    return;
+                }
+
+                ExchangeProvider.SaveUploadedFile();
+
+                LoadDocumentsList();
+            }
+
         }
 
         #endregion
