@@ -380,7 +380,7 @@ namespace DsRouterExchangeProviderLib.WcfProvider
         /// <summary>
         /// Получить содержимое документа и его имя
         /// </summary>
-        Tuple<byte[], string> IExchangeProvider.GetDocument(UInt16 dsGuid, Int32 documentId)
+        Tuple<byte[], string> IExchangeProvider.DownloadDocument(UInt16 dsGuid, Int32 documentId)
         {
             throw new NotImplementedException();
         }

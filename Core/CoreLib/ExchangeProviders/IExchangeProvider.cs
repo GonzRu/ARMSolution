@@ -146,7 +146,7 @@ namespace CoreLib.ExchangeProviders
         /// <summary>
         /// Получить содержимое документа и его имя
         /// </summary>
-        Tuple<byte[], string> GetDocument(UInt16 dsGuid, Int32 documentId);
+        Tuple<byte[], string> DownloadDocument(UInt16 dsGuid, Int32 documentId);
 
         #endregion
 
