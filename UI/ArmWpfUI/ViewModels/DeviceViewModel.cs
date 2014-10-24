@@ -27,6 +27,8 @@ namespace ArmWpfUI.ViewModels
 
         #region Properties
 
+        #region Группы
+
         /// <summary>
         /// Список групп, содержащих текущие данные
         /// </summary>
@@ -53,6 +55,8 @@ namespace ArmWpfUI.ViewModels
         {
             get { return Groups.Where(model => model.GroupCategory == GroupCategory.Specific).ToList(); }
         }
+
+        #endregion
 
         #region События устройства
 

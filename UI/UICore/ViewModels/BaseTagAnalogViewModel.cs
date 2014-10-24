@@ -19,7 +19,11 @@ namespace UICore.ViewModels
         public string Dim
         {
             get { return (Tag as TagAnalog).Dim; }
-            set { (Tag as TagAnalog).Dim = value; NotifyPropertyChanged("Dim"); }
+            set
+            {
+                (Tag as TagAnalog).Dim = value;
+                NotifyPropertyChanged("Dim");
+            }
         }
 
         /// <summary>
