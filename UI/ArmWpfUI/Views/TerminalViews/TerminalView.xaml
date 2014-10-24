@@ -173,6 +173,12 @@
                 <Image Height="70" Width="70" VerticalAlignment="Center" HorizontalAlignment="Center" Source="../../Resources/6.png" />
             </TabItem.Header>
 
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Loaded">
+                    <i:InvokeCommandAction Command="{Binding Path=LoadDocumentsListCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
             <Grid Margin="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60" />
