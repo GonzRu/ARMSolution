@@ -346,6 +346,61 @@ namespace DsRouterExchangeProviderLib.WcfProvider
 
         #endregion
 
+        #region Работа с документами
+
+        #region Методы для работы с существующими документами
+
+        /// <summary>
+        /// Получить список документов терминала
+        /// </summary>
+        List<Document> IExchangeProvider.GetDocumentsList(UInt16 dsGuid, UInt32 devGuid)
+        {
+            List<Document> documents = null;
+
+            try
+            {
+                documents = (from d in _dsRouterProxy.GetDocumentsList(dsGuid, (int)devGuid)
+                    select
+                        new Document
+                        {
+                            DocumentId = d.DocumentID,
+                            DocumentAddDate = d.DocumentAddDate,
+                            DocumentFileName = d.DocumentFileName,
+                            DocumentComment = d.DocumentComment,
+                            DocumentUserName = d.DocumentUserName
+                        }).ToList();
+            }
+            catch (Exception)
+            {
+            }
+
+            return documents;
+        }
+
+        /// <summary>
+        /// Получить содержимое документа и его имя
+        /// </summary>
+        Tuple<byte[], string> IExchangeProvider.GetDocument(UInt16 dsGuid, Int32 documentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Методы для загрузки документов
+
+        /// <summary>
+        /// Загрузить файла на сервер
+        /// </summary>
+        bool IExchangeProvider.LoadFile(UInt16 dsGuid, Int32 devGuid, string fileName, string comment)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #endregion
+
         #region Ручной ввод данных
 
         #region Ручной ввод значений тегов
