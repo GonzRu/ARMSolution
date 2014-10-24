@@ -76,7 +76,20 @@ namespace ArmWpfUI.ViewModels
 
         #region Документы устройства
 
-
+        /// <summary>
+        /// Список документов, соответствующих данному устройству
+        /// </summary>
+        [Browsable(false)]
+        public List<Document> Documents
+        {
+            get { return _documents; }
+            set
+            {
+                _documents = value;
+                NotifyPropertyChanged("Documents");
+            }
+        }
+        private List<Document> _documents;
 
         #endregion
 
@@ -135,7 +148,7 @@ namespace ArmWpfUI.ViewModels
         /// </summary>
         private void LoadDocumentsList()
         {
-            
+            Documents = ExchangeProvider.GetDocumentsList(Device.DataServer.DsGuid, Device.DeviceGuid);
         }
 
         /// <summary>
