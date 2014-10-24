@@ -141,7 +141,7 @@ namespace CoreLib.ExchangeProviders
         /// <summary>
         /// Получить список документов терминала
         /// </summary>
-        List<Document> GetDocumentsList(UInt16 dsGuid, Int32 devGuid);
+        List<Document> GetDocumentsList(UInt16 dsGuid, UInt32 devGuid);
 
         /// <summary>
         /// Получить содержимое документа и его имя
