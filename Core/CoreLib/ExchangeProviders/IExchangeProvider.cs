@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using CoreLib.Models.Common;
+﻿using CoreLib.Models.Common;
 using CoreLib.Models.Common.Reports;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CoreLib.ExchangeProviders
 {
@@ -135,47 +134,47 @@ namespace CoreLib.ExchangeProviders
 
         #endregion
 
-        //#region Работа с документами
+        #region Работа с документами
 
-        //#region Методы для работы с существующими документами
+        #region Методы для работы с существующими документами
 
-        ///// <summary>
-        ///// Получить список документов терминала
-        ///// </summary>
-        //List<DSRouterDocumentDataValue> GetDocumentsList(UInt16 dsGuid, Int32 devGuid);
+        /// <summary>
+        /// Получить список документов терминала
+        /// </summary>
+        List<Document> GetDocumentsList(UInt16 dsGuid, UInt32 devGuid);
 
-        ///// <summary>
-        ///// Получить ссылку на документ
-        ///// </summary>
-        //string GetDocumentByID(UInt16 dsGuid, Int32 documentId);
+        /// <summary>
+        /// Получить содержимое документа и его имя
+        /// </summary>
+        Tuple<byte[], string> DownloadDocument(UInt16 dsGuid, Int32 documentId);
 
-        //#endregion
+        #endregion
 
-        //#region Методы для загрузки документов
+        #region Методы для загрузки документов
 
-        ///// <summary>
-        ///// Иницилизировать передачу файлов
-        ///// </summary>
-        //bool InitUploadFileSession(UInt16 dsGuid, Int32 devGuid, string fileName, string comment);
+        /// <summary>
+        /// Иницилизировать передачу файлов
+        /// </summary>
+        bool InitUploadFileSession(UInt16 dsGuid, UInt32 devGuid, string fileName, string comment);
 
-        ///// <summary>
-        ///// Загрузить кусок файла
-        ///// </summary>
-        //bool UploadFileChunk(byte[] fileChunkBytes);
+        /// <summary>
+        /// Загрузить кусок файла
+        /// </summary>
+        bool UploadFileChunk(byte[] fileChunkBytes);
 
-        ///// <summary>
-        ///// Сохранить загруженный файл
-        ///// </summary>
-        //string SaveUploadedFile();
+        /// <summary>
+        /// Сохранить загруженный файл
+        /// </summary>
+        string SaveUploadedFile();
 
-        ///// <summary>
-        ///// Сбрасывает передачу файла
-        ///// </summary>
-        //void TerminateUploadFileSession();
+        /// <summary>
+        /// Сбрасывает передачу файла
+        /// </summary>
+        void TerminateUploadFileSession();
 
-        //#endregion
+        #endregion
 
-        //#endregion
+        #endregion
 
         #region Ручной ввод данных
 

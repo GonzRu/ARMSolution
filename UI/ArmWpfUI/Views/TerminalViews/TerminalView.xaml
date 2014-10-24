@@ -173,6 +173,12 @@
                 <Image Height="70" Width="70" VerticalAlignment="Center" HorizontalAlignment="Center" Source="../../Resources/6.png" />
             </TabItem.Header>
 
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Loaded">
+                    <i:InvokeCommandAction Command="{Binding Path=LoadDocumentsListCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
             <Grid Margin="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60" />
@@ -188,7 +194,7 @@
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Margin="5" Text="Название терминала:" Foreground="#FF1A76E0" VerticalAlignment="Center" />
                         <TextBlock Margin="5" Text="БМРЗ-КЛ" Foreground="#FFEF1212" FontSize="14" VerticalAlignment="Center"/>
-                        <Button Content="Добавить документ в базу" Width="200" Height="30" Margin="50,5,5,5" />
+                        <Button Content="Добавить документ в базу" Width="200" Height="30" Margin="50,5,5,5" Click="UploadDocumentButtonOnClick" />
 
                     </StackPanel>
                 </Border>
@@ -196,7 +202,7 @@
 
 
                 <Border CornerRadius="2" Margin="2" BorderThickness="1" BorderBrush="Black" Grid.Column ="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <DataGrid  Margin="2" AutoGenerateColumns="False" HorizontalAlignment="Stretch" Background="LightGray" GridLinesVisibility="All" ColumnHeaderHeight="30" IsReadOnly="True" >
+                    <DataGrid ItemsSource="{Binding Documents}" Margin="2" AutoGenerateColumns="False" HorizontalAlignment="Stretch" Background="LightGray" GridLinesVisibility="All" ColumnHeaderHeight="30" IsReadOnly="True" >
                         <DataGrid.Columns>
 
                             <DataGridTextColumn Binding="{Binding DocumentAddDate, StringFormat='dd.MM.yy HH:mm:ss'}" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Header="Дата" Width="Auto" />

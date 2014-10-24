@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.ServiceModel;
-using System.Threading.Tasks;
-using System.Timers;
-using CoreLib.ExchangeProviders;
+﻿using CoreLib.ExchangeProviders;
 using CoreLib.Models.Common;
 using CoreLib.Models.Common.Reports;
 using CoreLib.Models.Configuration;
 using DsRouterExchangeProviderLib.DSRouterService;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using System.Threading.Tasks;
+using System.Timers;
+using Timer = System.Timers.Timer;
 
 namespace DsRouterExchangeProviderLib.WcfProvider
 {
@@ -341,6 +341,121 @@ namespace DsRouterExchangeProviderLib.WcfProvider
         }
 
         #endregion
+
+        #endregion
+
+        #endregion
+
+        #region Работа с документами
+
+        #region Методы для работы с существующими документами
+
+        /// <summary>
+        /// Получить список документов терминала
+        /// </summary>
+        List<Document> IExchangeProvider.GetDocumentsList(UInt16 dsGuid, UInt32 devGuid)
+        {
+            List<Document> documents = null;
+
+            try
+            {
+                documents = (from d in _dsRouterProxy.GetDocumentsList(dsGuid, (int)devGuid)
+                    select
+                        new Document
+                        {
+                            DocumentId = d.DocumentID,
+                            DocumentAddDate = d.DocumentAddDate,
+                            DocumentFileName = d.DocumentFileName,
+                            DocumentComment = d.DocumentComment,
+                            DocumentUserName = d.DocumentUserName
+                        }).ToList();
+            }
+            catch (Exception)
+            {
+            }
+
+            return documents;
+        }
+
+        /// <summary>
+        /// Получить содержимое документа и его имя
+        /// </summary>
+        Tuple<byte[], string> IExchangeProvider.DownloadDocument(UInt16 dsGuid, Int32 documentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Методы для загрузки документов
+
+        /// <summary>
+        /// Иницилизировать передачу файлов
+        /// </summary>
+        bool IExchangeProvider.InitUploadFileSession(UInt16 dsGuid, UInt32 devGuid, string fileName, string comment)
+        {
+            bool result = false;
+
+            try
+            {
+                result = _dsRouterProxy.InitUploadFileSession(dsGuid, (int) devGuid, fileName, comment);
+            }
+            catch (Exception)
+            {
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Загрузить кусок файла
+        /// </summary>
+        bool IExchangeProvider.UploadFileChunk(byte[] fileChunkBytes)
+        {
+            bool result = false;
+
+            try
+            {
+                result = _dsRouterProxy.UploadFileChunk(fileChunkBytes);
+            }
+            catch (Exception)
+            {
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Сохранить загруженный файл
+        /// </summary>
+        string IExchangeProvider.SaveUploadedFile()
+        {
+            string result = null;
+
+            try
+            {
+                result = _dsRouterProxy.SaveUploadedFile();
+            }
+            catch (Exception)
+            {
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Сбрасывает передачу файла
+        /// </summary>
+        void IExchangeProvider.TerminateUploadFileSession()
+        {
+            try
+            {
+                _dsRouterProxy.TerminateUploadFileSession();
+            }
+            catch (Exception)
+            {
+            }
+        }
 
         #endregion
 
