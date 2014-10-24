@@ -137,7 +137,7 @@ namespace ArmWpfUI.ViewModels
         /// <summary>
         /// Загружает документ устройства
         /// </summary>
-        public ICommand UploadDocumentCommand { get; set; }
+        public AsyncCommand UploadDocumentAsyncCommand { get; set; }
 
         #endregion
 
@@ -152,7 +152,7 @@ namespace ArmWpfUI.ViewModels
 
             LoadEventsCommand = new AsyncCommand(LoadEvents);
             LoadDocumentsListCommand = new AsyncCommand(LoadDocumentsList);
-            UploadDocumentCommand = new AsyncCommand(UploadDocument);
+            UploadDocumentAsyncCommand = new AsyncCommand(UploadDocument);
         }
 
         #endregion
@@ -202,7 +202,7 @@ namespace ArmWpfUI.ViewModels
                     fileStream.Read(fileChunlBuffer, 0, UPLOAD_FILE_CHUNK_LENGTH);
 
                     // Проверяем - не отменил ли пользователь загрузку файла
-                    if ((UploadDocumentCommand is AsyncCommand) && (UploadDocumentCommand as AsyncCommand).IsCancellationRequested)
+                    if (UploadDocumentAsyncCommand.IsCancellationRequested)
                     {
                         ExchangeProvider.TerminateUploadFileSession();
                         return;
@@ -222,7 +222,7 @@ namespace ArmWpfUI.ViewModels
                 }
 
                 // Проверяем - не отменил ли пользователь загрузку файла
-                if ((UploadDocumentCommand is AsyncCommand) && (UploadDocumentCommand as AsyncCommand).IsCancellationRequested)
+                if (UploadDocumentAsyncCommand.IsCancellationRequested)
                 {
                     ExchangeProvider.TerminateUploadFileSession();
                     return;
