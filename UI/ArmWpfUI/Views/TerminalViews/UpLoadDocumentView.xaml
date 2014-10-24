@@ -19,6 +19,6 @@
 
         <ProgressBar Grid.Row="1" Height="30" Value="{Binding UploadDocumentProgress}" Maximum="1" Minimum="0" />
 
-        <Button Grid.Row="2" HorizontalAlignment="Right" Content="Отмена" Margin="0, 10, 15, 0" Command="{Binding UploadDocumentCommand.CancelCommand}"/>
+        <Button Grid.Row="2" HorizontalAlignment="Right" Content="Отмена" Margin="0, 10, 15, 0" Command="{Binding UploadDocumentAsyncCommand.CancelCommand}"/>
     </Grid>
 </Window>

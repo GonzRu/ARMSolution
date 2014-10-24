@@ -194,7 +194,7 @@
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Margin="5" Text="Название терминала:" Foreground="#FF1A76E0" VerticalAlignment="Center" />
                         <TextBlock Margin="5" Text="БМРЗ-КЛ" Foreground="#FFEF1212" FontSize="14" VerticalAlignment="Center"/>
-                        <Button Content="Добавить документ в базу" Width="200" Height="30" Margin="50,5,5,5" Command="{Binding UploadDocumentCommand}" />
+                        <Button Content="Добавить документ в базу" Width="200" Height="30" Margin="50,5,5,5" Click="UploadDocumentButtonOnClick" />
 
                     </StackPanel>
                 </Border>

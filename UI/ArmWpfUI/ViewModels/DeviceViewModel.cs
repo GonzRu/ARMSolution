@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Windows;
-using System.Windows.Input;
-using CoreLib.ExchangeProviders;
+﻿using CoreLib.ExchangeProviders;
 using CoreLib.Models.Common;
 using CoreLib.Models.Configuration;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using Microsoft.Win32;
+using System.IO;
+using System.Linq;
+using System.Windows.Input;
 using UICore.Commands;
 using UICore.ViewModels;
 
 namespace ArmWpfUI.ViewModels
 {
-    class DeviceViewModel : BaseDeviceViewModel
+    public class DeviceViewModel : BaseDeviceViewModel
     {
         #region CONSTS
 
@@ -183,18 +179,23 @@ namespace ArmWpfUI.ViewModels
         /// </summary>
         private void UploadDocument(object param)
         {
-            var openFileDialog = new OpenFileDialog();
-            if (!openFileDialog.ShowDialog(Application.Current.MainWindow).Value)
+            if (!(param is string))
                 return;
+
+            var pathToFile = param.ToString();
 
             // Проверяем - можно ли инициировать загрузку файла
-            if (!ExchangeProvider.InitUploadFileSession(Device.DataServer.DsGuid, DeviceGuid, Path.GetFileName(openFileDialog.FileName), "sdfsdf"))
+            if (!ExchangeProvider.InitUploadFileSession(Device.DataServer.DsGuid, DeviceGuid, Path.GetFileName(pathToFile), "sdfsdf"))
                 return;
 
-            using (var fileStream = openFileDialog.OpenFile())
+            UploadDocumentProgress = 0;
+
+            using (var fileStream = File.OpenRead(pathToFile))
             {
                 int chunkCount = 0;
                 byte[] fileChunlBuffer;
+
+                float progressStep = (float)UPLOAD_FILE_CHUNK_LENGTH / fileStream.Length;
 
                 while (fileStream.Length > UPLOAD_FILE_CHUNK_LENGTH * (chunkCount + 1))
                 {
@@ -209,6 +210,8 @@ namespace ArmWpfUI.ViewModels
                     }
 
                     ExchangeProvider.UploadFileChunk(fileChunlBuffer);
+
+                    UploadDocumentProgress += progressStep;
                     chunkCount++;
                 }
 
