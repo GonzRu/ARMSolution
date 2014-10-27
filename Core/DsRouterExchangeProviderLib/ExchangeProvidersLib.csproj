@@ -85,34 +85,9 @@
     <None Include="Service References\DSRouterService\DsRouterExchangeProviderLib.DSRouterService.RouterAuthResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DSRouterService\DSRouterService.wsdl" />
-    <None Include="Service References\DSRouterService\DSRouterService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DSRouterService\DSRouterService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DSRouterService\DSRouterService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DSRouterService\DSRouterService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DSRouterService\DSRouterService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DSRouterService\DSRouterService5.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DSRouterService\DSRouterService6.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\DSRouterService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\DSRouterService\DSRouterService.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\DSRouterService\configuration91.svcinfo" />
@@ -121,6 +96,28 @@
     <None Include="Service References\DSRouterService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\DSRouterService\DSRouterService1.wsdl" />
+    <None Include="Service References\DSRouterService\DSRouterService7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DSRouterService\DSRouterService71.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DSRouterService\DSRouterService72.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DSRouterService\DSRouterService73.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DSRouterService\DSRouterService74.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DSRouterService\DSRouterService75.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DSRouterService\DSRouterService76.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\DSRouterService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -131,6 +128,9 @@
       <Project>{55dd5992-4a7b-46cc-9987-0dec4518f537}</Project>
       <Name>CoreLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DSRouterService\DSRouterService1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:complexType name="DSRouterTagValue">
     <xs:sequence>
       <xs:element minOccurs="0" name="VarQuality" type="xs:unsignedInt" />
@@ -37,6 +37,7 @@
       <xs:element minOccurs="0" name="CreateDateTime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="DsRouterUserGroup" nillable="true" type="tns:DSRouterUserGroup" />
       <xs:element minOccurs="0" name="EditDateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UserComment" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UserID" type="xs:int" />
       <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
     </xs:sequence>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="dfwSwXD0cgrtogh92OSzgP46niU=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="QY2myxcCm7GEk3zAcKaHbVs0M9Y=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="customBinding" name="CustomBinding_IDSRouter">
       <properties>
@@ -272,10 +272,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="CustomBinding_IDSRouter" contract="DSRouterService.IDSRouter" bindingType="customBinding" address="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc" bindingConfiguration="CustomBinding_IDSRouter">
+    <endpoint name="CustomBinding_IDSRouter" contract="DSRouterService.IDSRouter" bindingType="customBinding" address="http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc" bindingConfiguration="CustomBinding_IDSRouter">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc</serializedValue>
+          <serializedValue>http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -357,10 +357,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IDSRouter" contract="DSRouterService.IDSRouter" bindingType="netTcpBinding" address="net.tcp://asu-smirnov.mtra.local:3331/DSRouter.DSRouterService/DSRouterService.svc" bindingConfiguration="NetTcpBinding_IDSRouter">
+    <endpoint name="NetTcpBinding_IDSRouter" contract="DSRouterService.IDSRouter" bindingType="netTcpBinding" address="net.tcp://Роутер-ПК:3332/DSRouter.DSRouterService/DSRouterService.svc" bindingConfiguration="NetTcpBinding_IDSRouter">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://asu-smirnov.mtra.local:3331/DSRouter.DSRouterService/DSRouterService.svc</serializedValue>
+          <serializedValue>net.tcp://Роутер-ПК:3332/DSRouter.DSRouterService/DSRouterService.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

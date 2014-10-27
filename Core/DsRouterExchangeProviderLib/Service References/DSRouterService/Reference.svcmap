@@ -21,18 +21,18 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost/DSRouter.DSRouterService" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://192.168.240.2/DSRouter.DSRouterService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="DSRouterService.xsd" MetadataType="Schema" ID="469a5b97-7b7a-4bef-99f5-d8c04efef71e" SourceId="1" SourceUrl="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd5" />
-    <MetadataFile FileName="DSRouterService.disco" MetadataType="Disco" ID="b43f9762-031d-47e7-9866-91a109b39331" SourceId="1" SourceUrl="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?disco" />
-    <MetadataFile FileName="DSRouterService1.xsd" MetadataType="Schema" ID="19cd1918-9199-49a5-a49f-3439e309080b" SourceId="1" SourceUrl="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd2" />
-    <MetadataFile FileName="DSRouterService2.xsd" MetadataType="Schema" ID="3b3472de-4504-43bb-bd01-abb630feeba7" SourceId="1" SourceUrl="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd6" />
-    <MetadataFile FileName="DSRouterService3.xsd" MetadataType="Schema" ID="efb1e541-f98e-4185-a9e4-4e28e2000fa8" SourceId="1" SourceUrl="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd4" />
-    <MetadataFile FileName="DSRouterService4.xsd" MetadataType="Schema" ID="90fd226c-d47d-47ef-92cf-a723ba87e9a2" SourceId="1" SourceUrl="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd3" />
-    <MetadataFile FileName="DSRouterService5.xsd" MetadataType="Schema" ID="7b5c7305-2b4f-4d53-8074-d8c70bccb8ed" SourceId="1" SourceUrl="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd1" />
-    <MetadataFile FileName="DSRouterService6.xsd" MetadataType="Schema" ID="ebd910de-1fee-475a-85ad-daa35c8f9b2a" SourceId="1" SourceUrl="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd0" />
-    <MetadataFile FileName="DSRouterService.wsdl" MetadataType="Wsdl" ID="37ee9f08-4686-46c7-8cb8-73ab57ef2ed4" SourceId="1" SourceUrl="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?wsdl" />
+    <MetadataFile FileName="DSRouterService7.xsd" MetadataType="Schema" ID="e09e0fde-11cf-4ffb-ad32-e44a889830a9" SourceId="1" SourceUrl="http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd4" />
+    <MetadataFile FileName="DSRouterService71.xsd" MetadataType="Schema" ID="106afb88-1485-48dc-8a1a-6a636685582f" SourceId="1" SourceUrl="http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd1" />
+    <MetadataFile FileName="DSRouterService72.xsd" MetadataType="Schema" ID="63edd204-17e7-4d45-9e87-02b3683595d4" SourceId="1" SourceUrl="http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd0" />
+    <MetadataFile FileName="DSRouterService73.xsd" MetadataType="Schema" ID="fe7e42ae-73a8-4f69-b6b0-bd479d197b14" SourceId="1" SourceUrl="http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd3" />
+    <MetadataFile FileName="DSRouterService74.xsd" MetadataType="Schema" ID="1257fbe8-255c-46fa-a468-12c34c6e8356" SourceId="1" SourceUrl="http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd2" />
+    <MetadataFile FileName="DSRouterService75.xsd" MetadataType="Schema" ID="5721c82a-4799-4c6c-9733-bf74206940c6" SourceId="1" SourceUrl="http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd5" />
+    <MetadataFile FileName="DSRouterService1.disco" MetadataType="Disco" ID="b3af9c75-dec7-4b9c-8e74-667e64c22a7f" SourceId="1" SourceUrl="http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc?disco" />
+    <MetadataFile FileName="DSRouterService76.xsd" MetadataType="Schema" ID="8359d516-abbf-43cf-a8a4-e75e6ef35163" SourceId="1" SourceUrl="http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd6" />
+    <MetadataFile FileName="DSRouterService1.wsdl" MetadataType="Wsdl" ID="c3a4d8e8-bc1e-4523-a532-29ef52418de0" SourceId="1" SourceUrl="http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -62,6 +62,11 @@ namespace DsRouterExchangeProviderLib.DSRouterService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterTagValue", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<string>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, DsRouterExchangeProviderLib.DSRouterService.DSRouterTagValue>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<ushort, DsRouterExchangeProviderLib.DSRouterService.DSRouterAuthResult>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.LstError))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.RouterAuthResult))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterAuthResult))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.AuthResult))]
@@ -90,11 +95,6 @@ namespace DsRouterExchangeProviderLib.DSRouterService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<System.Tuple<System.DateTime, object>>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<System.Collections.Generic.List<System.Tuple<System.DateTime, object>>>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<string>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, DsRouterExchangeProviderLib.DSRouterService.DSRouterTagValue>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<ushort, DsRouterExchangeProviderLib.DSRouterService.DSRouterAuthResult>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.LstError))]
     public partial class DSRouterTagValue : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -138,51 +138,6 @@ namespace DsRouterExchangeProviderLib.DSRouterService {
                 if ((object.ReferenceEquals(this.VarValueAsObjectField, value) != true)) {
                     this.VarValueAsObjectField = value;
                     this.RaisePropertyChanged("VarValueAsObject");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="RouterAuthResult", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
-    [System.SerializableAttribute()]
-    public partial class RouterAuthResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.Dictionary<ushort, DsRouterExchangeProviderLib.DSRouterService.DSRouterAuthResult> DSAuthResultsField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.Dictionary<ushort, DsRouterExchangeProviderLib.DSRouterService.DSRouterAuthResult> DSAuthResults {
-            get {
-                return this.DSAuthResultsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DSAuthResultsField, value) != true)) {
-                    this.DSAuthResultsField = value;
-                    this.RaisePropertyChanged("DSAuthResults");
                 }
             }
         }
@@ -258,6 +213,51 @@ namespace DsRouterExchangeProviderLib.DSRouterService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RouterAuthResult", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
+    [System.SerializableAttribute()]
+    public partial class RouterAuthResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.Dictionary<ushort, DsRouterExchangeProviderLib.DSRouterService.DSRouterAuthResult> DSAuthResultsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.Dictionary<ushort, DsRouterExchangeProviderLib.DSRouterService.DSRouterAuthResult> DSAuthResults {
+            get {
+                return this.DSAuthResultsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DSAuthResultsField, value) != true)) {
+                    this.DSAuthResultsField = value;
+                    this.RaisePropertyChanged("DSAuthResults");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="AuthResult", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
     public enum AuthResult : int {
@@ -298,6 +298,9 @@ namespace DsRouterExchangeProviderLib.DSRouterService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime EditDateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UserCommentField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int UserIDField;
@@ -350,6 +353,19 @@ namespace DsRouterExchangeProviderLib.DSRouterService {
                 if ((this.EditDateTimeField.Equals(value) != true)) {
                     this.EditDateTimeField = value;
                     this.RaisePropertyChanged("EditDateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UserComment {
+            get {
+                return this.UserCommentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserCommentField, value) != true)) {
+                    this.UserCommentField = value;
+                    this.RaisePropertyChanged("UserComment");
                 }
             }
         }
@@ -1746,6 +1762,12 @@ namespace DsRouterExchangeProviderLib.DSRouterService {
         System.Threading.Tasks.Task SaveSettingsToDeviceAsync(ushort dsGuid, uint devGuid, System.Collections.Generic.Dictionary<string, DsRouterExchangeProviderLib.DSRouterService.DSRouterTagValue> tagsValues);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/CommandRun", ReplyAction="http://tempuri.org/IDSRouter/CommandRunResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<string>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, DsRouterExchangeProviderLib.DSRouterService.DSRouterTagValue>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<ushort, DsRouterExchangeProviderLib.DSRouterService.DSRouterAuthResult>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.LstError))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(byte[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterTagValue))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.RouterAuthResult))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterAuthResult))]
@@ -1767,7 +1789,6 @@ namespace DsRouterExchangeProviderLib.DSRouterService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterReportExtension))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterEventsReportSettings))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterTagsReportSettings))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(byte[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<System.Tuple<ushort, uint>>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<ushort, uint>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<byte[], string>))]
@@ -1776,11 +1797,6 @@ namespace DsRouterExchangeProviderLib.DSRouterService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<System.Tuple<System.DateTime, object>>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<System.Collections.Generic.List<System.Tuple<System.DateTime, object>>>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<string>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, DsRouterExchangeProviderLib.DSRouterService.DSRouterTagValue>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<ushort, DsRouterExchangeProviderLib.DSRouterService.DSRouterAuthResult>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.LstError))]
         void CommandRun(string ACommandID, System.Collections.Generic.List<object> AParameters);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/CommandRun", ReplyAction="http://tempuri.org/IDSRouter/CommandRunResponse")]
@@ -1803,6 +1819,12 @@ namespace DsRouterExchangeProviderLib.DSRouterService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetDocumentByID", ReplyAction="http://tempuri.org/IDSRouter/GetDocumentByIDResponse")]
         System.Threading.Tasks.Task<string> GetDocumentByIDAsync(ushort dsGuid, int documentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetDocument", ReplyAction="http://tempuri.org/IDSRouter/GetDocumentResponse")]
+        System.Tuple<byte[], string> GetDocument(ushort dsGuid, int documentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetDocument", ReplyAction="http://tempuri.org/IDSRouter/GetDocumentResponse")]
+        System.Threading.Tasks.Task<System.Tuple<byte[], string>> GetDocumentAsync(ushort dsGuid, int documentId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/InitUploadFileSession", ReplyAction="http://tempuri.org/IDSRouter/InitUploadFileSessionResponse")]
         bool InitUploadFileSession(ushort dsGuid, int devGuid, string fileName, string comment);
@@ -1835,6 +1857,12 @@ namespace DsRouterExchangeProviderLib.DSRouterService {
         System.Threading.Tasks.Task<System.DateTime> GetCurrentDateTimeAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IDSRouter/SetTagValueFromHMI")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<string>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, DsRouterExchangeProviderLib.DSRouterService.DSRouterTagValue>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<ushort, DsRouterExchangeProviderLib.DSRouterService.DSRouterAuthResult>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.LstError))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(byte[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterTagValue))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.RouterAuthResult))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterAuthResult))]
@@ -1856,7 +1884,6 @@ namespace DsRouterExchangeProviderLib.DSRouterService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterReportExtension))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterEventsReportSettings))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterTagsReportSettings))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(byte[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<System.Tuple<ushort, uint>>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<ushort, uint>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<byte[], string>))]
@@ -1865,11 +1892,6 @@ namespace DsRouterExchangeProviderLib.DSRouterService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<System.Tuple<System.DateTime, object>>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<System.Collections.Generic.List<System.Tuple<System.DateTime, object>>>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<string>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, DsRouterExchangeProviderLib.DSRouterService.DSRouterTagValue>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<ushort, DsRouterExchangeProviderLib.DSRouterService.DSRouterAuthResult>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.LstError))]
         void SetTagValueFromHMI(ushort dsGuid, uint devGuid, uint tagGuid, object valinobject);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IDSRouter/SetTagValueFromHMI")]
@@ -1882,6 +1904,12 @@ namespace DsRouterExchangeProviderLib.DSRouterService {
         System.Threading.Tasks.Task ReSetTagValueFromHMIAsync(ushort dsGuid, uint devGuid, uint tagGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetTagAnalogTransformationRatio", ReplyAction="http://tempuri.org/IDSRouter/GetTagAnalogTransformationRatioResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<string>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, DsRouterExchangeProviderLib.DSRouterService.DSRouterTagValue>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<ushort, DsRouterExchangeProviderLib.DSRouterService.DSRouterAuthResult>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.LstError))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(byte[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterTagValue))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.RouterAuthResult))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterAuthResult))]
@@ -1903,7 +1931,6 @@ namespace DsRouterExchangeProviderLib.DSRouterService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterReportExtension))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterEventsReportSettings))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterTagsReportSettings))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(byte[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<System.Tuple<ushort, uint>>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<ushort, uint>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<byte[], string>))]
@@ -1912,17 +1939,18 @@ namespace DsRouterExchangeProviderLib.DSRouterService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<System.Tuple<System.DateTime, object>>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<System.Collections.Generic.List<System.Tuple<System.DateTime, object>>>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<string>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, DsRouterExchangeProviderLib.DSRouterService.DSRouterTagValue>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<ushort, DsRouterExchangeProviderLib.DSRouterService.DSRouterAuthResult>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.LstError))]
         object GetTagAnalogTransformationRatio(ushort dsGuid, uint devGuid, uint tagGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetTagAnalogTransformationRatio", ReplyAction="http://tempuri.org/IDSRouter/GetTagAnalogTransformationRatioResponse")]
         System.Threading.Tasks.Task<object> GetTagAnalogTransformationRatioAsync(ushort dsGuid, uint devGuid, uint tagGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/SetTagAnalogTransformationRatio", ReplyAction="http://tempuri.org/IDSRouter/SetTagAnalogTransformationRatioResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<string>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, DsRouterExchangeProviderLib.DSRouterService.DSRouterTagValue>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<ushort, DsRouterExchangeProviderLib.DSRouterService.DSRouterAuthResult>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.LstError))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(byte[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterTagValue))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.RouterAuthResult))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterAuthResult))]
@@ -1944,7 +1972,6 @@ namespace DsRouterExchangeProviderLib.DSRouterService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterReportExtension))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterEventsReportSettings))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.DSRouterTagsReportSettings))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(byte[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<System.Tuple<ushort, uint>>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<ushort, uint>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<byte[], string>))]
@@ -1953,11 +1980,6 @@ namespace DsRouterExchangeProviderLib.DSRouterService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<System.Tuple<System.DateTime, object>>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<System.Collections.Generic.List<System.Tuple<System.DateTime, object>>>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<string>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, DsRouterExchangeProviderLib.DSRouterService.DSRouterTagValue>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<ushort, DsRouterExchangeProviderLib.DSRouterService.DSRouterAuthResult>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DsRouterExchangeProviderLib.DSRouterService.LstError))]
         void SetTagAnalogTransformationRatio(ushort dsGuid, uint devGuid, uint tagGuid, object transformationRatio);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/SetTagAnalogTransformationRatio", ReplyAction="http://tempuri.org/IDSRouter/SetTagAnalogTransformationRatioResponse")]
@@ -2496,6 +2518,14 @@ namespace DsRouterExchangeProviderLib.DSRouterService {
         
         public System.Threading.Tasks.Task<string> GetDocumentByIDAsync(ushort dsGuid, int documentId) {
             return base.Channel.GetDocumentByIDAsync(dsGuid, documentId);
+        }
+        
+        public System.Tuple<byte[], string> GetDocument(ushort dsGuid, int documentId) {
+            return base.Channel.GetDocument(dsGuid, documentId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Tuple<byte[], string>> GetDocumentAsync(ushort dsGuid, int documentId) {
+            return base.Channel.GetDocumentAsync(dsGuid, documentId);
         }
         
         public bool InitUploadFileSession(ushort dsGuid, int devGuid, string fileName, string comment) {

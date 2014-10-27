@@ -19,13 +19,13 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/Message" />
-      <xsd:import schemaLocation="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/InterfaceLibrary" />
-      <xsd:import schemaLocation="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-      <xsd:import schemaLocation="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" />
-      <xsd:import schemaLocation="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import schemaLocation="http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/Message" />
+      <xsd:import schemaLocation="http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/InterfaceLibrary" />
+      <xsd:import schemaLocation="http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" />
+      <xsd:import schemaLocation="http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IDSRouter_GetDSValueAsByteBuffer_InputMessage">
@@ -315,6 +315,12 @@
   </wsdl:message>
   <wsdl:message name="IDSRouter_GetDocumentByID_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetDocumentByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetDocument_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocument" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetDocument_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentResponse" />
   </wsdl:message>
   <wsdl:message name="IDSRouter_InitUploadFileSession_InputMessage">
     <wsdl:part name="parameters" element="tns:InitUploadFileSession" />
@@ -662,6 +668,10 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetDocumentByID">
       <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetDocumentByID" message="tns:IDSRouter_GetDocumentByID_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetDocumentByIDResponse" message="tns:IDSRouter_GetDocumentByID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetDocument">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetDocument" message="tns:IDSRouter_GetDocument_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetDocumentResponse" message="tns:IDSRouter_GetDocument_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="InitUploadFileSession">
       <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/InitUploadFileSession" message="tns:IDSRouter_InitUploadFileSession_InputMessage" />
@@ -1204,6 +1214,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetDocumentByID">
       <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetDocumentByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocument">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetDocument" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1887,6 +1906,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetDocument">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="InitUploadFileSession">
       <soap12:operation soapAction="http://tempuri.org/IDSRouter/InitUploadFileSession" style="document" />
       <wsdl:input>
@@ -2124,15 +2152,15 @@
   </wsdl:binding>
   <wsdl:service name="DSRouterService">
     <wsdl:port name="CustomBinding_IDSRouter" binding="tns:CustomBinding_IDSRouter">
-      <soap12:address location="http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc" />
+      <soap12:address location="http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc" />
       <wsa10:EndpointReference>
-        <wsa10:Address>http://asu-smirnov.mtra.local/DSRouter.DSRouterService/DSRouterService.svc</wsa10:Address>
+        <wsa10:Address>http://Роутер-ПК/DSRouter.DSRouterService/DSRouterService.svc</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IDSRouter" binding="tns:NetTcpBinding_IDSRouter">
-      <soap12:address location="net.tcp://asu-smirnov.mtra.local:3331/DSRouter.DSRouterService/DSRouterService.svc" />
+      <soap12:address location="net.tcp://Роутер-ПК:3332/DSRouter.DSRouterService/DSRouterService.svc" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://asu-smirnov.mtra.local:3331/DSRouter.DSRouterService/DSRouterService.svc</wsa10:Address>
+        <wsa10:Address>net.tcp://Роутер-ПК:3332/DSRouter.DSRouterService/DSRouterService.svc</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>
