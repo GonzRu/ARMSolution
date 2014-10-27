@@ -382,7 +382,17 @@ namespace DsRouterExchangeProviderLib.WcfProvider
         /// </summary>
         Tuple<byte[], string> IExchangeProvider.DownloadDocument(UInt16 dsGuid, Int32 documentId)
         {
-            throw new NotImplementedException();
+            Tuple<byte[], string> result = null;
+
+            try
+            {
+                result = _dsRouterProxy.GetDocument(dsGuid, documentId);
+            }
+            catch (Exception)
+            {
+            }
+
+            return result;
         }
 
         #endregion
