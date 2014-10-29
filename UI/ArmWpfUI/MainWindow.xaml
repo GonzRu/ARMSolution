@@ -44,7 +44,7 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             
-                            <Button Grid.Column="0" ToolTip="В начало" Command="{x:Static NavigationCommands.FirstPage}" IsEnabled="{TemplateBinding CanGoBack}" Height="30" Width="30">
+                            <Button Grid.Column="0" ToolTip="В начало" Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DataContext.GotoFirstPageCommand}" IsEnabled="{TemplateBinding CanGoBack}" Height="30" Width="30">
                                 <Button.Template>
                                     <ControlTemplate>
                                         <Image Name="GoFirstButtonImage" Source="Resources/go-first.png"></Image>
@@ -60,7 +60,7 @@
                                 </Button.Template>
                             </Button>
 
-                            <Button Grid.Column="1" ToolTip="Назад" Command="{x:Static NavigationCommands.BrowseBack}" IsEnabled="{TemplateBinding CanGoBack}" Height="30" Width="30">
+                            <Button Grid.Column="1" ToolTip="Назад" Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DataContext.GoBackCommand}" Height="30" Width="30">
                                 <Button.Template>
                                     <ControlTemplate>
                                         <Image Source="Resources/back.png" />
