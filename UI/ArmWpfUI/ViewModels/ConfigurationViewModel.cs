@@ -105,11 +105,6 @@ namespace ArmWpfUI.ViewModels
         /// </summary>
         private readonly Dictionary<string, object> _mnemoPagesCache = new Dictionary<string, object>();
 
-        /// <summary>
-        /// Таймер для периодической проверки на наличие не квитированных сообщений
-        /// </summary>
-        private Timer _checkNotReciptedEventsTimer;
-
         #endregion
 
         #region Constructor
@@ -128,8 +123,6 @@ namespace ArmWpfUI.ViewModels
             GotoTerminalViewCommand = new Command(GotoTerminalView);
 
             #endregion
-
-            _checkNotReciptedEventsTimer = new Timer(CheckNotReciptedEvents, null, 0, 2000);
 
             Configuration.DsRouterProvider.ConnectionStateChanged += b => NotifyPropertyChanged("IsConnectionStateOpened");
 
@@ -621,13 +614,6 @@ namespace ArmWpfUI.ViewModels
             MainFrameContent = stackPanel;
         }
 
-        private void CheckNotReciptedEvents(object state)
-        {
-            if (Configuration.DsRouterProvider.IsNotReceiptedEventsExist())
-            {
-                IsNotReciptedEventsExist = true;
-            }
-        }
 
         /// <summary>
         /// Устанавливает содержимое фрейма
