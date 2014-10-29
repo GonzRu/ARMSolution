@@ -75,17 +75,17 @@ namespace ArmWpfUI.ViewModels
         /// <summary>
         /// Перейти на другую мнемосхему
         /// </summary>
-        public ICommand GotoMnemoCommand { get; set; }
+        public Command GotoMnemoCommand { get; set; }
 
         /// <summary>
         /// Перейти на страницу событий
         /// </summary>
-        public ICommand GotoEventsViewCommand { get; set; }
+        public Command GotoEventsViewCommand { get; set; }
 
         /// <summary>
         /// Перейти на страницу блока
         /// </summary>
-        public ICommand GotoTerminalViewCommand { get; set; }
+        public Command GotoTerminalViewCommand { get; set; }
 
         #endregion
 
