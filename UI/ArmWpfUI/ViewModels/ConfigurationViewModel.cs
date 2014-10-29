@@ -60,6 +60,18 @@ namespace ArmWpfUI.ViewModels
 
         #region Commands
 
+        #region Команды навигации
+
+        /// <summary>
+        /// Переход назад
+        /// </summary>
+        public Command GoBackCommand { get; set; }
+
+        /// <summary>
+        /// Переход к первой(главной) странице
+        /// </summary>
+        public Command GotoFirstPageCommand { get; set; }
+
         /// <summary>
         /// Перейти на другую мнемосхему
         /// </summary>
@@ -79,12 +91,19 @@ namespace ArmWpfUI.ViewModels
 
         #endregion
 
+        #endregion
+
         #region Private fields
 
         /// <summary>
-        /// Закеширова
+        /// Стек страниц для обратной навигации
         /// </summary>
-        private Dictionary<string, object> _cachedFrameContents = new Dictionary<string, object>();
+        private readonly Stack<Tuple<string, object>> _backNavigationPagesStack = new Stack<Tuple<string, object>>(); 
+
+        /// <summary>
+        /// Кешированные страницы мнемосхем
+        /// </summary>
+        private readonly Dictionary<string, object> _mnemoPagesCache = new Dictionary<string, object>();
 
         /// <summary>
         /// Таймер для периодической проверки на наличие не квитированных сообщений
@@ -100,6 +119,9 @@ namespace ArmWpfUI.ViewModels
             LoadConfiguration();
 
             #region Иницилизация комманд
+
+            GoBackCommand = new Command(GoBack, false);
+            GotoFirstPageCommand = new Command(GotoFirstPage, false);
 
             GotoMnemoCommand = new Command(GotoMnemo);
             GotoEventsViewCommand = new Command(GotoEventsView);
@@ -124,27 +146,61 @@ namespace ArmWpfUI.ViewModels
 
         #region Работа с представлением главного окна
 
+        /// <summary>
+        /// Переводит состояние фрейма на одну страницу назад
+        /// </summary>
+        private void GoBack()
+        {
+            if (_backNavigationPagesStack.Count == 0)
+                return;
+
+            var prevPage = _backNavigationPagesStack.Pop();
+
+            SetFrameContent(prevPage.Item1, prevPage.Item2, true);
+        }
+
+        /// <summary>
+        /// Переводит состояние фрейма на главную страницу
+        /// </summary>
+        private void GotoFirstPage()
+        {
+            if (_backNavigationPagesStack.Count == 0)
+                return;
+
+            var prevPage = _backNavigationPagesStack.ToArray()[_backNavigationPagesStack.Count - 1];
+            _backNavigationPagesStack.Clear();
+
+            SetFrameContent(prevPage.Item1, prevPage.Item2, true);
+        }
+
+        /// <summary>
+        /// Загружает указанную мнемосхему и переходит на нее
+        /// </summary>
         private void GotoMnemo(object param)
         {
             if (!(param is string) || String.IsNullOrWhiteSpace(param as string))
                 return;
 
             var xamlFileName = param as string;
+            var frameContent = LoadXaml(xamlFileName);
 
-            MainFrameContent = LoadXaml(xamlFileName);
-            PageHeader = xamlFileName;
+            SetFrameContent(xamlFileName, frameContent);
         }
 
+        /// <summary>
+        /// Переходит к окну событий
+        /// </summary>
         private void GotoEventsView()
         {
-            PageHeader = "События";
-
             var eventsViewModel = new EventsView();
             eventsViewModel.DataContext = new EventsPageViewModel(Configuration.DsRouterProvider);
 
-            MainFrameContent = eventsViewModel;
+            SetFrameContent("События", eventsViewModel);
         }
 
+        /// <summary>
+        /// Переходит у окну терминала
+        /// </summary>
         private void GotoTerminalView(object param)
         {
             var terminalsId = param as string;
@@ -152,22 +208,20 @@ namespace ArmWpfUI.ViewModels
                 return;
 
             var terminalViewContent = new TerminalView();
-
             var terminals = terminalsId.Split(';');
 
             if (terminals.Length == 1)
             {
                 var deviceViewModel = GetDeviceViewModel(terminals[0]);
                 terminalViewContent.DataContext = deviceViewModel;
-                PageHeader = deviceViewModel.DeviceDescription;
-            }
-            else
-            {
-                var selectTerminalWindow = new SelectTerminalView(terminalsId);
-                selectTerminalWindow.ShowDialog();
-            }
 
-            MainFrameContent = terminalViewContent;
+                SetFrameContent(deviceViewModel.DeviceDescription, terminalViewContent);
+            }
+            //else
+            //{
+            //    var selectTerminalWindow = new SelectTerminalView(terminalsId);
+            //    selectTerminalWindow.ShowDialog();
+            //}
         }
 
         #endregion
@@ -203,8 +257,8 @@ namespace ArmWpfUI.ViewModels
 
         private object LoadXaml(string xamlFileName)
         {
-            if (_cachedFrameContents.ContainsKey(xamlFileName))
-                return _cachedFrameContents[xamlFileName];
+            if (_mnemoPagesCache.ContainsKey(xamlFileName))
+                return _mnemoPagesCache[xamlFileName];
 
             var pathTomainMnemo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Project", "Mnemo", xamlFileName);
             string str1 = OpenData(pathTomainMnemo);// При сохранении Было переименовано для WEB, для редактирования - обратно
@@ -499,6 +553,8 @@ namespace ArmWpfUI.ViewModels
 
             Task.Run(() => Configuration.DsRouterProvider.SubscribeToTagsValuesUpdate(tagsToSubscribe));
 
+            _mnemoPagesCache.Add(xamlFileName, grid);
+
             return grid;
         }
 
@@ -571,6 +627,50 @@ namespace ArmWpfUI.ViewModels
             {
                 IsNotReciptedEventsExist = true;
             }
+        }
+
+        /// <summary>
+        /// Устанавливает содержимое фрейма
+        /// </summary>
+        private void SetFrameContent(string frameHeader, object frameContent, bool isBackNavigation = false)
+        {
+            if (!isBackNavigation)
+                PushCurrentPageStateToStack();
+
+            PageHeader = frameHeader;
+            MainFrameContent = frameContent;
+
+            AdjustNavigationCommandsStatus();
+        }
+
+        #endregion
+
+        #region Методы для работы со стеком и кешированием страниц
+
+        /// <summary>
+        /// Устанавливает возможность запуска навигационных команад
+        /// в зависимости от состояния стека страниц
+        /// </summary>
+        private void AdjustNavigationCommandsStatus()
+        {
+            if (_backNavigationPagesStack.Count == 0)
+            {
+                GoBackCommand.CanExecute = false;
+                GotoFirstPageCommand.CanExecute = false;
+            }
+            else if (_backNavigationPagesStack.Count == 1)
+            {
+                GoBackCommand.CanExecute = true;
+                GotoFirstPageCommand.CanExecute = true;
+            }
+        }
+
+        /// <summary>
+        /// Добавляет текущее состояние фрейма в стек
+        /// </summary>
+        private void PushCurrentPageStateToStack()
+        {
+            _backNavigationPagesStack.Push(new Tuple<string, object>(PageHeader, MainFrameContent));
         }
 
         #endregion
