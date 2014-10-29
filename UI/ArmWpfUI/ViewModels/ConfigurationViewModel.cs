@@ -248,6 +248,9 @@ namespace ArmWpfUI.ViewModels
 
         #region Загрузка xaml
 
+        /// <summary>
+        /// Загружает мнемосхему и привязывает все эелементы
+        /// </summary>
         private object LoadXaml(string xamlFileName)
         {
             if (_mnemoPagesCache.ContainsKey(xamlFileName))
@@ -594,10 +597,6 @@ namespace ArmWpfUI.ViewModels
             fe.SetBinding(dp, binding);
         }
 
-        #endregion
-
-        #region Разобрать
-
         /// <summary>
         /// Загружает главную мнемосхему и добавляет к ней поле вывода тревог
         /// </summary>
@@ -607,13 +606,16 @@ namespace ArmWpfUI.ViewModels
             PageHeader = "Главная мнемосхема";
 
             // Контрол вывода последних тревог
-            var stackPanel = new StackPanel {Orientation = Orientation.Vertical};
-            stackPanel.Children.Add(new Label {Content = "123123123"});
+            var stackPanel = new StackPanel { Orientation = Orientation.Vertical };
+            stackPanel.Children.Add(new Label { Content = "123123123" });
             stackPanel.Children.Add(grid);
 
             MainFrameContent = stackPanel;
         }
 
+        #endregion
+
+        #region Работа с содержимым фрейма
 
         /// <summary>
         /// Устанавливает содержимое фрейма
