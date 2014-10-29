@@ -96,9 +96,14 @@ namespace ArmWpfUI.ViewModels
         #region Private fields
 
         /// <summary>
-        /// Закеширова
+        /// Стек страниц для обратной навигации
         /// </summary>
-        private Dictionary<string, object> _cachedFrameContents = new Dictionary<string, object>();
+        private readonly Stack<Tuple<string, object>> _backNavigationPagesStack = new Stack<Tuple<string, object>>(); 
+
+        /// <summary>
+        /// Кешированные страницы мнемосхем
+        /// </summary>
+        private readonly Dictionary<string, object> _mnemoPagesCache = new Dictionary<string, object>();
 
         /// <summary>
         /// Таймер для периодической проверки на наличие не квитированных сообщений
@@ -228,8 +233,8 @@ namespace ArmWpfUI.ViewModels
 
         private object LoadXaml(string xamlFileName)
         {
-            if (_cachedFrameContents.ContainsKey(xamlFileName))
-                return _cachedFrameContents[xamlFileName];
+            if (_mnemoPagesCache.ContainsKey(xamlFileName))
+                return _mnemoPagesCache[xamlFileName];
 
             var pathTomainMnemo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Project", "Mnemo", xamlFileName);
             string str1 = OpenData(pathTomainMnemo);// При сохранении Было переименовано для WEB, для редактирования - обратно
