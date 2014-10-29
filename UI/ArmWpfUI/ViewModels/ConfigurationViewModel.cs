@@ -60,6 +60,18 @@ namespace ArmWpfUI.ViewModels
 
         #region Commands
 
+        #region Команды навигации
+
+        /// <summary>
+        /// Переход назад
+        /// </summary>
+        public Command GoBackCommand { get; set; }
+
+        /// <summary>
+        /// Переход к первой(главной) странице
+        /// </summary>
+        public Command GotoFirstPageCommand { get; set; }
+
         /// <summary>
         /// Перейти на другую мнемосхему
         /// </summary>
@@ -74,6 +86,8 @@ namespace ArmWpfUI.ViewModels
         /// Перейти на страницу блока
         /// </summary>
         public ICommand GotoTerminalViewCommand { get; set; }
+
+        #endregion
 
         #endregion
 
@@ -101,6 +115,9 @@ namespace ArmWpfUI.ViewModels
 
             #region Иницилизация комманд
 
+            GoBackCommand = new Command(GoBack, false);
+            GotoFirstPageCommand = new Command(GotoFirstPage, false);
+
             GotoMnemoCommand = new Command(GotoMnemo);
             GotoEventsViewCommand = new Command(GotoEventsView);
             GotoTerminalViewCommand = new Command(GotoTerminalView);
@@ -123,6 +140,14 @@ namespace ArmWpfUI.ViewModels
         #region Commands Implementations
 
         #region Работа с представлением главного окна
+
+        private void GoBack()
+        {
+        }
+
+        private void GotoFirstPage()
+        {
+        }
 
         private void GotoMnemo(object param)
         {
