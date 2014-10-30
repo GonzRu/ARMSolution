@@ -547,7 +547,7 @@ namespace ArmWpfUI.ViewModels
 
             #endregion
 
-            Task.Run(() => Configuration.DsRouterProvider.SubscribeToTagsValuesUpdate(tagsToSubscribe));
+            Configuration.DsRouterProvider.SubscribeToTagsValuesUpdate(tagsToSubscribe);
 
             _mnemoPagesCache.Add(xamlFileName, grid);
 
@@ -591,7 +591,8 @@ namespace ArmWpfUI.ViewModels
                 Path = new PropertyPath("TagValue"),
                 Mode = BindingMode.TwoWay,
                 Converter = converter,
-                ConverterParameter = converterParameter
+                ConverterParameter = converterParameter,
+                IsAsync = true
             };
 
             fe.SetBinding(dp, binding);
