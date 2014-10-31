@@ -291,7 +291,7 @@ namespace ArmWpfUI.ViewModels
 
                 if (!cc.ASUTagIDState.Equals("-1"))
                 {
-                    CreateBinding(cc, CBaseControl.ASUCommutationDeviceStateProperty, cc.ASUTagIDState, new AnalogTagValueToDeviceStateConverter(), null);
+                    CreateBinding(cc, CBaseControl.ASUCommutationDeviceStateProperty, cc.ASUTagIDState, "TagValue", new AnalogTagValueToDeviceStateConverter());
                     if (!tagsToSubscribe.Contains(cc.ASUTagIDState))
                         tagsToSubscribe.Add(cc.ASUTagIDState);
 
@@ -310,7 +310,7 @@ namespace ArmWpfUI.ViewModels
                             Command = HandleSetOnDeviceStateCommand,
                             CommandParameter = cc.ASUTagIDState
                         };
-                        CreateBinding(setHandleStateOnMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 2, InvertHandleQuality = true}, null);
+                        CreateBinding(setHandleStateOnMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, "TagValue", new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 2, InvertHandleQuality = true }, null);
 
                         #endregion
 
@@ -322,7 +322,7 @@ namespace ArmWpfUI.ViewModels
                             Command = HandleSetOffDeviceStateCommand,
                             CommandParameter = cc.ASUTagIDState
                         };
-                        CreateBinding(setHandleStateOffMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 1, InvertHandleQuality = true }, null);
+                        CreateBinding(setHandleStateOffMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, "TagValue", new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 1, InvertHandleQuality = true });
 
                         #endregion
 
@@ -334,7 +334,7 @@ namespace ArmWpfUI.ViewModels
                             Command = ReSetHandleDeviceStateCommand,
                             CommandParameter = cc.ASUTagIDState
                         };
-                        CreateBinding(resetHandleStatefMenuItem, MenuItem.IsEnabledProperty, cc.ASUTagIDState, new HandledQualityToBooleanConverter(), null);
+                        CreateBinding(resetHandleStatefMenuItem, MenuItem.IsEnabledProperty, cc.ASUTagIDState, "TagValue", new HandledQualityToBooleanConverter());
 
                         #endregion
 
@@ -354,8 +354,8 @@ namespace ArmWpfUI.ViewModels
                     {
                         var deviceCommandOnMenuItem = new MenuItem();
                         deviceCommandOnMenuItem.Header = "Включить выключатель";
-                        CreateBinding(deviceCommandOnMenuItem, MenuItem.IsEnabledProperty, cc.ASUTagIDState, new HandledQualityToBooleanConverter { Invert = true }, null);
-                        CreateBinding(deviceCommandOnMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 2 }, null);
+                        CreateBinding(deviceCommandOnMenuItem, MenuItem.IsEnabledProperty, cc.ASUTagIDState, "TagValue", new HandledQualityToBooleanConverter { Invert = true });
+                        CreateBinding(deviceCommandOnMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, "TagValue", new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 2 });
 
                         deviceCommandsMenuItem.Items.Add(deviceCommandOnMenuItem);
                     }
@@ -364,8 +364,8 @@ namespace ArmWpfUI.ViewModels
                     {
                         var deviceCommandOffMenuItem = new MenuItem();
                         deviceCommandOffMenuItem.Header = "Отключить выключатель";
-                        CreateBinding(deviceCommandOffMenuItem, MenuItem.IsEnabledProperty, cc.ASUTagIDState, new HandledQualityToBooleanConverter { Invert = true }, null);
-                        CreateBinding(deviceCommandOffMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 1 }, null);
+                        CreateBinding(deviceCommandOffMenuItem, MenuItem.IsEnabledProperty, cc.ASUTagIDState, "TagValue", new HandledQualityToBooleanConverter { Invert = true });
+                        CreateBinding(deviceCommandOffMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, "TagValue", new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 1 });
 
                         deviceCommandsMenuItem.Items.Add(deviceCommandOffMenuItem);
                     }
@@ -470,7 +470,7 @@ namespace ArmWpfUI.ViewModels
 
                 if (cc.ASUCommutationDeviceStateManualSetEnabled)
                 {
-                    CreateBinding(cc, CBaseControl.ASUControlISManualSetProperty, cc.ASUTagIDState, new HandledQualityToBooleanConverter(), null);
+                    CreateBinding(cc, CBaseControl.ASUControlISManualSetProperty, cc.ASUTagIDState, "TagValue", new HandledQualityToBooleanConverter());
                 }
 
                 #endregion
@@ -579,7 +579,7 @@ namespace ArmWpfUI.ViewModels
             #endregion Открываем xml
         }
 
-        private void CreateBinding(FrameworkElement fe, DependencyProperty dp, string tagGuidAsStr, IValueConverter converter, object converterParameter)
+        private void CreateBinding(FrameworkElement fe, DependencyProperty dp, string tagGuidAsStr, string propertyPath, IValueConverter converter, object converterParameter = null)
         {
             var tagViewModel = GetTagViewModel(tagGuidAsStr);
             if (tagViewModel == null)
@@ -588,8 +588,8 @@ namespace ArmWpfUI.ViewModels
             var binding = new Binding
             {
                 Source = tagViewModel,
-                Path = new PropertyPath("TagValue"),
-                Mode = BindingMode.TwoWay,
+                Path = new PropertyPath(propertyPath),
+                Mode = BindingMode.OneWay,
                 Converter = converter,
                 ConverterParameter = converterParameter,
                 IsAsync = true
