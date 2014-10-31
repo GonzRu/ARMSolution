@@ -48,7 +48,7 @@
     <Compile Include="ViewModels\DataServerViewModel.cs" />
     <Compile Include="ViewModels\DeviceViewModel.cs" />
     <Compile Include="ViewModels\GroupViewModel.cs" />
-    <Compile Include="ViewModels\BaseTagAnalogViewModel.cs" />
+    <Compile Include="ViewModels\AnalogTagViewModel.cs" />
     <Compile Include="ViewModels\BaseTagDiscretViewModel.cs" />
     <Compile Include="ViewModels\TagViewModel.cs" />
   </ItemGroup>
