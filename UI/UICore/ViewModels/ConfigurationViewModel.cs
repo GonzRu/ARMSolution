@@ -41,7 +41,7 @@ namespace UICore.ViewModels
         /// <summary>
         /// Список моделей-представлний DS
         /// </summary>
-        public List<BaseDataServerViewModel> DataServers
+        public List<DataServerViewModel> DataServers
         {
             get { return _dataServers; }
             set
@@ -50,7 +50,7 @@ namespace UICore.ViewModels
                 NotifyPropertyChanged("DataServers");
             }
         }
-        private List<BaseDataServerViewModel> _dataServers;
+        private List<DataServerViewModel> _dataServers;
 
         /// <summary>
         /// Индикатор показывающий - есть ли в системе неквитированные сообщения

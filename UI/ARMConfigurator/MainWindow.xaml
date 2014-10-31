@@ -79,7 +79,7 @@
 
                 <TreeView.Resources>
 
-                    <HierarchicalDataTemplate  DataType="{x:Type commonViewModels:BaseDataServerViewModel}" ItemsSource="{Binding Path=Devices}">
+                    <HierarchicalDataTemplate  DataType="{x:Type commonViewModels:DataServerViewModel}" ItemsSource="{Binding Path=Devices}">
                         <TextBlock Text="{Binding Path=ObjectName}" Margin="3,1,1,3" />
                     </HierarchicalDataTemplate>
 

@@ -119,10 +119,10 @@ namespace ARMConfigurator.ViewModels
 
             base.LoadConfiguration();
 
-            var tmp = new List<BaseDataServerViewModel>();
+            var tmp = new List<DataServerViewModel>();
             foreach (var ds in Configuration.DataServers.Values)
             {
-                tmp.Add(new BaseDataServerViewModel(ds, Configuration.DsRouterProvider));
+                tmp.Add(new DataServerViewModel(ds, Configuration.DsRouterProvider));
             }
             DataServers = tmp;
 

@@ -5,7 +5,7 @@ using UICore.ViewModels;
 
 namespace ArmWpfUI.ViewModels
 {
-    public class DataServerViewModel : BaseDataServerViewModel
+    public class DataServerViewModel : UICore.ViewModels.DataServerViewModel
     {
         #region Constructors
 
