@@ -23,7 +23,7 @@ using UICore.ViewModels;
 
 namespace ArmWpfUI.ViewModels
 {
-    class ConfigurationViewModel : BaseConfigurationViewModel
+    class ConfigurationViewModel : UICore.ViewModels.ConfigurationViewModel
     {
         #region Public properties
 
@@ -236,7 +236,7 @@ namespace ArmWpfUI.ViewModels
         {
             base.LoadConfiguration();
 
-            DataServers = new List<BaseDataServerViewModel>();
+            DataServers = new List<UICore.ViewModels.DataServerViewModel>();
             foreach (var ds in Configuration.DataServers.Values)
             {
                 DataServers.Add(new DataServerViewModel(ds, Configuration.DsRouterProvider));

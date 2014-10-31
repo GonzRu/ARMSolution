@@ -79,18 +79,18 @@
 
                 <TreeView.Resources>
 
-                    <HierarchicalDataTemplate  DataType="{x:Type commonViewModels:BaseDataServerViewModel}" ItemsSource="{Binding Path=Devices}">
+                    <HierarchicalDataTemplate  DataType="{x:Type commonViewModels:DataServerViewModel}" ItemsSource="{Binding Path=Devices}">
                         <TextBlock Text="{Binding Path=ObjectName}" Margin="3,1,1,3" />
                     </HierarchicalDataTemplate>
 
-                    <HierarchicalDataTemplate DataType="{x:Type commonViewModels:BaseDeviceViewModel}" ItemsSource="{Binding Path=Groups}">
+                    <HierarchicalDataTemplate DataType="{x:Type commonViewModels:DeviceViewModel}" ItemsSource="{Binding Path=Groups}">
                         <StackPanel Orientation="Horizontal" Margin="0,1,1,0">
                             <TextBlock Text="{Binding Path=DeviceName}" Margin="3,0,0,3" />
                             <TextBlock Text="{Binding Path=DeviceDescription}" Margin="3,0,0,3" Foreground="BlueViolet" />
                         </StackPanel>
                     </HierarchicalDataTemplate>
 
-                    <HierarchicalDataTemplate DataType="{x:Type commonViewModels:BaseGroupViewModel}" ItemsSource="{Binding Path=SubGroups}">
+                    <HierarchicalDataTemplate DataType="{x:Type commonViewModels:GroupViewModel}" ItemsSource="{Binding Path=SubGroups}">
                         <StackPanel Orientation="Horizontal" Margin="0,1,1,0">
                             <CheckBox IsChecked="{Binding Path=Enable}" />
                             <TextBlock Text="{Binding Path=GroupName}" Margin="3,0,0,3" Foreground="CadetBlue" />

@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace UICore.ViewModels
 {
-    public class BaseTagViewModel : BaseViewModel
+    public class TagViewModel : ViewModelBase
     {
         #region Public properties
 
@@ -128,7 +128,7 @@ namespace UICore.ViewModels
 
         #region Constructor
 
-        public BaseTagViewModel(Tag tag, IExchangeProvider exchangeProvider)
+        public TagViewModel(Tag tag, IExchangeProvider exchangeProvider)
         {
             Tag = tag;
             ExchangeProvider = exchangeProvider;

@@ -9,7 +9,7 @@ using UICore.ViewModels;
 
 namespace ArmWpfUI.ViewModels
 {
-    class EventsPageViewModel : BaseViewModel
+    class EventsPageViewModel : ViewModelBase
     {
         #region Private fields
 

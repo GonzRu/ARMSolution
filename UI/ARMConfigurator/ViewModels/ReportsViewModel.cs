@@ -14,7 +14,7 @@ using UICore.ViewModels;
 
 namespace ARMConfigurator.ViewModels
 {
-    class ReportsViewModel : BaseViewModel
+    class ReportsViewModel : ViewModelBase
     {
         #region Costructor
 

@@ -3,7 +3,6 @@ using ArmWpfUI.Views.TerminalViews;
 using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
-using UICore.ViewModels;
 
 namespace ArmWpfUI.Views
 {
@@ -27,11 +26,11 @@ namespace ArmWpfUI.Views
 
         private void DataGridDataContextChangedHandler(object sender, DependencyPropertyChangedEventArgs e)
         {
-            var oldDataContext = e.OldValue as BaseGroupViewModel;
+            var oldDataContext = e.OldValue as UICore.ViewModels.GroupViewModel;
             //if (oldDataContext != null)
             //    oldDataContext.UnSubscribeToTagsValuesUpdateCommand.Execute(null);
 
-            var newDataContext = e.NewValue as BaseGroupViewModel;
+            var newDataContext = e.NewValue as UICore.ViewModels.GroupViewModel;
             //if (newDataContext != null)
             //    newDataContext.SubscribeToTagsValuesUpdateCommand.Execute(null);
         }

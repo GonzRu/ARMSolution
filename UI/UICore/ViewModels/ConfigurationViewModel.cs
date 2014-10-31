@@ -9,7 +9,7 @@ using UICore.Commands;
 
 namespace UICore.ViewModels
 {
-    public abstract class BaseConfigurationViewModel : BaseViewModel
+    public abstract class ConfigurationViewModel : ViewModelBase
     {
         #region CONSTS
 
@@ -41,7 +41,7 @@ namespace UICore.ViewModels
         /// <summary>
         /// Список моделей-представлний DS
         /// </summary>
-        public List<BaseDataServerViewModel> DataServers
+        public List<DataServerViewModel> DataServers
         {
             get { return _dataServers; }
             set
@@ -50,7 +50,7 @@ namespace UICore.ViewModels
                 NotifyPropertyChanged("DataServers");
             }
         }
-        private List<BaseDataServerViewModel> _dataServers;
+        private List<DataServerViewModel> _dataServers;
 
         /// <summary>
         /// Индикатор показывающий - есть ли в системе неквитированные сообщения
@@ -113,7 +113,7 @@ namespace UICore.ViewModels
 
         #region Constructors
 
-        protected BaseConfigurationViewModel(IConfigurationProvider configurationProvider)
+        protected ConfigurationViewModel(IConfigurationProvider configurationProvider)
         {
             ConfigurationProvider = configurationProvider;
 
@@ -224,7 +224,7 @@ namespace UICore.ViewModels
 
         #region Вспомогательные методы для получение VM
 
-        protected BaseDeviceViewModel GetDeviceViewModel(string deviceGuidAsStr)
+        protected DeviceViewModel GetDeviceViewModel(string deviceGuidAsStr)
         {
             var c = deviceGuidAsStr.Split('.');
 
@@ -241,7 +241,7 @@ namespace UICore.ViewModels
                     select deviceViewModel).FirstOrDefault();
         }
 
-        protected BaseTagViewModel GetTagViewModel(string tagGuidAsStr)
+        protected TagViewModel GetTagViewModel(string tagGuidAsStr)
         {
             var deviceViewModel = GetDeviceViewModel(tagGuidAsStr);
             if (deviceViewModel == null)

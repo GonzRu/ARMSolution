@@ -5,7 +5,7 @@ using CoreLib.Models.Configuration;
 
 namespace UICore.ViewModels
 {
-    public class BaseDataServerViewModel : BaseViewModel
+    public class DataServerViewModel : ViewModelBase
     {
         #region Public properties
 
@@ -35,7 +35,7 @@ namespace UICore.ViewModels
         /// Список устройств
         /// </summary>
         [Browsable(false)]
-        public List<BaseDeviceViewModel> Devices { get; set; }
+        public List<DeviceViewModel> Devices { get; set; }
 
         #endregion
 
@@ -47,18 +47,18 @@ namespace UICore.ViewModels
 
         #region Constructors
 
-        protected BaseDataServerViewModel()
+        protected DataServerViewModel()
         {
             
         }
 
-        public BaseDataServerViewModel(DataServer dataServer, IExchangeProvider exchangeProvider)
+        public DataServerViewModel(DataServer dataServer, IExchangeProvider exchangeProvider)
         {
             DataServer = dataServer;
 
-            Devices = new List<BaseDeviceViewModel>();
+            Devices = new List<DeviceViewModel>();
             foreach (var device in DataServer.Devices.Values)
-                Devices.Add(new BaseDeviceViewModel(device, exchangeProvider));
+                Devices.Add(new DeviceViewModel(device, exchangeProvider));
         }
 
         #endregion

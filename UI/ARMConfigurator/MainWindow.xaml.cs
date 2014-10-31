@@ -5,7 +5,6 @@ using ConfigurationParsersLib;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using UICore.ViewModels;
 
 namespace ARMConfigurator
 {
@@ -35,18 +34,18 @@ namespace ARMConfigurator
             if (e.AddedItems != null && e.AddedItems.Count > 0)
                 PropertyGrid.SelectedObject = e.AddedItems[0];
 
-            //List<BaseTagViewModel> selectedCollection;
+            //List<TagViewModel> selectedCollection;
 
-            //if (PropertyGrid.SelectedObjects is BaseTagViewModel[])
-            //    selectedCollection = (PropertyGrid.SelectedObjects as BaseTagViewModel[]).ToList<BaseTagViewModel>();
+            //if (PropertyGrid.SelectedObjects is TagViewModel[])
+            //    selectedCollection = (PropertyGrid.SelectedObjects as TagViewModel[]).ToList<TagViewModel>();
             //else
-            //    selectedCollection = new List<BaseTagViewModel>();
+            //    selectedCollection = new List<TagViewModel>();
 
             //if (e.AddedItems.Count > 0)
-            //    selectedCollection.AddRange(e.AddedItems.Cast<BaseTagViewModel>().ToList<BaseTagViewModel>());
+            //    selectedCollection.AddRange(e.AddedItems.Cast<TagViewModel>().ToList<TagViewModel>());
 
             //if (e.RemovedItems.Count > 0)
-            //    e.RemovedItems.Cast<BaseTagViewModel>().ToList<BaseTagViewModel>().ForEach((i) => selectedCollection.Remove(i));
+            //    e.RemovedItems.Cast<TagViewModel>().ToList<TagViewModel>().ForEach((i) => selectedCollection.Remove(i));
 
             //PropertyGrid.SelectedObjects = selectedCollection.ToArray();
         }

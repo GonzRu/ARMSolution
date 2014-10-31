@@ -12,7 +12,7 @@ using UICore.ViewModels;
 
 namespace ArmWpfUI.ViewModels
 {
-    public class DeviceViewModel : BaseDeviceViewModel
+    public class DeviceViewModel : UICore.ViewModels.DeviceViewModel
     {
         #region CONSTS
 
@@ -33,7 +33,7 @@ namespace ArmWpfUI.ViewModels
         /// Список групп, содержащих текущие данные
         /// </summary>
         [Browsable(false)]
-        public List<BaseGroupViewModel> CurrentDataGroups
+        public List<GroupViewModel> CurrentDataGroups
         {
             get { return Groups.Where(model => model.GroupCategory == GroupCategory.CurrentData).ToList(); }
         }
@@ -42,7 +42,7 @@ namespace ArmWpfUI.ViewModels
         /// Список групп, содержащих уставки устройства
         /// </summary>
         [Browsable(false)]
-        public List<BaseGroupViewModel> SettingsGroups
+        public List<GroupViewModel> SettingsGroups
         {
             get { return Groups.Where(model => model.GroupCategory == GroupCategory.Ustavki).ToList(); }
         }
@@ -51,7 +51,7 @@ namespace ArmWpfUI.ViewModels
         /// Список всех групп
         /// </summary>
         [Browsable(false)]
-        public List<BaseGroupViewModel> SpecificGroups
+        public List<GroupViewModel> SpecificGroups
         {
             get { return Groups.Where(model => model.GroupCategory == GroupCategory.Specific).ToList(); }
         }

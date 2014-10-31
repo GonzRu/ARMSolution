@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace UICore.ViewModels
 {
-    public class BaseDeviceViewModel : BaseViewModel
+    public class DeviceViewModel : ViewModelBase
     {
         #region Public properties
 
@@ -48,13 +48,13 @@ namespace UICore.ViewModels
         /// Список всех групп
         /// </summary>
         [Browsable(false)]
-        public List<BaseGroupViewModel> Groups { get; set; }
+        public List<GroupViewModel> Groups { get; set; }
 
         /// <summary>
         /// Список всех тегов устройства
         /// </summary>
         [Browsable(false)]
-        public List<BaseTagViewModel> Tags { get; set; } 
+        public List<TagViewModel> Tags { get; set; } 
 
         #endregion
 
@@ -74,16 +74,16 @@ namespace UICore.ViewModels
 
         #region Constructor
 
-        public BaseDeviceViewModel(Device device, IExchangeProvider exchangeProvider)
+        public DeviceViewModel(Device device, IExchangeProvider exchangeProvider)
         {
             Device = device;
             ExchangeProvider = exchangeProvider;
 
-            Groups = new List<BaseGroupViewModel>();
-            Tags = new List<BaseTagViewModel>();
+            Groups = new List<GroupViewModel>();
+            Tags = new List<TagViewModel>();
             foreach (var group in Device.Groups)
             {
-                var groupViewModel = new BaseGroupViewModel(group, exchangeProvider);
+                var groupViewModel = new GroupViewModel(group, exchangeProvider);
                 Groups.Add(groupViewModel);
 
                 Tags.AddRange(GetGroupTags(groupViewModel));
@@ -94,9 +94,9 @@ namespace UICore.ViewModels
 
         #region Private metods
 
-        private List<BaseTagViewModel> GetGroupTags(BaseGroupViewModel groupViewModel)
+        private List<TagViewModel> GetGroupTags(GroupViewModel groupViewModel)
         {
-            var result = new List<BaseTagViewModel>();
+            var result = new List<TagViewModel>();
 
             foreach (var subGroup in groupViewModel.SubGroups)
             {

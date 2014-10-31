@@ -1,11 +1,10 @@
 ﻿using CoreLib.ExchangeProviders;
 using CoreLib.Models.Configuration;
 using System.Collections.Generic;
-using UICore.ViewModels;
 
 namespace ArmWpfUI.ViewModels
 {
-    public class DataServerViewModel : BaseDataServerViewModel
+    public class DataServerViewModel : UICore.ViewModels.DataServerViewModel
     {
         #region Constructors
 
@@ -13,7 +12,7 @@ namespace ArmWpfUI.ViewModels
         {
             DataServer = dataServer;
 
-            Devices = new List<BaseDeviceViewModel>();
+            Devices = new List<UICore.ViewModels.DeviceViewModel>();
             foreach (var device in DataServer.Devices.Values)
                 Devices.Add(new DeviceViewModel(device, exchangeProvider));
         }

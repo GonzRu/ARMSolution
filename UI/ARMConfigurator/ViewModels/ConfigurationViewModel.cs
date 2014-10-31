@@ -8,7 +8,7 @@ using UICore.ViewModels;
 
 namespace ARMConfigurator.ViewModels
 {
-    public class ConfigurationViewModel : BaseConfigurationViewModel
+    public class ConfigurationViewModel : UICore.ViewModels.ConfigurationViewModel
     {
         #region Public properties
 
@@ -44,7 +44,7 @@ namespace ARMConfigurator.ViewModels
         /// <summary>
         /// Последняя группа, на которую была организована подиска
         /// </summary>
-        private BaseGroupViewModel _lastSubscribedBaseGroup;
+        private GroupViewModel _lastSubscribedBaseGroup;
 
         #endregion
 
@@ -66,9 +66,9 @@ namespace ARMConfigurator.ViewModels
 
         private void SubscribeToTagsValueUpdate(object param)
         {
-            if (param is BaseGroupViewModel)
+            if (param is GroupViewModel)
             {
-                var group = param as BaseGroupViewModel;
+                var group = param as GroupViewModel;
 
                 if (group.Tags == null) return;
 
@@ -88,9 +88,9 @@ namespace ARMConfigurator.ViewModels
 
         private void UnSubscribeToTagsValueUpdate(object param)
         {
-            if (param is BaseGroupViewModel)
+            if (param is GroupViewModel)
             {
-                var group = param as BaseGroupViewModel;
+                var group = param as GroupViewModel;
 
                 if (group.Tags == null) return;
 
@@ -119,10 +119,10 @@ namespace ARMConfigurator.ViewModels
 
             base.LoadConfiguration();
 
-            var tmp = new List<BaseDataServerViewModel>();
+            var tmp = new List<DataServerViewModel>();
             foreach (var ds in Configuration.DataServers.Values)
             {
-                tmp.Add(new BaseDataServerViewModel(ds, Configuration.DsRouterProvider));
+                tmp.Add(new DataServerViewModel(ds, Configuration.DsRouterProvider));
             }
             DataServers = tmp;
 
