@@ -5,7 +5,6 @@ using ConfigurationParsersLib;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using UICore.ViewModels;
 
 namespace ARMConfigurator
 {

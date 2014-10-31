@@ -9,7 +9,7 @@ using UICore.Commands;
 
 namespace UICore.ViewModels
 {
-    public abstract class BaseConfigurationViewModel : ViewModelBase
+    public abstract class ConfigurationViewModel : ViewModelBase
     {
         #region CONSTS
 
@@ -113,7 +113,7 @@ namespace UICore.ViewModels
 
         #region Constructors
 
-        protected BaseConfigurationViewModel(IConfigurationProvider configurationProvider)
+        protected ConfigurationViewModel(IConfigurationProvider configurationProvider)
         {
             ConfigurationProvider = configurationProvider;
 

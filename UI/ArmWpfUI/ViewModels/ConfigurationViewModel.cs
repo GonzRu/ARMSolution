@@ -23,7 +23,7 @@ using UICore.ViewModels;
 
 namespace ArmWpfUI.ViewModels
 {
-    class ConfigurationViewModel : BaseConfigurationViewModel
+    class ConfigurationViewModel : UICore.ViewModels.ConfigurationViewModel
     {
         #region Public properties
 
