@@ -44,7 +44,7 @@ namespace ARMConfigurator.ViewModels
         /// <summary>
         /// Последняя группа, на которую была организована подиска
         /// </summary>
-        private BaseGroupViewModel _lastSubscribedBaseGroup;
+        private GroupViewModel _lastSubscribedBaseGroup;
 
         #endregion
 
@@ -66,9 +66,9 @@ namespace ARMConfigurator.ViewModels
 
         private void SubscribeToTagsValueUpdate(object param)
         {
-            if (param is BaseGroupViewModel)
+            if (param is GroupViewModel)
             {
-                var group = param as BaseGroupViewModel;
+                var group = param as GroupViewModel;
 
                 if (group.Tags == null) return;
 
@@ -88,9 +88,9 @@ namespace ARMConfigurator.ViewModels
 
         private void UnSubscribeToTagsValueUpdate(object param)
         {
-            if (param is BaseGroupViewModel)
+            if (param is GroupViewModel)
             {
-                var group = param as BaseGroupViewModel;
+                var group = param as GroupViewModel;
 
                 if (group.Tags == null) return;
 

@@ -26,11 +26,11 @@ namespace ArmWpfUI.Views
 
         private void DataGridDataContextChangedHandler(object sender, DependencyPropertyChangedEventArgs e)
         {
-            var oldDataContext = e.OldValue as UICore.ViewModels.BaseGroupViewModel;
+            var oldDataContext = e.OldValue as UICore.ViewModels.GroupViewModel;
             //if (oldDataContext != null)
             //    oldDataContext.UnSubscribeToTagsValuesUpdateCommand.Execute(null);
 
-            var newDataContext = e.NewValue as UICore.ViewModels.BaseGroupViewModel;
+            var newDataContext = e.NewValue as UICore.ViewModels.GroupViewModel;
             //if (newDataContext != null)
             //    newDataContext.SubscribeToTagsValuesUpdateCommand.Execute(null);
         }

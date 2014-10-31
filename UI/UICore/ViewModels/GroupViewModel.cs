@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace UICore.ViewModels
 {
-    public class BaseGroupViewModel : ViewModelBase
+    public class GroupViewModel : ViewModelBase
     {
         #region Public properties
 
@@ -51,7 +51,7 @@ namespace UICore.ViewModels
         /// Подгруппы
         /// </summary>
         [Browsable(false)]
-        public List<BaseGroupViewModel> SubGroups { get; set; }
+        public List<GroupViewModel> SubGroups { get; set; }
 
         /// <summary>
         /// Теги
@@ -74,14 +74,14 @@ namespace UICore.ViewModels
 
         #region Constructor
 
-        public BaseGroupViewModel(Group group, IExchangeProvider exchangeProvider)
+        public GroupViewModel(Group group, IExchangeProvider exchangeProvider)
         {
             Group = group;
             ExchangeProvider = exchangeProvider;
 
-            SubGroups = new List<BaseGroupViewModel>();
+            SubGroups = new List<GroupViewModel>();
             foreach (var subgroup in group.SubGroups)
-                SubGroups.Add(new BaseGroupViewModel(subgroup, exchangeProvider));
+                SubGroups.Add(new GroupViewModel(subgroup, exchangeProvider));
 
             if (Group.Tags.Count != 0)
             {

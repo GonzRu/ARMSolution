@@ -48,7 +48,7 @@ namespace UICore.ViewModels
         /// Список всех групп
         /// </summary>
         [Browsable(false)]
-        public List<BaseGroupViewModel> Groups { get; set; }
+        public List<GroupViewModel> Groups { get; set; }
 
         /// <summary>
         /// Список всех тегов устройства
@@ -79,11 +79,11 @@ namespace UICore.ViewModels
             Device = device;
             ExchangeProvider = exchangeProvider;
 
-            Groups = new List<BaseGroupViewModel>();
+            Groups = new List<GroupViewModel>();
             Tags = new List<BaseTagViewModel>();
             foreach (var group in Device.Groups)
             {
-                var groupViewModel = new BaseGroupViewModel(group, exchangeProvider);
+                var groupViewModel = new GroupViewModel(group, exchangeProvider);
                 Groups.Add(groupViewModel);
 
                 Tags.AddRange(GetGroupTags(groupViewModel));
@@ -94,7 +94,7 @@ namespace UICore.ViewModels
 
         #region Private metods
 
-        private List<BaseTagViewModel> GetGroupTags(BaseGroupViewModel groupViewModel)
+        private List<BaseTagViewModel> GetGroupTags(GroupViewModel groupViewModel)
         {
             var result = new List<BaseTagViewModel>();
 

@@ -31,7 +31,7 @@
                 <TreeView Grid.Column="0" Grid.Row="0" Name="TreeView" VerticalAlignment="Stretch" Height="Auto" Margin="2,22,11,2" Background="LightGray" ItemsSource="{Binding Path=CurrentDataGroups}">
                     
                     <TreeView.Resources>
-                        <HierarchicalDataTemplate DataType="{x:Type commonViewModels:BaseGroupViewModel}" ItemsSource="{Binding Path=SubGroups}">
+                        <HierarchicalDataTemplate DataType="{x:Type commonViewModels:GroupViewModel}" ItemsSource="{Binding Path=SubGroups}">
                             <TextBlock Text="{Binding Path=GroupName}" Margin="3,0,0,3" Foreground="CadetBlue" />
                         </HierarchicalDataTemplate>
                     </TreeView.Resources>

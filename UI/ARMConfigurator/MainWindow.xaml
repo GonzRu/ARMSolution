@@ -90,7 +90,7 @@
                         </StackPanel>
                     </HierarchicalDataTemplate>
 
-                    <HierarchicalDataTemplate DataType="{x:Type commonViewModels:BaseGroupViewModel}" ItemsSource="{Binding Path=SubGroups}">
+                    <HierarchicalDataTemplate DataType="{x:Type commonViewModels:GroupViewModel}" ItemsSource="{Binding Path=SubGroups}">
                         <StackPanel Orientation="Horizontal" Margin="0,1,1,0">
                             <CheckBox IsChecked="{Binding Path=Enable}" />
                             <TextBlock Text="{Binding Path=GroupName}" Margin="3,0,0,3" Foreground="CadetBlue" />
