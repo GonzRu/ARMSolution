@@ -241,7 +241,7 @@ namespace UICore.ViewModels
                     select deviceViewModel).FirstOrDefault();
         }
 
-        protected BaseTagViewModel GetTagViewModel(string tagGuidAsStr)
+        protected TagViewModel GetTagViewModel(string tagGuidAsStr)
         {
             var deviceViewModel = GetDeviceViewModel(tagGuidAsStr);
             if (deviceViewModel == null)

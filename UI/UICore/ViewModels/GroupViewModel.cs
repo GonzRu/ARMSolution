@@ -57,7 +57,7 @@ namespace UICore.ViewModels
         /// Теги
         /// </summary>
         [Browsable(false)]
-        public List<BaseTagViewModel> Tags { get; set; }
+        public List<TagViewModel> Tags { get; set; }
 
         #endregion
 
@@ -85,14 +85,14 @@ namespace UICore.ViewModels
 
             if (Group.Tags.Count != 0)
             {
-                Tags = new List<BaseTagViewModel>();
+                Tags = new List<TagViewModel>();
                 foreach (var tag in Group.Tags)
                     if (tag is TagAnalog)
                         Tags.Add(new BaseTagAnalogViewModel(tag as TagAnalog, exchangeProvider));
                     else if (tag is TagDiscret)
                         Tags.Add(new BaseTagDiscretViewModel(tag as TagDiscret, exchangeProvider));
                     else
-                        Tags.Add(new BaseTagViewModel(tag, exchangeProvider));
+                        Tags.Add(new TagViewModel(tag, exchangeProvider));
             }
         }
 

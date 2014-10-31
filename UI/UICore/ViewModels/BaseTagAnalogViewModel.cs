@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UICore.ViewModels
 {
-    public class BaseTagAnalogViewModel : BaseTagViewModel
+    public class BaseTagAnalogViewModel : TagViewModel
     {
         #region Public properties
 

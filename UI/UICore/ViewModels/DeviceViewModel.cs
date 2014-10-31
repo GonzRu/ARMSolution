@@ -54,7 +54,7 @@ namespace UICore.ViewModels
         /// Список всех тегов устройства
         /// </summary>
         [Browsable(false)]
-        public List<BaseTagViewModel> Tags { get; set; } 
+        public List<TagViewModel> Tags { get; set; } 
 
         #endregion
 
@@ -80,7 +80,7 @@ namespace UICore.ViewModels
             ExchangeProvider = exchangeProvider;
 
             Groups = new List<GroupViewModel>();
-            Tags = new List<BaseTagViewModel>();
+            Tags = new List<TagViewModel>();
             foreach (var group in Device.Groups)
             {
                 var groupViewModel = new GroupViewModel(group, exchangeProvider);
@@ -94,9 +94,9 @@ namespace UICore.ViewModels
 
         #region Private metods
 
-        private List<BaseTagViewModel> GetGroupTags(GroupViewModel groupViewModel)
+        private List<TagViewModel> GetGroupTags(GroupViewModel groupViewModel)
         {
-            var result = new List<BaseTagViewModel>();
+            var result = new List<TagViewModel>();
 
             foreach (var subGroup in groupViewModel.SubGroups)
             {
