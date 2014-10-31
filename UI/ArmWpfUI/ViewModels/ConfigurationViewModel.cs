@@ -89,6 +89,11 @@ namespace ArmWpfUI.ViewModels
 
         #endregion
 
+        /// <summary>
+        /// Меняет состояние указанного баннера
+        /// </summary>
+        public AsyncCommand ChangeBannerStateAsyncCommand { get; set; }
+
         #endregion
 
         #endregion
@@ -121,6 +126,8 @@ namespace ArmWpfUI.ViewModels
             GotoMnemoCommand = new Command(GotoMnemo);
             GotoEventsViewCommand = new Command(GotoEventsView);
             GotoTerminalViewCommand = new Command(GotoTerminalView);
+
+            ChangeBannerStateAsyncCommand = new AsyncCommand(ChangeBannerState);
 
             #endregion
 
@@ -238,6 +245,23 @@ namespace ArmWpfUI.ViewModels
         }
 
         #endregion
+
+        private void ChangeBannerState(object param)
+        {
+            if (!(param is Tuple<string, int>))
+                return;
+
+            var p = param as Tuple<string, int>;
+            var bannerTagId = p.Item1;
+            var bannerId = p.Item2;
+
+            var tagViewModel = GetTagViewModel(bannerTagId);
+            if (tagViewModel == null)
+                return;
+
+            var newBannerTagValue = (int)(float)tagViewModel.TagValueAsObject ^ (1 << (bannerId - 1));
+            Configuration.DsRouterProvider.SetTagValueFromHMI(tagViewModel.DsGuid, tagViewModel.DeviceGuid, tagViewModel.TagGuid, (float)newBannerTagValue);
+        }
 
         protected override void Authorization()
         {
