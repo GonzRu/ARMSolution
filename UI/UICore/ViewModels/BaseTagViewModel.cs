@@ -114,7 +114,6 @@ namespace UICore.ViewModels
         public Tuple<object, TagValueQuality> TagValue
         {
             get { return new Tuple<object, TagValueQuality>(TagValueAsObject, TagValueQuality); }
-            set { }
         }
 
         #endregion

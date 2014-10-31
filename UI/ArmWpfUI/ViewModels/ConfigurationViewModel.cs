@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Xml.Linq;
 using ArmWpfUI.Converters;
+using ArmWpfUI.Properties;
 using ArmWpfUI.Views;
 using ConfigurationParsersLib;
 using CoreLib.Models.Configuration;
@@ -89,6 +90,11 @@ namespace ArmWpfUI.ViewModels
 
         #endregion
 
+        /// <summary>
+        /// Меняет состояние указанного баннера
+        /// </summary>
+        public AsyncCommand ChangeBannerStateAsyncCommand { get; set; }
+
         #endregion
 
         #endregion
@@ -121,6 +127,8 @@ namespace ArmWpfUI.ViewModels
             GotoMnemoCommand = new Command(GotoMnemo);
             GotoEventsViewCommand = new Command(GotoEventsView);
             GotoTerminalViewCommand = new Command(GotoTerminalView);
+
+            ChangeBannerStateAsyncCommand = new AsyncCommand(ChangeBannerState);
 
             #endregion
 
@@ -239,6 +247,23 @@ namespace ArmWpfUI.ViewModels
 
         #endregion
 
+        private void ChangeBannerState(object param)
+        {
+            if (!(param is Tuple<string, int>))
+                return;
+
+            var p = param as Tuple<string, int>;
+            var bannerTagId = p.Item1;
+            var bannerId = p.Item2;
+
+            var tagViewModel = GetTagViewModel(bannerTagId);
+            if (tagViewModel == null)
+                return;
+
+            var newBannerTagValue = (int)(float)tagViewModel.TagValueAsObject ^ (1 << (bannerId - 1));
+            Configuration.DsRouterProvider.SetTagValueFromHMI(tagViewModel.DsGuid, tagViewModel.DeviceGuid, tagViewModel.TagGuid, (float)newBannerTagValue);
+        }
+
         protected override void Authorization()
         {
             Configuration.DsRouterProvider.Authorization("alex", "s", false);
@@ -291,7 +316,7 @@ namespace ArmWpfUI.ViewModels
 
                 if (!cc.ASUTagIDState.Equals("-1"))
                 {
-                    CreateBinding(cc, CBaseControl.ASUCommutationDeviceStateProperty, cc.ASUTagIDState, new AnalogTagValueToDeviceStateConverter(), null);
+                    CreateBinding(cc, CBaseControl.ASUCommutationDeviceStateProperty, cc.ASUTagIDState, "TagValue", new AnalogTagValueToDeviceStateConverter());
                     if (!tagsToSubscribe.Contains(cc.ASUTagIDState))
                         tagsToSubscribe.Add(cc.ASUTagIDState);
 
@@ -310,7 +335,7 @@ namespace ArmWpfUI.ViewModels
                             Command = HandleSetOnDeviceStateCommand,
                             CommandParameter = cc.ASUTagIDState
                         };
-                        CreateBinding(setHandleStateOnMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 2, InvertHandleQuality = true}, null);
+                        CreateBinding(setHandleStateOnMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, "TagValue", new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 2, InvertHandleQuality = true }, null);
 
                         #endregion
 
@@ -322,7 +347,7 @@ namespace ArmWpfUI.ViewModels
                             Command = HandleSetOffDeviceStateCommand,
                             CommandParameter = cc.ASUTagIDState
                         };
-                        CreateBinding(setHandleStateOffMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 1, InvertHandleQuality = true }, null);
+                        CreateBinding(setHandleStateOffMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, "TagValue", new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 1, InvertHandleQuality = true });
 
                         #endregion
 
@@ -334,7 +359,7 @@ namespace ArmWpfUI.ViewModels
                             Command = ReSetHandleDeviceStateCommand,
                             CommandParameter = cc.ASUTagIDState
                         };
-                        CreateBinding(resetHandleStatefMenuItem, MenuItem.IsEnabledProperty, cc.ASUTagIDState, new HandledQualityToBooleanConverter(), null);
+                        CreateBinding(resetHandleStatefMenuItem, MenuItem.IsEnabledProperty, cc.ASUTagIDState, "TagValue", new HandledQualityToBooleanConverter());
 
                         #endregion
 
@@ -354,8 +379,8 @@ namespace ArmWpfUI.ViewModels
                     {
                         var deviceCommandOnMenuItem = new MenuItem();
                         deviceCommandOnMenuItem.Header = "Включить выключатель";
-                        CreateBinding(deviceCommandOnMenuItem, MenuItem.IsEnabledProperty, cc.ASUTagIDState, new HandledQualityToBooleanConverter { Invert = true }, null);
-                        CreateBinding(deviceCommandOnMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 2 }, null);
+                        CreateBinding(deviceCommandOnMenuItem, MenuItem.IsEnabledProperty, cc.ASUTagIDState, "TagValue", new HandledQualityToBooleanConverter { Invert = true });
+                        CreateBinding(deviceCommandOnMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, "TagValue", new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 2 });
 
                         deviceCommandsMenuItem.Items.Add(deviceCommandOnMenuItem);
                     }
@@ -364,8 +389,8 @@ namespace ArmWpfUI.ViewModels
                     {
                         var deviceCommandOffMenuItem = new MenuItem();
                         deviceCommandOffMenuItem.Header = "Отключить выключатель";
-                        CreateBinding(deviceCommandOffMenuItem, MenuItem.IsEnabledProperty, cc.ASUTagIDState, new HandledQualityToBooleanConverter { Invert = true }, null);
-                        CreateBinding(deviceCommandOffMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 1 }, null);
+                        CreateBinding(deviceCommandOffMenuItem, MenuItem.IsEnabledProperty, cc.ASUTagIDState, "TagValue", new HandledQualityToBooleanConverter { Invert = true });
+                        CreateBinding(deviceCommandOffMenuItem, MenuItem.VisibilityProperty, cc.ASUTagIDState, "TagValue", new DeviceStateAndHandleQualityToVisibilityConverter { DeviceState = 1 });
 
                         deviceCommandsMenuItem.Items.Add(deviceCommandOffMenuItem);
                     }
@@ -403,12 +428,73 @@ namespace ArmWpfUI.ViewModels
 
                 if (!cc.ASUTagIDBanners.Equals("-1"))
                 {
-                    //CreateBinding(cc, CBaseControl.ASUBannersStateProperty, cc.ASUTagIDBanners, null);
-                    if (!tagsToSubscribe.Contains(cc.ASUTagIDBanners))
+                    CreateBinding(cc, CBaseControl.ASUBannersStateProperty, cc.ASUTagIDBanners, "TagValueAsObject", null);
+                    if (!tagsToSubscribe.Contains(cc.ASUTagIDBanners))  
                         tagsToSubscribe.Add(cc.ASUTagIDBanners);
 
                     bannersMenuItem = new MenuItem();
                     bannersMenuItem.Header = "Плакаты";
+
+                    #region Banner1
+
+                    var banner1MenuItem = new MenuItem();
+                    banner1MenuItem.IsCheckable = true;
+                    banner1MenuItem.Style = Application.Current.FindResource("Banner1MenuItemStyle") as Style;
+                    banner1MenuItem.Command = ChangeBannerStateAsyncCommand;
+                    banner1MenuItem.CommandParameter = new Tuple<string, int>(cc.ASUTagIDBanners, 1);
+                    CreateBinding(banner1MenuItem, MenuItem.IsCheckedProperty, cc.ASUTagIDBanners, "TagValue", new AnalogTagValueToIsBannerSetOnBoolean { BannerId = 1 });
+                    
+                    #endregion
+
+                    #region Banner2
+
+                    var banner2MenuItem = new MenuItem();
+                    banner2MenuItem.IsCheckable = true;
+                    banner2MenuItem.Style = Application.Current.FindResource("Banner2MenuItemStyle") as Style;
+                    banner2MenuItem.Command = ChangeBannerStateAsyncCommand;
+                    banner2MenuItem.CommandParameter = new Tuple<string, int>(cc.ASUTagIDBanners, 2);
+                    CreateBinding(banner2MenuItem, MenuItem.IsCheckedProperty, cc.ASUTagIDBanners, "TagValue", new AnalogTagValueToIsBannerSetOnBoolean { BannerId = 2 });
+
+                    #endregion
+
+                    #region Banner3
+
+                    var banner3MenuItem = new MenuItem();
+                    banner3MenuItem.IsCheckable = true;
+                    banner3MenuItem.Style = Application.Current.FindResource("Banner3MenuItemStyle") as Style;
+                    banner3MenuItem.Command = ChangeBannerStateAsyncCommand;
+                    banner3MenuItem.CommandParameter = new Tuple<string, int>(cc.ASUTagIDBanners, 3);
+                    CreateBinding(banner3MenuItem, MenuItem.IsCheckedProperty, cc.ASUTagIDBanners, "TagValue", new AnalogTagValueToIsBannerSetOnBoolean { BannerId = 3 });
+
+                    #endregion
+
+                    #region Banner4
+
+                    var banner4MenuItem = new MenuItem();
+                    banner4MenuItem.IsCheckable = true;
+                    banner4MenuItem.Style = Application.Current.FindResource("Banner4MenuItemStyle") as Style;
+                    banner4MenuItem.Command = ChangeBannerStateAsyncCommand;
+                    banner4MenuItem.CommandParameter = new Tuple<string, int>(cc.ASUTagIDBanners, 4);
+                    CreateBinding(banner4MenuItem, MenuItem.IsCheckedProperty, cc.ASUTagIDBanners, "TagValue", new AnalogTagValueToIsBannerSetOnBoolean { BannerId = 4 });
+
+                    #endregion
+
+                    #region Banner5
+
+                    var banner5MenuItem = new MenuItem();
+                    banner5MenuItem.IsCheckable = true;
+                    banner5MenuItem.Style = Application.Current.FindResource("Banner5MenuItemStyle") as Style;
+                    banner5MenuItem.Command = ChangeBannerStateAsyncCommand;
+                    banner5MenuItem.CommandParameter = new Tuple<string, int>(cc.ASUTagIDBanners, 5);
+                    CreateBinding(banner5MenuItem, MenuItem.IsCheckedProperty, cc.ASUTagIDBanners, "TagValue", new AnalogTagValueToIsBannerSetOnBoolean { BannerId = 5 });
+
+                    #endregion
+
+                    bannersMenuItem.Items.Add(banner1MenuItem);
+                    bannersMenuItem.Items.Add(banner2MenuItem);
+                    bannersMenuItem.Items.Add(banner3MenuItem);
+                    bannersMenuItem.Items.Add(banner4MenuItem);
+                    bannersMenuItem.Items.Add(banner5MenuItem);
                 }
 
                 #endregion
@@ -470,7 +556,7 @@ namespace ArmWpfUI.ViewModels
 
                 if (cc.ASUCommutationDeviceStateManualSetEnabled)
                 {
-                    CreateBinding(cc, CBaseControl.ASUControlISManualSetProperty, cc.ASUTagIDState, new HandledQualityToBooleanConverter(), null);
+                    CreateBinding(cc, CBaseControl.ASUControlISManualSetProperty, cc.ASUTagIDState, "TagValue", new HandledQualityToBooleanConverter());
                 }
 
                 #endregion
@@ -579,7 +665,7 @@ namespace ArmWpfUI.ViewModels
             #endregion Открываем xml
         }
 
-        private void CreateBinding(FrameworkElement fe, DependencyProperty dp, string tagGuidAsStr, IValueConverter converter, object converterParameter)
+        private void CreateBinding(FrameworkElement fe, DependencyProperty dp, string tagGuidAsStr, string propertyPath, IValueConverter converter, object converterParameter = null)
         {
             var tagViewModel = GetTagViewModel(tagGuidAsStr);
             if (tagViewModel == null)
@@ -588,8 +674,8 @@ namespace ArmWpfUI.ViewModels
             var binding = new Binding
             {
                 Source = tagViewModel,
-                Path = new PropertyPath("TagValue"),
-                Mode = BindingMode.TwoWay,
+                Path = new PropertyPath(propertyPath),
+                Mode = BindingMode.OneWay,
                 Converter = converter,
                 ConverterParameter = converterParameter,
                 IsAsync = true
