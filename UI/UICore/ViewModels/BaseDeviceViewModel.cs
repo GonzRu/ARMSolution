@@ -86,9 +86,27 @@ namespace UICore.ViewModels
                 var groupViewModel = new BaseGroupViewModel(group, exchangeProvider);
                 Groups.Add(groupViewModel);
 
-                if (groupViewModel.Tags != null)
-                    Tags.AddRange(groupViewModel.Tags);
+                Tags.AddRange(GetGroupTags(groupViewModel));
             }
+        }
+
+        #endregion
+
+        #region Private metods
+
+        private List<BaseTagViewModel> GetGroupTags(BaseGroupViewModel groupViewModel)
+        {
+            var result = new List<BaseTagViewModel>();
+
+            foreach (var subGroup in groupViewModel.SubGroups)
+            {
+                result.AddRange(GetGroupTags(subGroup));
+            }
+
+            if (groupViewModel.Tags != null)
+                result.AddRange(groupViewModel.Tags);
+
+            return result;
         }
 
         #endregion
