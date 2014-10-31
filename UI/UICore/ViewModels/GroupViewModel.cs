@@ -90,7 +90,7 @@ namespace UICore.ViewModels
                     if (tag is TagAnalog)
                         Tags.Add(new AnalogTagViewModel(tag as TagAnalog, exchangeProvider));
                     else if (tag is TagDiscret)
-                        Tags.Add(new BaseTagDiscretViewModel(tag as TagDiscret, exchangeProvider));
+                        Tags.Add(new DiscretTagViewModel(tag as TagDiscret, exchangeProvider));
                     else
                         Tags.Add(new TagViewModel(tag, exchangeProvider));
             }
