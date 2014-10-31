@@ -2,7 +2,7 @@
 
 namespace UICore.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public class ViewModelBase : INotifyPropertyChanged
     {
         /// <summary>
         /// The property changed event.

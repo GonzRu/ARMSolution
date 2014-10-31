@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace UICore.ViewModels
 {
-    public class BaseDeviceViewModel : BaseViewModel
+    public class BaseDeviceViewModel : ViewModelBase
     {
         #region Public properties
 

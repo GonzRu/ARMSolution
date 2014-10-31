@@ -5,7 +5,7 @@ using CoreLib.Models.Configuration;
 
 namespace UICore.ViewModels
 {
-    public class BaseDataServerViewModel : BaseViewModel
+    public class BaseDataServerViewModel : ViewModelBase
     {
         #region Public properties
 

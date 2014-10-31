@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace UICore.ViewModels
 {
-    public class BaseGroupViewModel : BaseViewModel
+    public class BaseGroupViewModel : ViewModelBase
     {
         #region Public properties
 

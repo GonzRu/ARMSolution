@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace UICore.ViewModels
 {
-    public class BaseTagViewModel : BaseViewModel
+    public class BaseTagViewModel : ViewModelBase
     {
         #region Public properties
 
