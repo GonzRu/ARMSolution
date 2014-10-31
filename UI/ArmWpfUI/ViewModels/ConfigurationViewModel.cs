@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Xml.Linq;
 using ArmWpfUI.Converters;
+using ArmWpfUI.Properties;
 using ArmWpfUI.Views;
 using ConfigurationParsersLib;
 using CoreLib.Models.Configuration;
@@ -427,12 +428,73 @@ namespace ArmWpfUI.ViewModels
 
                 if (!cc.ASUTagIDBanners.Equals("-1"))
                 {
-                    //CreateBinding(cc, CBaseControl.ASUBannersStateProperty, cc.ASUTagIDBanners, null);
-                    if (!tagsToSubscribe.Contains(cc.ASUTagIDBanners))
+                    CreateBinding(cc, CBaseControl.ASUBannersStateProperty, cc.ASUTagIDBanners, "TagValueAsObject", null);
+                    if (!tagsToSubscribe.Contains(cc.ASUTagIDBanners))  
                         tagsToSubscribe.Add(cc.ASUTagIDBanners);
 
                     bannersMenuItem = new MenuItem();
                     bannersMenuItem.Header = "Плакаты";
+
+                    #region Banner1
+
+                    var banner1MenuItem = new MenuItem();
+                    banner1MenuItem.IsCheckable = true;
+                    banner1MenuItem.Style = Application.Current.FindResource("Banner1MenuItemStyle") as Style;
+                    banner1MenuItem.Command = ChangeBannerStateAsyncCommand;
+                    banner1MenuItem.CommandParameter = new Tuple<string, int>(cc.ASUTagIDBanners, 1);
+                    CreateBinding(banner1MenuItem, MenuItem.IsCheckedProperty, cc.ASUTagIDBanners, "TagValue", new AnalogTagValueToIsBannerSetOnBoolean { BannerId = 1 });
+                    
+                    #endregion
+
+                    #region Banner2
+
+                    var banner2MenuItem = new MenuItem();
+                    banner2MenuItem.IsCheckable = true;
+                    banner2MenuItem.Style = Application.Current.FindResource("Banner2MenuItemStyle") as Style;
+                    banner2MenuItem.Command = ChangeBannerStateAsyncCommand;
+                    banner2MenuItem.CommandParameter = new Tuple<string, int>(cc.ASUTagIDBanners, 2);
+                    CreateBinding(banner2MenuItem, MenuItem.IsCheckedProperty, cc.ASUTagIDBanners, "TagValue", new AnalogTagValueToIsBannerSetOnBoolean { BannerId = 2 });
+
+                    #endregion
+
+                    #region Banner3
+
+                    var banner3MenuItem = new MenuItem();
+                    banner3MenuItem.IsCheckable = true;
+                    banner3MenuItem.Style = Application.Current.FindResource("Banner3MenuItemStyle") as Style;
+                    banner3MenuItem.Command = ChangeBannerStateAsyncCommand;
+                    banner3MenuItem.CommandParameter = new Tuple<string, int>(cc.ASUTagIDBanners, 3);
+                    CreateBinding(banner3MenuItem, MenuItem.IsCheckedProperty, cc.ASUTagIDBanners, "TagValue", new AnalogTagValueToIsBannerSetOnBoolean { BannerId = 3 });
+
+                    #endregion
+
+                    #region Banner4
+
+                    var banner4MenuItem = new MenuItem();
+                    banner4MenuItem.IsCheckable = true;
+                    banner4MenuItem.Style = Application.Current.FindResource("Banner4MenuItemStyle") as Style;
+                    banner4MenuItem.Command = ChangeBannerStateAsyncCommand;
+                    banner4MenuItem.CommandParameter = new Tuple<string, int>(cc.ASUTagIDBanners, 4);
+                    CreateBinding(banner4MenuItem, MenuItem.IsCheckedProperty, cc.ASUTagIDBanners, "TagValue", new AnalogTagValueToIsBannerSetOnBoolean { BannerId = 4 });
+
+                    #endregion
+
+                    #region Banner5
+
+                    var banner5MenuItem = new MenuItem();
+                    banner5MenuItem.IsCheckable = true;
+                    banner5MenuItem.Style = Application.Current.FindResource("Banner5MenuItemStyle") as Style;
+                    banner5MenuItem.Command = ChangeBannerStateAsyncCommand;
+                    banner5MenuItem.CommandParameter = new Tuple<string, int>(cc.ASUTagIDBanners, 5);
+                    CreateBinding(banner5MenuItem, MenuItem.IsCheckedProperty, cc.ASUTagIDBanners, "TagValue", new AnalogTagValueToIsBannerSetOnBoolean { BannerId = 5 });
+
+                    #endregion
+
+                    bannersMenuItem.Items.Add(banner1MenuItem);
+                    bannersMenuItem.Items.Add(banner2MenuItem);
+                    bannersMenuItem.Items.Add(banner3MenuItem);
+                    bannersMenuItem.Items.Add(banner4MenuItem);
+                    bannersMenuItem.Items.Add(banner5MenuItem);
                 }
 
                 #endregion
