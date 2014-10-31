@@ -222,6 +222,105 @@
                         <Canvas Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="{TemplateBinding ASUGridRowASUTextContent}" Grid.Column="{TemplateBinding ASUGridColumnASUTextContent}" >
                             <TextBlock FontSize="{TemplateBinding ASUTextContentFontSize}" Height="Auto" Width="{TemplateBinding ASUTextContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="{TemplateBinding ASUTextContentVisible}" x:Name="ASUTextContentPresenter" Foreground="{TemplateBinding ASUTextColorBrush}" Text="{TemplateBinding ASUTextContent}" Margin="{TemplateBinding ASUMarginText}" TextAlignment="Center" TextWrapping="Wrap" />
                         </Canvas>
+
+                        <Grid Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                            <ToolTipService.ToolTip>
+                                <StackPanel>
+                                    <Border Grid.Row="2" Grid.Column="2" Width="85" Height="40" Visibility="{TemplateBinding ASUBanner5Visibility}" Margin="5"  BorderBrush="Black" BorderThickness="1" CornerRadius="1">
+                                        <Border BorderBrush="#3475cd" BorderThickness="3" CornerRadius="1">
+                                            <Border BorderBrush="Black" BorderThickness="1" CornerRadius="1" Background="White">
+                                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                    <TextBlock Width="75" FontSize="9" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Text="Транзит разомкнут" TextAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" />
+                                                </StackPanel>
+                                            </Border>
+                                        </Border>
+                                    </Border>
+
+                                    <Border Grid.Row="2" Grid.Column="2" Width="85" Height="40" Visibility="{TemplateBinding ASUBanner4Visibility}" Margin="5"  BorderBrush="Black" BorderThickness="1" CornerRadius="1">
+                                        <Border BorderBrush="Red" BorderThickness="3" CornerRadius="1">
+                                            <Border BorderBrush="Black" BorderThickness="1" CornerRadius="1" Background="White">
+                                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                    <TextBlock Width="75" FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Red" Text="Работа под напряжением" TextAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"/>
+                                                    <TextBlock FontSize="5" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Red" Text="повторно не включать" TextAlignment="Center" TextWrapping="NoWrap" FontWeight="Bold"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </Border>
+                                    </Border>
+
+                                    <Border Grid.Row="2" Grid.Column="2" Width="85" Height="40" Visibility="{TemplateBinding ASUBanner3Visibility}" Margin="5"  BorderBrush="Black" BorderThickness="1" CornerRadius="1">
+                                        <Border Background="#3475cd" BorderBrush="#3475cd" BorderThickness="1" CornerRadius="1">
+                                            <TextBlock FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Text="Заземлено" TextAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"/>
+                                        </Border>
+                                    </Border>
+
+                                    <Border Grid.Row="2" Grid.Column="2" Width="85" Height="40" Visibility="{TemplateBinding ASUBanner2Visibility}" Margin="5"  BorderBrush="Black" BorderThickness="1" CornerRadius="1">
+                                        <Border BorderBrush="Red" BorderThickness="3" CornerRadius="1">
+                                            <Border BorderBrush="Black" BorderThickness="1" CornerRadius="1" Background="White">
+                                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                    <TextBlock FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Red" Text="НЕ ВКЛЮЧАТЬ!" TextAlignment="Center" TextWrapping="NoWrap" FontWeight="Bold"/>
+                                                    <TextBlock FontSize="7" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Red" Text="Работают люди" TextAlignment="Center" TextWrapping="NoWrap" FontWeight="Bold"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </Border>
+                                    </Border>
+
+                                    <Border Grid.Row="2" Grid.Column="2" Width="85" Height="40" Visibility="{TemplateBinding ASUBanner1Visibility}" Margin="5"  BorderBrush="Black" BorderThickness="1" CornerRadius="1">
+                                        <Border Background="Red" BorderBrush="Red" BorderThickness="1" CornerRadius="1">
+                                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                <TextBlock FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Text="НЕ ВКЛЮЧАТЬ!" TextAlignment="Center" TextWrapping="NoWrap" FontWeight="Bold"/>
+                                                <TextBlock FontSize="7" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Text="Работа на линии" TextAlignment="Center" TextWrapping="NoWrap" FontWeight="Bold"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </Border>
+                                </StackPanel>
+                            </ToolTipService.ToolTip>
+                            <Border Grid.Row="2" Grid.Column="2" Width="85" Height="40" x:Name="Banner5" Visibility="{TemplateBinding ASUBanner5Visibility}" Margin="-40,-30,0,0"  BorderBrush="Black" BorderThickness="1" CornerRadius="1">
+                                <Border BorderBrush="#3475cd" BorderThickness="3" CornerRadius="1">
+                                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="1" Background="White">
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <TextBlock Width="75" FontSize="9" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Banner1Text" Foreground="Black" Text="Транзит разомкнут" TextAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" />
+                                        </StackPanel>
+                                    </Border>
+                                </Border>
+                            </Border>
+
+                            <Border Grid.Row="2" Grid.Column="2" Width="85" Height="40" x:Name="Banner4" Visibility="{TemplateBinding ASUBanner4Visibility}" Margin="-37,-27,0,0"  BorderBrush="Black" BorderThickness="1" CornerRadius="1">
+                                <Border BorderBrush="Red" BorderThickness="3" CornerRadius="1">
+                                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="1" Background="White">
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <TextBlock Width="75" FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Banner2Text" Foreground="Red" Text="Работа под напряжением" TextAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"/>
+                                            <TextBlock FontSize="5" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Banner21Text" Foreground="Red" Text="повторно не включать" TextAlignment="Center" TextWrapping="NoWrap" FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </Border>
+                                </Border>
+                            </Border>
+
+                            <Border Grid.Row="2" Grid.Column="2" Width="85" Height="40" x:Name="Banner3" Visibility="{TemplateBinding ASUBanner3Visibility}" Margin="-34,-24,0,0" BorderBrush="Black" BorderThickness="1" CornerRadius="1">
+                                <Border Background="#3475cd" BorderBrush="#3475cd" BorderThickness="1" CornerRadius="1">
+                                    <TextBlock FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Banner3Text" Foreground="White" Text="Заземлено" TextAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"/>
+                                </Border>
+                            </Border>
+
+                            <Border Grid.Row="2" Grid.Column="2" Width="85" Height="40" x:Name="Banner2" Visibility="{TemplateBinding ASUBanner2Visibility}" Margin="-31,-21,0,0" BorderBrush="Black" BorderThickness="1" CornerRadius="1">
+                                <Border BorderBrush="Red" BorderThickness="3" CornerRadius="1">
+                                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="1" Background="White">
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <TextBlock FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Banner4Text" Foreground="Red" Text="НЕ ВКЛЮЧАТЬ!" TextAlignment="Center" TextWrapping="NoWrap" FontWeight="Bold"/>
+                                            <TextBlock FontSize="7" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Banner41Text" Foreground="Red" Text="Работают люди" TextAlignment="Center" TextWrapping="NoWrap" FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </Border>
+                                </Border>
+                            </Border>
+
+                            <Border Grid.Row="2" Grid.Column="2" Width="85" Height="40" x:Name="Banner1" Visibility="{TemplateBinding ASUBanner1Visibility}" Margin="-28,-18,0,0"  BorderBrush="Black" BorderThickness="1" CornerRadius="1">
+                                <Border Background="Red" BorderBrush="Red" BorderThickness="1" CornerRadius="1">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Banner5Text" Foreground="White" Text="НЕ ВКЛЮЧАТЬ!" TextAlignment="Center" TextWrapping="NoWrap" FontWeight="Bold"/>
+                                        <TextBlock FontSize="7" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="Banner51Text" Foreground="White" Text="Работа на линии" TextAlignment="Center" TextWrapping="NoWrap" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </Border>
+                            </Border>
+                        </Grid>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
