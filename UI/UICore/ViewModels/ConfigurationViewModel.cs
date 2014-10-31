@@ -224,7 +224,7 @@ namespace UICore.ViewModels
 
         #region Вспомогательные методы для получение VM
 
-        protected BaseDeviceViewModel GetDeviceViewModel(string deviceGuidAsStr)
+        protected DeviceViewModel GetDeviceViewModel(string deviceGuidAsStr)
         {
             var c = deviceGuidAsStr.Split('.');
 

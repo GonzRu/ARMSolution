@@ -12,7 +12,7 @@ using UICore.ViewModels;
 
 namespace ArmWpfUI.ViewModels
 {
-    public class DeviceViewModel : BaseDeviceViewModel
+    public class DeviceViewModel : UICore.ViewModels.DeviceViewModel
     {
         #region CONSTS
 

@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace UICore.ViewModels
 {
-    public class BaseDeviceViewModel : ViewModelBase
+    public class DeviceViewModel : ViewModelBase
     {
         #region Public properties
 
@@ -74,7 +74,7 @@ namespace UICore.ViewModels
 
         #region Constructor
 
-        public BaseDeviceViewModel(Device device, IExchangeProvider exchangeProvider)
+        public DeviceViewModel(Device device, IExchangeProvider exchangeProvider)
         {
             Device = device;
             ExchangeProvider = exchangeProvider;
