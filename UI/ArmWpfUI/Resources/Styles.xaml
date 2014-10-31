@@ -195,5 +195,138 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <Style x:Key="Banner1MenuItemStyle" TargetType="MenuItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuItem">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <CheckBox IsChecked="{TemplateBinding IsChecked}" VerticalAlignment="Center" Margin="0, 0, 4, 0" IsHitTestVisible="False" />
+                        
+                        <Border Grid.Column="1" Width="85" Height="40" BorderBrush="Black" BorderThickness="1" CornerRadius="1">
+                            <Border Background="Red" BorderBrush="Red" BorderThickness="1" CornerRadius="1">
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <TextBlock FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Text="НЕ ВКЛЮЧАТЬ!" TextAlignment="Center" TextWrapping="NoWrap" FontWeight="Bold"/>
+                                    <TextBlock FontSize="7" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Text="Работа на линии" TextAlignment="Center" TextWrapping="NoWrap" FontWeight="Bold"/>
+                                    <ContentPresenter Margin="3" Name="HeaderHost" ContentSource="Header"/>
+                                </StackPanel>
+                            </Border>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Banner2MenuItemStyle" TargetType="MenuItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuItem">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox IsChecked="{TemplateBinding IsChecked}" VerticalAlignment="Center" Margin="0, 0, 4, 0" IsHitTestVisible="False" />
+
+                        <Border Grid.Column="1" Width="85" Height="40" BorderBrush="Black" BorderThickness="1" CornerRadius="1">
+                            <Border BorderBrush="Red" BorderThickness="3" CornerRadius="1">
+                                <Border BorderBrush="Black" BorderThickness="1" CornerRadius="1" Background="White">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Red" Text="НЕ ВКЛЮЧАТЬ!" TextAlignment="Center" TextWrapping="NoWrap" FontWeight="Bold"/>
+                                        <TextBlock FontSize="7" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Red" Text="Работают люди" TextAlignment="Center" TextWrapping="NoWrap" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </Border>
+                            </Border>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Banner3MenuItemStyle" TargetType="MenuItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuItem">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox IsChecked="{TemplateBinding IsChecked}" VerticalAlignment="Center" Margin="0, 0, 4, 0" IsHitTestVisible="False" />
+
+                        <Border Grid.Column="1" Width="85" Height="40" BorderBrush="Black" BorderThickness="1" CornerRadius="1">
+                            <Border Background="#3475cd" BorderBrush="#3475cd" BorderThickness="1" CornerRadius="1">
+                                <TextBlock FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Text="Заземлено" TextAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"/>
+                            </Border>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Banner4MenuItemStyle" TargetType="MenuItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuItem">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox IsChecked="{TemplateBinding IsChecked}" VerticalAlignment="Center" Margin="0, 0, 4, 0" IsHitTestVisible="False" />
+
+                        <Border Grid.Column="1" Width="85" Height="40"  BorderBrush="Black" BorderThickness="1" CornerRadius="1">
+                            <Border BorderBrush="Red" BorderThickness="3" CornerRadius="1">
+                                <Border BorderBrush="Black" BorderThickness="1" CornerRadius="1" Background="White">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Width="75" FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Red" Text="Работа под напряжением" TextAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"/>
+                                        <TextBlock FontSize="5" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Red" Text="повторно не включать" TextAlignment="Center" TextWrapping="NoWrap" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </Border>
+                            </Border>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Banner5MenuItemStyle" TargetType="MenuItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuItem">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox IsChecked="{TemplateBinding IsChecked}" VerticalAlignment="Center" Margin="0, 0, 4, 0" IsHitTestVisible="False" />
+
+                        <Border Grid.Column="1" Width="85" Height="40"  BorderBrush="Black" BorderThickness="1" CornerRadius="1">
+                            <Border BorderBrush="#3475cd" BorderThickness="3" CornerRadius="1">
+                                <Border BorderBrush="Black" BorderThickness="1" CornerRadius="1" Background="White">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Width="75" FontSize="9" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Text="Транзит разомкнут" TextAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" />
+                                    </StackPanel>
+                                </Border>
+                            </Border>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 </ResourceDictionary>
