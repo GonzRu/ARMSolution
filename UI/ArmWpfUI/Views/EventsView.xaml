@@ -15,41 +15,41 @@
     </i:Interaction.Triggers>
 
     <xctk:BusyIndicator IsBusy="{Binding Path=LoadEventsAsyncCommand.IsExecuting}">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition Height="30" />
-            <RowDefinition />
-            <RowDefinition Height="40" />
-        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="30" />
+                <RowDefinition />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
 
-        <ToggleButton Grid.Row="0"></ToggleButton>
+            <ToggleButton Grid.Row="0"></ToggleButton>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Label Content="События с: " />
-            <xctk:DateTimePicker Name="StartDatePicker" Value="{Binding Path=StartDateTime}" />
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <Label Content="События с: " />
+                <xctk:DateTimePicker Name="StartDatePicker" Value="{Binding Path=StartDateTime}" />
 
-            <Label Content="События по: " />
-            <xctk:DateTimePicker Name="EnDatePicker" Value="{Binding Path=EndDateTime}" />
+                <Label Content="События по: " />
+                <xctk:DateTimePicker Name="EnDatePicker" Value="{Binding Path=EndDateTime}" />
 
-            <CheckBox IsChecked="{Binding IsShowSystemEvents}" VerticalAlignment="Center" Content="Системные события" Margin="10, 0 ,0 ,0" />
+                <CheckBox IsChecked="{Binding IsShowSystemEvents}" VerticalAlignment="Center" Content="Системные события" Margin="10, 0 ,0 ,0" />
 
-            <CheckBox IsChecked="{Binding IsShowTerminalEvents}" VerticalAlignment="Center" Content="Терминальные события" Margin="10, 0 ,0 ,0" />
+                <CheckBox IsChecked="{Binding IsShowTerminalEvents}" VerticalAlignment="Center" Content="Терминальные события" Margin="10, 0 ,0 ,0" />
 
-            <CheckBox IsChecked="{Binding IsShowUserEvents}" VerticalAlignment="Center" Content="Пользовательские события" Margin="10, 0 ,0 ,0" />
+                <CheckBox IsChecked="{Binding IsShowUserEvents}" VerticalAlignment="Center" Content="Пользовательские события" Margin="10, 0 ,0 ,0" />
 
-            <Button Content="Обновить" Command="{Binding Path=LoadEventsAsyncCommand}" />
-        </StackPanel>
+                <Button Content="Обновить" Command="{Binding Path=LoadEventsAsyncCommand}" />
+            </StackPanel>
 
-        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path=EventsSource}" Grid.Row="2">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Дата" Binding="{Binding Path=EventTime}" />
-                <DataGridTextColumn Header="Идентификатор источника" Binding="{Binding Path=DevGuid}" />
-                <DataGridTextColumn Header="Присоединение источника" Binding="{Binding Path=EventSourceName}" />
-                <DataGridTextColumn Header="Текст" Binding="{Binding Path=EventText}" />
-            </DataGrid.Columns>
-        </DataGrid>
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path=EventsSource}" Grid.Row="2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding Path=EventTime}" />
+                    <DataGridTextColumn Header="Идентификатор источника" Binding="{Binding Path=DevGuid}" />
+                    <DataGridTextColumn Header="Присоединение источника" Binding="{Binding Path=EventSourceName}" />
+                    <DataGridTextColumn Header="Текст" Binding="{Binding Path=EventText}" />
+                </DataGrid.Columns>
+            </DataGrid>
 
-    </Grid>
+        </Grid>
     </xctk:BusyIndicator>
 </Page>
