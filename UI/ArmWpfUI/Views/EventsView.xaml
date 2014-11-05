@@ -17,15 +17,11 @@
     <xctk:BusyIndicator IsBusy="{Binding Path=LoadEventsAsyncCommand.IsExecuting}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="30" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition />
-                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
 
-            <ToggleButton Grid.Row="0"></ToggleButton>
-
-            <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <Label Content="События с: " />
                 <xctk:DateTimePicker Name="StartDatePicker" Value="{Binding Path=StartDateTime}" />
 
@@ -41,7 +37,7 @@
                 <Button Content="Обновить" Command="{Binding Path=LoadEventsAsyncCommand}" />
             </StackPanel>
 
-            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path=EventsSource}" Grid.Row="2">
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path=EventsSource}" Grid.Row="1">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Дата" Binding="{Binding Path=EventTime}" />
                     <DataGridTextColumn Header="Идентификатор источника" Binding="{Binding Path=DevGuid}" />
