@@ -42,7 +42,24 @@
                     <DataGridTextColumn Header="Дата" Binding="{Binding Path=EventTime}" />
                     <DataGridTextColumn Header="Идентификатор источника" Binding="{Binding Path=DevGuid}" />
                     <DataGridTextColumn Header="Присоединение источника" Binding="{Binding Path=EventSourceName}" />
-                    <DataGridTextColumn Header="Текст" Binding="{Binding Path=EventText}" />
+                    <DataGridTextColumn Header="Текст" Binding="{Binding Path=EventText}" Width="*" />
+                    <DataGridTemplateColumn Header="Приложение" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="../Resources/attachment.png" Height="20" Width="20">
+                                    <Image.Style>
+                                        <Style>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding EventDataID}" Value="-1">
+                                                    <Setter Property="Image.Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
 
