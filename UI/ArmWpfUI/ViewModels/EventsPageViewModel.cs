@@ -54,7 +54,37 @@ namespace ArmWpfUI.ViewModels
                 NotifyPropertyChanged("EventsSource");
             }
         }
-        private List<EventValue> _eventsSource; 
+        private List<EventValue> _eventsSource;
+
+        /// <summary>
+        /// Флаг, показывающий нужно ли отображать системные сообщения
+        /// </summary>
+        public bool IsShowSystemEvents
+        {
+            get { return _isShowSystemEvents; }
+            set { _isShowSystemEvents = value; NotifyPropertyChanged("IsShowSystemEvents"); }
+        }
+        private bool _isShowSystemEvents;
+
+        /// <summary>
+        /// Флаг, показывающий нужно ли отображать терминальные сообщения
+        /// </summary>
+        public bool IsShowTerminalEvents
+        {
+            get { return _isShowTerminalEvents; }
+            set { _isShowTerminalEvents = value; NotifyPropertyChanged("IsShowTerminalEvents"); }
+        }
+        private bool _isShowTerminalEvents;
+
+        /// <summary>
+        /// Флаг, показывающий нужно ли отображать пользовательские сообщения сообщения
+        /// </summary>
+        public bool IsShowUserEvents
+        {
+            get { return _isShowUserEvents; }
+            set { _isShowUserEvents = value; NotifyPropertyChanged("IsShowUserEvents"); }
+        }
+        private bool _isShowUserEvents;
 
         #endregion
 
@@ -92,7 +122,7 @@ namespace ArmWpfUI.ViewModels
 
         private void LoadEvents()
         {
-            var events = _exchangeProvider.GetEvents(StartDateTime, EndDateTime, true, true, true, null);
+            var events = _exchangeProvider.GetEvents(StartDateTime, EndDateTime, IsShowSystemEvents, IsShowTerminalEvents, IsShowUserEvents, null);
 
             EventsSource = events;
         }
