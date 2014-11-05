@@ -30,6 +30,8 @@ namespace ArmWpfUI.ViewModels
 
         #region Public properties
 
+        #region Properties
+
         /// <summary>
         /// Начало выборки событий
         /// </summary>
@@ -71,6 +73,8 @@ namespace ArmWpfUI.ViewModels
             }
         }
         private List<EventValue> _eventsSource; 
+
+        #endregion
 
         #region Commands
 
