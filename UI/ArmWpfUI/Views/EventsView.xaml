@@ -26,10 +26,10 @@
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Label Content="События с: " />
-            <DatePicker Name="StartDatePicker" SelectedDate="{Binding Path=StartDateTime}" />
+            <xctk:DateTimePicker Name="StartDatePicker" Value="{Binding Path=StartDateTime}" />
 
             <Label Content="События по: " />
-            <DatePicker Name="EnDatePicker" SelectedDate="{Binding Path=EndDateTime}" />
+            <xctk:DateTimePicker Name="EnDatePicker" Value="{Binding Path=EndDateTime}" />
         </StackPanel>
 
         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path=EventsSource}" Grid.Row="2">
