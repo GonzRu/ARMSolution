@@ -122,7 +122,7 @@ namespace ArmWpfUI.ViewModels
 
         private void LoadEvents()
         {
-            var events = _exchangeProvider.GetEvents(StartDateTime, EndDateTime, IsShowSystemEvents, IsShowTerminalEvents, IsShowUserEvents, null);
+            var events = _exchangeProvider.GetEvents(StartDateTime, EndDateTime, IsShowSystemEvents, IsShowUserEvents, IsShowTerminalEvents, null);
 
             EventsSource = events;
         }
