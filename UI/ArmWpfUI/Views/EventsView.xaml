@@ -31,15 +31,12 @@
 
             <Label Content="События по: " />
             <xctk:DateTimePicker Name="EnDatePicker" Value="{Binding Path=EndDateTime}" />
-            
-            <Label Content="Системные события" />
-            <CheckBox IsChecked="{Binding IsShowSystemEvents}" VerticalAlignment="Center" />
 
-            <Label Content="Терминальные события" />
-            <CheckBox IsChecked="{Binding IsShowTerminalEvents}" VerticalAlignment="Center" />
+            <CheckBox IsChecked="{Binding IsShowSystemEvents}" VerticalAlignment="Center" Content="Системные события" Margin="10, 0 ,0 ,0" />
 
-            <Label Content="Пользовательские события" />
-            <CheckBox IsChecked="{Binding IsShowUserEvents}" VerticalAlignment="Center" />
+            <CheckBox IsChecked="{Binding IsShowTerminalEvents}" VerticalAlignment="Center" Content="Терминальные события" Margin="10, 0 ,0 ,0" />
+
+            <CheckBox IsChecked="{Binding IsShowUserEvents}" VerticalAlignment="Center" Content="Пользовательские события" Margin="10, 0 ,0 ,0" />
 
             <Button Content="Обновить" Command="{Binding Path=LoadEventsAsyncCommand}" />
         </StackPanel>
