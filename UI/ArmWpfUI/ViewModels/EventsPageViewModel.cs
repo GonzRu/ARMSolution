@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Documents;
-using System.Windows.Input;
-using CoreLib.ExchangeProviders;
+﻿using CoreLib.ExchangeProviders;
 using CoreLib.Models.Common;
+using System;
+using System.Collections.Generic;
+using System.Windows.Input;
 using UICore.Commands;
 using UICore.ViewModels;
 
@@ -11,23 +10,6 @@ namespace ArmWpfUI.ViewModels
 {
     class EventsPageViewModel : ViewModelBase
     {
-        #region Private fields
-
-        private IExchangeProvider _exchangeProvider;
-
-        #endregion
-
-        #region Constructors
-
-        public EventsPageViewModel(IExchangeProvider exchangeProvider)
-        {
-            _exchangeProvider = exchangeProvider;
-
-            LoadEventsAsyncCommands = new AsyncCommand(LoadEvents);
-        }
-
-        #endregion
-
         #region Public properties
 
         #region Properties
@@ -84,6 +66,23 @@ namespace ArmWpfUI.ViewModels
         public ICommand LoadEventsAsyncCommands { get; set; }
 
         #endregion
+
+        #endregion
+
+        #region Private fields
+
+        private IExchangeProvider _exchangeProvider;
+
+        #endregion
+
+        #region Constructors
+
+        public EventsPageViewModel(IExchangeProvider exchangeProvider)
+        {
+            _exchangeProvider = exchangeProvider;
+
+            LoadEventsAsyncCommands = new AsyncCommand(LoadEvents);
+        }
 
         #endregion
 
