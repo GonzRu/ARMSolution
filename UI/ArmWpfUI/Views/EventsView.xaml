@@ -37,7 +37,7 @@
                 <Button Content="Обновить" Command="{Binding Path=LoadEventsAsyncCommand}" />
             </StackPanel>
 
-            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path=EventsSource}" Grid.Row="1">
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path=EventsSource}" Grid.Row="1" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Дата" Binding="{Binding Path=EventTime}" />
                     <DataGridTextColumn Header="Идентификатор источника" Binding="{Binding Path=DevGuid}" />
