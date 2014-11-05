@@ -30,6 +30,15 @@
 
             <Label Content="События по: " />
             <xctk:DateTimePicker Name="EnDatePicker" Value="{Binding Path=EndDateTime}" />
+            
+            <Label Content="Системные события" />
+            <CheckBox IsChecked="{Binding IsShowSystemEvents}" VerticalAlignment="Center" />
+
+            <Label Content="Терминальные события" />
+            <CheckBox IsChecked="{Binding IsShowTerminalEvents}" VerticalAlignment="Center" />
+
+            <Label Content="Пользовательские события" />
+            <CheckBox IsChecked="{Binding IsShowUserEvents}" VerticalAlignment="Center" />
         </StackPanel>
 
         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path=EventsSource}" Grid.Row="2">
