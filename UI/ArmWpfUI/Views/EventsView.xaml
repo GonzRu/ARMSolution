@@ -10,7 +10,7 @@
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding Path=LoadEventsAsyncCommands}" />
+            <i:InvokeCommandAction Command="{Binding Path=LoadEventsAsyncCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 

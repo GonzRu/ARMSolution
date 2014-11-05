@@ -93,7 +93,7 @@ namespace ArmWpfUI.ViewModels
         /// <summary>
         /// Загрузить события
         /// </summary>
-        public ICommand LoadEventsAsyncCommands { get; set; }
+        public AsyncCommand LoadEventsAsyncCommand { get; set; }
 
         #endregion
 
@@ -111,7 +111,7 @@ namespace ArmWpfUI.ViewModels
         {
             _exchangeProvider = exchangeProvider;
 
-            LoadEventsAsyncCommands = new AsyncCommand(LoadEvents);
+            LoadEventsAsyncCommand = new AsyncCommand(LoadEvents);
         }
 
         #endregion
