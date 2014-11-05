@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Documents;
-using System.Windows.Input;
-using CoreLib.ExchangeProviders;
+﻿using CoreLib.ExchangeProviders;
 using CoreLib.Models.Common;
+using System;
+using System.Collections.Generic;
+using System.Windows.Input;
 using UICore.Commands;
 using UICore.ViewModels;
 
@@ -11,24 +10,9 @@ namespace ArmWpfUI.ViewModels
 {
     class EventsPageViewModel : ViewModelBase
     {
-        #region Private fields
-
-        private IExchangeProvider _exchangeProvider;
-
-        #endregion
-
-        #region Constructors
-
-        public EventsPageViewModel(IExchangeProvider exchangeProvider)
-        {
-            _exchangeProvider = exchangeProvider;
-
-            LoadEventsAsyncCommands = new AsyncCommand(LoadEvents);
-        }
-
-        #endregion
-
         #region Public properties
+
+        #region Properties
 
         /// <summary>
         /// Начало выборки событий
@@ -70,16 +54,65 @@ namespace ArmWpfUI.ViewModels
                 NotifyPropertyChanged("EventsSource");
             }
         }
-        private List<EventValue> _eventsSource; 
+        private List<EventValue> _eventsSource;
+
+        /// <summary>
+        /// Флаг, показывающий нужно ли отображать системные сообщения
+        /// </summary>
+        public bool IsShowSystemEvents
+        {
+            get { return _isShowSystemEvents; }
+            set { _isShowSystemEvents = value; NotifyPropertyChanged("IsShowSystemEvents"); }
+        }
+        private bool _isShowSystemEvents;
+
+        /// <summary>
+        /// Флаг, показывающий нужно ли отображать терминальные сообщения
+        /// </summary>
+        public bool IsShowTerminalEvents
+        {
+            get { return _isShowTerminalEvents; }
+            set { _isShowTerminalEvents = value; NotifyPropertyChanged("IsShowTerminalEvents"); }
+        }
+        private bool _isShowTerminalEvents;
+
+        /// <summary>
+        /// Флаг, показывающий нужно ли отображать пользовательские сообщения сообщения
+        /// </summary>
+        public bool IsShowUserEvents
+        {
+            get { return _isShowUserEvents; }
+            set { _isShowUserEvents = value; NotifyPropertyChanged("IsShowUserEvents"); }
+        }
+        private bool _isShowUserEvents;
+
+        #endregion
 
         #region Commands
 
         /// <summary>
         /// Загрузить события
         /// </summary>
-        public ICommand LoadEventsAsyncCommands { get; set; }
+        public AsyncCommand LoadEventsAsyncCommand { get; set; }
 
         #endregion
+
+        #endregion
+
+        #region Private fields
+
+        private IExchangeProvider _exchangeProvider;
+
+        #endregion
+
+        #region Constructors
+
+        public EventsPageViewModel(IExchangeProvider exchangeProvider)
+        {
+            _exchangeProvider = exchangeProvider;
+
+            LoadEventsAsyncCommand = new AsyncCommand(LoadEvents);
+        }
 
         #endregion
 
@@ -89,7 +122,7 @@ namespace ArmWpfUI.ViewModels
 
         private void LoadEvents()
         {
-            var events = _exchangeProvider.GetEvents(StartDateTime, EndDateTime, true, true, true, null);
+            var events = _exchangeProvider.GetEvents(StartDateTime, EndDateTime, IsShowSystemEvents, IsShowUserEvents, IsShowTerminalEvents, null);
 
             EventsSource = events;
         }

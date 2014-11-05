@@ -10,36 +10,59 @@
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding Path=LoadEventsAsyncCommands}" />
+            <i:InvokeCommandAction Command="{Binding Path=LoadEventsAsyncCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition Height="30" />
-            <RowDefinition />
-            <RowDefinition Height="40" />
-        </Grid.RowDefinitions>
+    <xctk:BusyIndicator IsBusy="{Binding Path=LoadEventsAsyncCommand.IsExecuting}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <ToggleButton Grid.Row="0"></ToggleButton>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Label Content="События с: " />
+                <xctk:DateTimePicker Name="StartDatePicker" Value="{Binding Path=StartDateTime}" />
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Label Content="События с: " />
-            <DatePicker Name="StartDatePicker" SelectedDate="{Binding Path=StartDateTime}" />
+                <Label Content="События по: " />
+                <xctk:DateTimePicker Name="EnDatePicker" Value="{Binding Path=EndDateTime}" />
 
-            <Label Content="События по: " />
-            <DatePicker Name="EnDatePicker" SelectedDate="{Binding Path=EndDateTime}" />
-        </StackPanel>
+                <CheckBox IsChecked="{Binding IsShowSystemEvents}" VerticalAlignment="Center" Content="Системные события" Margin="10, 0 ,0 ,0" />
 
-        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path=EventsSource}" Grid.Row="2">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Дата" Binding="{Binding Path=EventTime}" />
-                <DataGridTextColumn Header="Идентификатор источника" Binding="{Binding Path=DevGuid}" />
-                <DataGridTextColumn Header="Присоединение источника" Binding="{Binding Path=EventSourceName}" />
-                <DataGridTextColumn Header="Текст" Binding="{Binding Path=EventText}" />
-            </DataGrid.Columns>
-        </DataGrid>
+                <CheckBox IsChecked="{Binding IsShowTerminalEvents}" VerticalAlignment="Center" Content="Терминальные события" Margin="10, 0 ,0 ,0" />
 
-    </Grid>
+                <CheckBox IsChecked="{Binding IsShowUserEvents}" VerticalAlignment="Center" Content="Пользовательские события" Margin="10, 0 ,0 ,0" />
+
+                <Button Content="Обновить" Command="{Binding Path=LoadEventsAsyncCommand}" />
+            </StackPanel>
+
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path=EventsSource}" Grid.Row="1" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding Path=EventTime}" />
+                    <DataGridTextColumn Header="Идентификатор источника" Binding="{Binding Path=DevGuid}" />
+                    <DataGridTextColumn Header="Присоединение источника" Binding="{Binding Path=EventSourceName}" />
+                    <DataGridTextColumn Header="Текст" Binding="{Binding Path=EventText}" Width="*" />
+                    <DataGridTemplateColumn Header="Приложение" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="../Resources/attachment.png" Height="20" Width="20">
+                                    <Image.Style>
+                                        <Style>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding EventDataID}" Value="-1">
+                                                    <Setter Property="Image.Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
+    </xctk:BusyIndicator>
 </Page>
