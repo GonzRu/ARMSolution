@@ -40,6 +40,8 @@
 
             <Label Content="Пользовательские события" />
             <CheckBox IsChecked="{Binding IsShowUserEvents}" VerticalAlignment="Center" />
+
+            <Button Content="Обновить" Command="{Binding Path=LoadEventsAsyncCommand}" />
         </StackPanel>
 
         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path=EventsSource}" Grid.Row="2">
