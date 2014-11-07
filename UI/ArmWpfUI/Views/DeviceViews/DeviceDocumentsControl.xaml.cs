@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ArmWpfUI.ViewModels.DeviceViewModels;
+using ArmWpfUI.Views.TerminalViews;
+using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ArmWpfUI.Views.DeviceViews
 {
@@ -24,5 +15,25 @@ namespace ArmWpfUI.Views.DeviceViews
         {
             InitializeComponent();
         }
+
+        #region Handlers
+
+        private void UploadDocumentButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog();
+            if (!openFileDialog.ShowDialog(Application.Current.MainWindow).Value)
+                return;
+
+            var uploadDocumentProgressView = new UpLoadDocumentView(DataContext as DeviceViewModel);
+            uploadDocumentProgressView.Loaded += (o, args) =>
+            {
+                var deviceViewModel = DataContext as DeviceViewModel;
+                deviceViewModel.UploadDocumentAsyncCommand.DoExecute(openFileDialog.FileName);
+            };
+
+            uploadDocumentProgressView.ShowDialog();
+        }
+
+        #endregion
     }
 }
