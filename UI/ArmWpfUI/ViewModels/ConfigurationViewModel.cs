@@ -3,6 +3,7 @@ using System.Xml.Linq;
 using ArmWpfUI.Converters;
 using ArmWpfUI.Properties;
 using ArmWpfUI.Views;
+using ArmWpfUI.Views.DeviceViews;
 using ConfigurationParsersLib;
 using CoreLib.Models.Configuration;
 using SilverlightControlsLibrary;

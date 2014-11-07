@@ -98,7 +98,7 @@
     <Compile Include="Views\TerminalViews\SelectTerminalView.xaml.cs">
       <DependentUpon>SelectTerminalView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TerminalViews\TerminalView.xaml.cs">
+    <Compile Include="Views\DeviceViews\TerminalView.xaml.cs">
       <DependentUpon>TerminalView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TerminalViews\UpLoadDocumentView.xaml.cs">
@@ -139,7 +139,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TerminalViews\TerminalView.xaml">
+    <Page Include="Views\DeviceViews\TerminalView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

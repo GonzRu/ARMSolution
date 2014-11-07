@@ -5,7 +5,7 @@ using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ArmWpfUI.Views
+namespace ArmWpfUI.Views.DeviceViews
 {
     /// <summary>
     /// Логика взаимодействия для TerminalView.xaml
