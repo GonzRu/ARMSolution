@@ -17,6 +17,8 @@
                 <Image Height="70" Width="70" VerticalAlignment="Center" HorizontalAlignment="Center" Source="../../Resources/1.png" />
             </TabItem.Header>
 
+            <deviceViews:DeviceDataControl DataContext="{Binding Path=CurrentDataViewModel}" />
+            
         </TabItem>
 
         <TabItem>
@@ -107,12 +109,18 @@
             <TabItem.Header>
                 <Image Height="70" Width="70" VerticalAlignment="Center" HorizontalAlignment="Center" Source="../../Resources/4.png" />
             </TabItem.Header>
+            
+            <deviceViews:DeviceDataControl DataContext="{Binding Path=ServiceDataViewModel}" />
+            
         </TabItem>
 
         <TabItem>
             <TabItem.Header>
                 <Image Height="70" Width="70" VerticalAlignment="Center" HorizontalAlignment="Center" Source="../../Resources/5.png" />
             </TabItem.Header>
+
+            <deviceViews:DeviceDataControl DataContext="{Binding Path=SpecificDataViewModelDataViewModel}" />
+
         </TabItem>
 
         <TabItem>
@@ -126,6 +134,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
 
+            <deviceViews:DeviceDocumentsControl />
 
         </TabItem>
     </TabControl>

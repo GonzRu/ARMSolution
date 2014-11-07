@@ -27,34 +27,22 @@ namespace ArmWpfUI.ViewModels.DeviceViewModels
 
         #region Properties
 
-        #region Группы
+        #region Подразделы устройства
 
         /// <summary>
-        /// Список групп, содержащих текущие данные
+        /// Текущие данные
         /// </summary>
-        [Browsable(false)]
-        public List<GroupViewModel> CurrentDataGroups
-        {
-            get { return Groups.Where(model => model.GroupCategory == GroupCategory.CurrentData).ToList(); }
-        }
+        public DeviceDataViewModel CurrentDataViewModel { get; set; }
 
         /// <summary>
-        /// Список групп, содержащих уставки устройства
+        /// Служебные данные
         /// </summary>
-        [Browsable(false)]
-        public List<GroupViewModel> SettingsGroups
-        {
-            get { return Groups.Where(model => model.GroupCategory == GroupCategory.Ustavki).ToList(); }
-        }
+        public DeviceDataViewModel ServiceDataViewModel { get; set; }
 
         /// <summary>
-        /// Список всех групп
+        /// Специфические данные
         /// </summary>
-        [Browsable(false)]
-        public List<GroupViewModel> SpecificGroups
-        {
-            get { return Groups.Where(model => model.GroupCategory == GroupCategory.Specific).ToList(); }
-        }
+        public DeviceDataViewModel SpecificDataViewModel { get; set; }
 
         #endregion
 
@@ -153,6 +141,10 @@ namespace ArmWpfUI.ViewModels.DeviceViewModels
             LoadEventsCommand = new AsyncCommand(LoadEvents);
             LoadDocumentsListCommand = new AsyncCommand(LoadDocumentsList);
             UploadDocumentAsyncCommand = new AsyncCommand(UploadDocument);
+
+            CurrentDataViewModel = new DeviceDataViewModel(Groups.Where(model => model.GroupCategory == GroupCategory.CurrentData).ToList(), exchangeProvider);
+            ServiceDataViewModel = new DeviceDataViewModel(Groups.Where(model => model.GroupCategory == GroupCategory.Service).ToList(), exchangeProvider);
+            SpecificDataViewModel = new DeviceDataViewModel(Groups.Where(model => model.GroupCategory == GroupCategory.Specific).ToList(), exchangeProvider);
         }
 
         #endregion
