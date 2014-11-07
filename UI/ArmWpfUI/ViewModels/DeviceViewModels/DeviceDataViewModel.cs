@@ -13,7 +13,7 @@ namespace ArmWpfUI.ViewModels.DeviceViewModels
         /// <summary>
         /// Список групп. На данный момент не предполагает динамического измененияs
         /// </summary>
-        public List<Group> Groups { get; set; } 
+        public List<GroupViewModel> Groups { get; set; } 
 
         #endregion
 
@@ -25,7 +25,7 @@ namespace ArmWpfUI.ViewModels.DeviceViewModels
 
         #region Constructors
 
-        public DeviceDataViewModel(List<Group> groups, IExchangeProvider exchangeProvider)
+        public DeviceDataViewModel(List<GroupViewModel> groups, IExchangeProvider exchangeProvider)
         {
             Groups = groups;
             _exchangeProvider = exchangeProvider;
