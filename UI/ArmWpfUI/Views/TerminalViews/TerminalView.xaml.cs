@@ -1,4 +1,5 @@
 ﻿using ArmWpfUI.ViewModels;
+using ArmWpfUI.ViewModels.DeviceViewModels;
 using ArmWpfUI.Views.TerminalViews;
 using Microsoft.Win32;
 using System.Windows;

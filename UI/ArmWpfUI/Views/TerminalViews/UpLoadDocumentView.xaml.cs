@@ -1,4 +1,5 @@
 ﻿using ArmWpfUI.ViewModels;
+using ArmWpfUI.ViewModels.DeviceViewModels;
 using UICore.Commands;
 
 namespace ArmWpfUI.Views.TerminalViews

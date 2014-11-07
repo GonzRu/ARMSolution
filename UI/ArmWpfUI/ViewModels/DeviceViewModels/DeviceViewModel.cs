@@ -10,7 +10,7 @@ using System.Windows.Input;
 using UICore.Commands;
 using UICore.ViewModels;
 
-namespace ArmWpfUI.ViewModels
+namespace ArmWpfUI.ViewModels.DeviceViewModels
 {
     public class DeviceViewModel : UICore.ViewModels.DeviceViewModel
     {
