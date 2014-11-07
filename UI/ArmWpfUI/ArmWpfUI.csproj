@@ -88,6 +88,7 @@
     <Compile Include="ViewModels\DataServerViewModel.cs" />
     <Compile Include="ViewModels\DeviceViewModel.cs" />
     <Compile Include="ViewModels\EventsPageViewModel.cs" />
+    <Compile Include="ViewModels\DeviceViewModels\DeviceDataViewModel.cs" />
     <Compile Include="Views\AuthorizationView.xaml.cs">
       <DependentUpon>AuthorizationView.xaml</DependentUpon>
     </Compile>
