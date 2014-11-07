@@ -8,15 +8,15 @@ using System.Windows.Controls;
 namespace ArmWpfUI.Views.DeviceViews
 {
     /// <summary>
-    /// Логика взаимодействия для TerminalView.xaml
+    /// Логика взаимодействия для DeviceView.xaml
     /// </summary>
-    public partial class TerminalView : Page
+    public partial class DeviceView : Page
     {
         private DeviceViewModel DeviceViewModel { get; set; }
 
         #region Constructors
 
-        public TerminalView()
+        public DeviceView()
         {
             InitializeComponent();
         }

@@ -70,7 +70,7 @@ namespace ArmWpfUI.Views
             var device = (Device)((Button)sender).Tag;
             try
             {
-                Tag = new TerminalView();
+                Tag = new DeviceView();
             }
             catch (KeyNotFoundException)
             {
