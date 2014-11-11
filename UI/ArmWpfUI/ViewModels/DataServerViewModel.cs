@@ -1,4 +1,5 @@
-﻿using CoreLib.ExchangeProviders;
+﻿using ArmWpfUI.ViewModels.DeviceViewModels;
+using CoreLib.ExchangeProviders;
 using CoreLib.Models.Configuration;
 using System.Collections.Generic;
 

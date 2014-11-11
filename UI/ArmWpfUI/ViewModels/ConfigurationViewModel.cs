@@ -3,6 +3,7 @@ using System.Xml.Linq;
 using ArmWpfUI.Converters;
 using ArmWpfUI.Properties;
 using ArmWpfUI.Views;
+using ArmWpfUI.Views.DeviceViews;
 using ConfigurationParsersLib;
 using CoreLib.Models.Configuration;
 using SilverlightControlsLibrary;
@@ -208,7 +209,7 @@ namespace ArmWpfUI.ViewModels
             if (terminalsId == null)
                 return;
 
-            var terminalViewContent = new TerminalView();
+            var terminalViewContent = new DeviceView();
             var terminals = terminalsId.Split(';');
 
             if (terminals.Length == 1)

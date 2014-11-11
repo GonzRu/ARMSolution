@@ -1,18 +1,16 @@
-﻿using CoreLib.ExchangeProviders;
-using CoreLib.Models.Common;
-using CoreLib.Models.Configuration;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Windows.Input;
+using CoreLib.ExchangeProviders;
+using CoreLib.Models.Common;
 using UICore.Commands;
 using UICore.ViewModels;
 
-namespace ArmWpfUI.ViewModels
+namespace ArmWpfUI.ViewModels.DeviceViewModels
 {
-    public class DeviceViewModel : UICore.ViewModels.DeviceViewModel
+    public class DeviceDocumentsViewModel : ViewModelBase
     {
         #region CONSTS
 
@@ -23,71 +21,9 @@ namespace ArmWpfUI.ViewModels
 
         #endregion
 
-        #region Public properties
+        #region Public Properties
 
         #region Properties
-
-        #region Группы
-
-        /// <summary>
-        /// Список групп, содержащих текущие данные
-        /// </summary>
-        [Browsable(false)]
-        public List<GroupViewModel> CurrentDataGroups
-        {
-            get { return Groups.Where(model => model.GroupCategory == GroupCategory.CurrentData).ToList(); }
-        }
-
-        /// <summary>
-        /// Список групп, содержащих уставки устройства
-        /// </summary>
-        [Browsable(false)]
-        public List<GroupViewModel> SettingsGroups
-        {
-            get { return Groups.Where(model => model.GroupCategory == GroupCategory.Ustavki).ToList(); }
-        }
-
-        /// <summary>
-        /// Список всех групп
-        /// </summary>
-        [Browsable(false)]
-        public List<GroupViewModel> SpecificGroups
-        {
-            get { return Groups.Where(model => model.GroupCategory == GroupCategory.Specific).ToList(); }
-        }
-
-        #endregion
-
-        #region События устройства
-
-        /// <summary>
-        /// Список событий данного устройства
-        /// </summary>
-        [Browsable(false)]
-        public List<EventValue> Events
-        {
-            get { return _events; }
-            set
-            {
-                _events = value;
-                NotifyPropertyChanged("Events");
-            }
-        }
-        private List<EventValue> _events;
-
-        /// <summary>
-        /// Начало отсчета показываемых событий устройства
-        /// </summary>
-        public DateTime EventsStartDateTime { get; set; }
-
-        /// <summary>
-        /// Конец отсчета показываемых событий устройства
-        /// </summary>
-        public DateTime EventsEndDateTime { get; set; }
-
-        #endregion
-
-        #region Документы устройства
 
         /// <summary>
         /// Список документов, соответствующих данному устройству
@@ -120,14 +56,7 @@ namespace ArmWpfUI.ViewModels
 
         #endregion
 
-        #endregion
-
         #region Commands
-
-        /// <summary>
-        /// Загружает события данного устройства
-        /// </summary>
-        public ICommand LoadEventsCommand { get; set; }
 
         /// <summary>
         /// Загружает список документов данного устройства
@@ -143,14 +72,24 @@ namespace ArmWpfUI.ViewModels
 
         #endregion
 
-        #region Constructor
+        #region Private fields
 
-        public DeviceViewModel(Device device, IExchangeProvider exchangeProvider) : base(device, exchangeProvider)
+        private ushort _dsGuid;
+
+        private uint _deviceGuid;
+
+        private IExchangeProvider _exchangeProvider;
+
+        #endregion
+
+        #region Constructors
+
+        public DeviceDocumentsViewModel(ushort dsGuid, uint deviceGuid, IExchangeProvider exchangeProvider)
         {
-            EventsStartDateTime = DateTime.Now.AddDays(-1).Date;
-            EventsEndDateTime = DateTime.Now.Date;
+            _dsGuid = dsGuid;
+            _deviceGuid = deviceGuid;
+            _exchangeProvider = exchangeProvider;
 
-            LoadEventsCommand = new AsyncCommand(LoadEvents);
             LoadDocumentsListCommand = new AsyncCommand(LoadDocumentsList);
             UploadDocumentAsyncCommand = new AsyncCommand(UploadDocument);
         }
@@ -162,20 +101,11 @@ namespace ArmWpfUI.ViewModels
         #region Implementation commands
 
         /// <summary>
-        /// Загружает события, соответствующие данному устройству
-        /// </summary>
-        private void LoadEvents()
-        {
-            Events = ExchangeProvider.GetEvents(EventsStartDateTime, EventsEndDateTime, false, false, true,
-                new List<Tuple<ushort, uint>> {new Tuple<ushort, uint>(Device.DataServer.DsGuid, Device.DeviceGuid)});            
-        }
-
-        /// <summary>
         /// Загружает список документов, привязанных к данному устройству
         /// </summary>
         private void LoadDocumentsList()
         {
-            Documents = ExchangeProvider.GetDocumentsList(Device.DataServer.DsGuid, Device.DeviceGuid);
+            Documents = _exchangeProvider.GetDocumentsList(_dsGuid, _deviceGuid);
         }
 
         /// <summary>
@@ -189,7 +119,7 @@ namespace ArmWpfUI.ViewModels
             var pathToFile = param.ToString();
 
             // Проверяем - можно ли инициировать загрузку файла
-            if (!ExchangeProvider.InitUploadFileSession(Device.DataServer.DsGuid, DeviceGuid, Path.GetFileName(pathToFile), "sdfsdf"))
+            if (!_exchangeProvider.InitUploadFileSession(_dsGuid, _deviceGuid, Path.GetFileName(pathToFile), "sdfsdf"))
                 return;
 
             UploadDocumentProgress = 0;
@@ -209,33 +139,33 @@ namespace ArmWpfUI.ViewModels
                     // Проверяем - не отменил ли пользователь загрузку файла
                     if (UploadDocumentAsyncCommand.IsCancellationRequested)
                     {
-                        ExchangeProvider.TerminateUploadFileSession();
+                        _exchangeProvider.TerminateUploadFileSession();
                         return;
                     }
 
-                    ExchangeProvider.UploadFileChunk(fileChunlBuffer);
+                    _exchangeProvider.UploadFileChunk(fileChunlBuffer);
 
                     UploadDocumentProgress += progressStep;
                     chunkCount++;
                 }
 
                 // Загружаем последний кусок
-                if (fileStream.Length > UPLOAD_FILE_CHUNK_LENGTH*chunkCount)
+                if (fileStream.Length > UPLOAD_FILE_CHUNK_LENGTH * chunkCount)
                 {
                     fileChunlBuffer = new byte[fileStream.Length - UPLOAD_FILE_CHUNK_LENGTH * chunkCount];
                     fileStream.Read(fileChunlBuffer, 0, fileChunlBuffer.Length);
 
-                    ExchangeProvider.UploadFileChunk(fileChunlBuffer);
+                    _exchangeProvider.UploadFileChunk(fileChunlBuffer);
                 }
 
                 // Проверяем - не отменил ли пользователь загрузку файла
                 if (UploadDocumentAsyncCommand.IsCancellationRequested)
                 {
-                    ExchangeProvider.TerminateUploadFileSession();
+                    _exchangeProvider.TerminateUploadFileSession();
                     return;
                 }
 
-                ExchangeProvider.SaveUploadedFile();
+                _exchangeProvider.SaveUploadedFile();
 
                 LoadDocumentsList();
             }

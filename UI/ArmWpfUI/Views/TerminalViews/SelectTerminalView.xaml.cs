@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ArmWpfUI.Views.DeviceViews;
 using CoreLib.Models.Configuration;
 
 namespace ArmWpfUI.Views
@@ -69,7 +70,7 @@ namespace ArmWpfUI.Views
             var device = (Device)((Button)sender).Tag;
             try
             {
-                Tag = new TerminalView();
+                Tag = new DeviceView();
             }
             catch (KeyNotFoundException)
             {
