@@ -25,9 +25,9 @@
 
 
                 <Label Margin="10,0,0,0" Height="28" Width="auto" Content="Выбрать события с: " Foreground="#FF1A76E0"/>
-                <DatePicker VerticalContentAlignment="Center" Height="30" Width="auto" SelectedDate="{Binding EventsStartDateTime}" />
+                <xctk:DateTimePicker VerticalContentAlignment="Center" Height="30" Width="auto" Value="{Binding EventsStartDateTime}" />
                 <Label Margin="5" Height="28" Width="auto" Content="по: " Foreground="#FF1A76E0" />
-                <DatePicker VerticalContentAlignment="Center" Height="30" Width="auto" SelectedDate="{Binding EventsEndDateTime}" />
+                <xctk:DateTimePicker VerticalContentAlignment="Center" Height="30" Width="auto" Value="{Binding EventsEndDateTime}" />
 
                 <Button Content="Показать" Margin="10,0,0,0" Height="50" Width="75" Command="{Binding LoadEventsAsyncCommand}" />
 
