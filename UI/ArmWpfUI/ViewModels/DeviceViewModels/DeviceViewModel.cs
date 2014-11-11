@@ -14,15 +14,6 @@ namespace ArmWpfUI.ViewModels.DeviceViewModels
 {
     public class DeviceViewModel : UICore.ViewModels.DeviceViewModel
     {
-        #region CONSTS
-
-        /// <summary>
-        /// Размер части файла, которая за раз загружается на сервер
-        /// </summary>
-        private const int UPLOAD_FILE_CHUNK_LENGTH = 20480;
-
-        #endregion
-
         #region Public properties
 
         #region Properties
@@ -75,39 +66,6 @@ namespace ArmWpfUI.ViewModels.DeviceViewModels
 
         #endregion
 
-        #region Документы устройства
-
-        /// <summary>
-        /// Список документов, соответствующих данному устройству
-        /// </summary>
-        [Browsable(false)]
-        public List<Document> Documents
-        {
-            get { return _documents; }
-            set
-            {
-                _documents = value;
-                NotifyPropertyChanged("Documents");
-            }
-        }
-        private List<Document> _documents;
-
-        /// <summary>
-        /// Прогресс загрузки документа
-        /// </summary>
-        public float UploadDocumentProgress
-        {
-            get { return _uploadDocumentProgress; }
-            set
-            {
-                _uploadDocumentProgress = value;
-                NotifyPropertyChanged("UploadDocumentProgress");
-            }
-        }
-        private float _uploadDocumentProgress;
-
-        #endregion
-
         #endregion
 
         #region Commands
@@ -116,16 +74,6 @@ namespace ArmWpfUI.ViewModels.DeviceViewModels
         /// Загружает события данного устройства
         /// </summary>
         public ICommand LoadEventsCommand { get; set; }
-
-        /// <summary>
-        /// Загружает список документов данного устройства
-        /// </summary>
-        public ICommand LoadDocumentsListCommand { get; set; }
-
-        /// <summary>
-        /// Загружает документ устройства
-        /// </summary>
-        public AsyncCommand UploadDocumentAsyncCommand { get; set; }
 
         #endregion
 
@@ -139,8 +87,6 @@ namespace ArmWpfUI.ViewModels.DeviceViewModels
             EventsEndDateTime = DateTime.Now.Date;
 
             LoadEventsCommand = new AsyncCommand(LoadEvents);
-            LoadDocumentsListCommand = new AsyncCommand(LoadDocumentsList);
-            UploadDocumentAsyncCommand = new AsyncCommand(UploadDocument);
 
             CurrentDataViewModel = new DeviceDataViewModel(Groups.Where(model => model.GroupCategory == GroupCategory.CurrentData).ToList(), exchangeProvider);
             ServiceDataViewModel = new DeviceDataViewModel(Groups.Where(model => model.GroupCategory == GroupCategory.Service).ToList(), exchangeProvider);
@@ -160,78 +106,6 @@ namespace ArmWpfUI.ViewModels.DeviceViewModels
         {
             Events = ExchangeProvider.GetEvents(EventsStartDateTime, EventsEndDateTime, false, false, true,
                 new List<Tuple<ushort, uint>> {new Tuple<ushort, uint>(Device.DataServer.DsGuid, Device.DeviceGuid)});            
-        }
-
-        /// <summary>
-        /// Загружает список документов, привязанных к данному устройству
-        /// </summary>
-        private void LoadDocumentsList()
-        {
-            Documents = ExchangeProvider.GetDocumentsList(Device.DataServer.DsGuid, Device.DeviceGuid);
-        }
-
-        /// <summary>
-        /// Загружает конкретный документ
-        /// </summary>
-        private void UploadDocument(object param)
-        {
-            if (!(param is string))
-                return;
-
-            var pathToFile = param.ToString();
-
-            // Проверяем - можно ли инициировать загрузку файла
-            if (!ExchangeProvider.InitUploadFileSession(Device.DataServer.DsGuid, DeviceGuid, Path.GetFileName(pathToFile), "sdfsdf"))
-                return;
-
-            UploadDocumentProgress = 0;
-
-            using (var fileStream = File.OpenRead(pathToFile))
-            {
-                int chunkCount = 0;
-                byte[] fileChunlBuffer;
-
-                float progressStep = (float)UPLOAD_FILE_CHUNK_LENGTH / fileStream.Length;
-
-                while (fileStream.Length > UPLOAD_FILE_CHUNK_LENGTH * (chunkCount + 1))
-                {
-                    fileChunlBuffer = new byte[UPLOAD_FILE_CHUNK_LENGTH];
-                    fileStream.Read(fileChunlBuffer, 0, UPLOAD_FILE_CHUNK_LENGTH);
-
-                    // Проверяем - не отменил ли пользователь загрузку файла
-                    if (UploadDocumentAsyncCommand.IsCancellationRequested)
-                    {
-                        ExchangeProvider.TerminateUploadFileSession();
-                        return;
-                    }
-
-                    ExchangeProvider.UploadFileChunk(fileChunlBuffer);
-
-                    UploadDocumentProgress += progressStep;
-                    chunkCount++;
-                }
-
-                // Загружаем последний кусок
-                if (fileStream.Length > UPLOAD_FILE_CHUNK_LENGTH*chunkCount)
-                {
-                    fileChunlBuffer = new byte[fileStream.Length - UPLOAD_FILE_CHUNK_LENGTH * chunkCount];
-                    fileStream.Read(fileChunlBuffer, 0, fileChunlBuffer.Length);
-
-                    ExchangeProvider.UploadFileChunk(fileChunlBuffer);
-                }
-
-                // Проверяем - не отменил ли пользователь загрузку файла
-                if (UploadDocumentAsyncCommand.IsCancellationRequested)
-                {
-                    ExchangeProvider.TerminateUploadFileSession();
-                    return;
-                }
-
-                ExchangeProvider.SaveUploadedFile();
-
-                LoadDocumentsList();
-            }
-
         }
 
         #endregion
