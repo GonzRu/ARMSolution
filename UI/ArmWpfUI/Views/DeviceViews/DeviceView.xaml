@@ -32,6 +32,8 @@
                 <Image Height="70" Width="70" VerticalAlignment="Center" HorizontalAlignment="Center" Source="../../Resources/3.png" />
             </TabItem.Header>
 
+            <deviceViews:DeviceEventsControl DataContext="{Binding Path=DeviceEventsViewModel}" />
+            
         </TabItem>
 
         <TabItem>
