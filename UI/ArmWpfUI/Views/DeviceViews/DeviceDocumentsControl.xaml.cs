@@ -1,5 +1,4 @@
 ﻿using ArmWpfUI.ViewModels.DeviceViewModels;
-using ArmWpfUI.Views.TerminalViews;
 using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,14 +23,8 @@ namespace ArmWpfUI.Views.DeviceViews
             if (!openFileDialog.ShowDialog(Application.Current.MainWindow).Value)
                 return;
 
-            var uploadDocumentProgressView = new UpLoadDocumentView(DataContext as DeviceViewModel);
-            uploadDocumentProgressView.Loaded += (o, args) =>
-            {
-                var deviceViewModel = DataContext as DeviceViewModel;
-                deviceViewModel.UploadDocumentAsyncCommand.DoExecute(openFileDialog.FileName);
-            };
-
-            uploadDocumentProgressView.ShowDialog();
+            var deviceViewModel = DataContext as DeviceViewModel;
+            deviceViewModel.UploadDocumentAsyncCommand.DoExecute(openFileDialog.FileName);
         }
 
         #endregion
