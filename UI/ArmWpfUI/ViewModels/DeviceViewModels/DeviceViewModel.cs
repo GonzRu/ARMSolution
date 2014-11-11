@@ -23,27 +23,71 @@ namespace ArmWpfUI.ViewModels.DeviceViewModels
         /// <summary>
         /// Текущие данные
         /// </summary>
-        public DeviceDataViewModel CurrentDataViewModel { get; set; }
+        public DeviceDataViewModel CurrentDataViewModel {
+            get
+            {
+                if (_currentDataViewModel == null)
+                    _currentDataViewModel = new DeviceDataViewModel(Groups.Where(model => model.GroupCategory == GroupCategory.CurrentData).ToList(), ExchangeProvider);
+                return _currentDataViewModel;
+            }
+        }
+        private DeviceDataViewModel _currentDataViewModel;
 
         /// <summary>
         /// Служебные данные
         /// </summary>
-        public DeviceDataViewModel ServiceDataViewModel { get; set; }
+        public DeviceDataViewModel ServiceDataViewModel
+        {
+            get
+            {
+                if (_serviceDataViewModel == null)
+                    _serviceDataViewModel = new DeviceDataViewModel(Groups.Where(model => model.GroupCategory == GroupCategory.Service).ToList(), ExchangeProvider);
+                return _serviceDataViewModel;
+            }
+        }
+        private DeviceDataViewModel _serviceDataViewModel;
 
         /// <summary>
         /// Специфические данные
         /// </summary>
-        public DeviceDataViewModel SpecificDataViewModel { get; set; }
+        public DeviceDataViewModel SpecificDataViewModel
+        {
+            get
+            {
+                if (_specificDataViewModel == null)
+                    _specificDataViewModel = new DeviceDataViewModel(Groups.Where(model => model.GroupCategory == GroupCategory.Specific).ToList(), ExchangeProvider);
+                return _specificDataViewModel;
+            }
+        }
+        private DeviceDataViewModel _specificDataViewModel;
 
         /// <summary>
         /// Документы устройства
         /// </summary>
-        public DeviceDocumentsViewModel DeviceDocumentsViewModel { get; set; }
+        public DeviceDocumentsViewModel DeviceDocumentsViewModel
+        {
+            get
+            {
+                if (_deviceDocumentsViewModel == null)
+                    _deviceDocumentsViewModel = new DeviceDocumentsViewModel(Device.DataServer.DsGuid, DeviceGuid, ExchangeProvider);
+                return _deviceDocumentsViewModel;
+            }
+        }
+        private DeviceDocumentsViewModel _deviceDocumentsViewModel;
 
         /// <summary>
         /// События устройства
         /// </summary>
-        public DeviceEventsViewModel DeviceEventsViewModel { get; set; }
+        public DeviceEventsViewModel DeviceEventsViewModel
+        {
+            get
+            {
+                if (_deviceEventsViewModel == null)
+                    _deviceEventsViewModel = new DeviceEventsViewModel(Device, ExchangeProvider);
+                return _deviceEventsViewModel;
+            }
+        }
+        private DeviceEventsViewModel _deviceEventsViewModel;
 
         #endregion
 
@@ -61,12 +105,6 @@ namespace ArmWpfUI.ViewModels.DeviceViewModels
 
         public DeviceViewModel(Device device, IExchangeProvider exchangeProvider) : base(device, exchangeProvider)
         {
-
-            CurrentDataViewModel = new DeviceDataViewModel(Groups.Where(model => model.GroupCategory == GroupCategory.CurrentData).ToList(), exchangeProvider);
-            ServiceDataViewModel = new DeviceDataViewModel(Groups.Where(model => model.GroupCategory == GroupCategory.Service).ToList(), exchangeProvider);
-            SpecificDataViewModel = new DeviceDataViewModel(Groups.Where(model => model.GroupCategory == GroupCategory.Specific).ToList(), exchangeProvider);
-            DeviceDocumentsViewModel = new DeviceDocumentsViewModel(Device.DataServer.DsGuid, DeviceGuid, exchangeProvider);
-            DeviceEventsViewModel = new DeviceEventsViewModel(Device, exchangeProvider);
         }
 
         #endregion
