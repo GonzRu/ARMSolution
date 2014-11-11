@@ -57,13 +57,11 @@
                     <DataGridTextColumn Binding="{Binding DocumentUserName}" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Header="Добавил" Width="200" />
                     <DataGridTextColumn Binding="{Binding DocumentFileName}" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Header="Документ" Width="200" />
                     <DataGridTextColumn Binding="{Binding DocumentComment}" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Header="Комментарий" Width="Auto" />
-                    <DataGridTextColumn Binding="{Binding DocumentId}" CanUserReorder="True" CanUserResize="True" CanUserSort="False" Header="" Width="30" Visibility="Collapsed"/>
 
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
 
-        <!--DataPager Grid.Row="3" Height="26" HorizontalAlignment="Left" Source="{Binding Path=ItemsSource,ElementName=dataGridDocuments}" PageSize="30" Name="DataGridPager" Width="219" /-->
     </Grid>
     </xctk:BusyIndicator>
 
