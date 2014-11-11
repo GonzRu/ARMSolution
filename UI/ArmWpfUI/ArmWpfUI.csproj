@@ -99,6 +99,9 @@
     <Compile Include="Views\DeviceViews\DeviceDocumentsControl.xaml.cs">
       <DependentUpon>DeviceDocumentsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DeviceViews\DeviceEventsControl.xaml.cs">
+      <DependentUpon>DeviceEventsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DeviceViews\DeviceSettingsControl.xaml.cs">
       <DependentUpon>DeviceSettingsControl.xaml</DependentUpon>
     </Compile>
@@ -143,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DeviceViews\DeviceDocumentsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DeviceViews\DeviceEventsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
