@@ -276,5 +276,24 @@ namespace CoreLib.ExchangeProviders
         byte[] GetReportAsByteArray(BaseReportSettings reportSettings);
 
         #endregion
+
+        #region Уставки
+
+        /// <summary>
+        /// Получение списка архивных записей уставок для устройства
+        /// </summary>
+        List<SettingsSet> GetSettingsSetsList(UInt16 dsGuid, UInt32 devGuid);
+
+        /// <summary>
+        /// Получение значений для указанных тегов из конкретного архивного набора уставок
+        /// </summary>
+        Dictionary<String, TagValue> GetValuesFromSettingsSet(UInt16 dsGuid, Int32 settingsSetId);
+
+        /// <summary>
+        /// Запись набора уставкок в устройство
+        /// </summary>
+        void SaveSettingsToDevice(UInt16 dsGuid, UInt32 devGuid, Dictionary<string, TagValue> tagsValues);
+
+        #endregion
     }
 }
