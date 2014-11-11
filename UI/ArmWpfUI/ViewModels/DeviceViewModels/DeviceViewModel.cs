@@ -40,34 +40,10 @@ namespace ArmWpfUI.ViewModels.DeviceViewModels
         /// </summary>
         public DeviceDocumentsViewModel DeviceDocumentsViewModel { get; set; }
 
-        #endregion
-
-        #region События устройства
-
         /// <summary>
-        /// Список событий данного устройства
+        /// События устройства
         /// </summary>
-        [Browsable(false)]
-        public List<EventValue> Events
-        {
-            get { return _events; }
-            set
-            {
-                _events = value;
-                NotifyPropertyChanged("Events");
-            }
-        }
-        private List<EventValue> _events;
-
-        /// <summary>
-        /// Начало отсчета показываемых событий устройства
-        /// </summary>
-        public DateTime EventsStartDateTime { get; set; }
-
-        /// <summary>
-        /// Конец отсчета показываемых событий устройства
-        /// </summary>
-        public DateTime EventsEndDateTime { get; set; }
+        public DeviceEventsViewModel DeviceEventsViewModel { get; set; }
 
         #endregion
 
@@ -75,10 +51,7 @@ namespace ArmWpfUI.ViewModels.DeviceViewModels
 
         #region Commands
 
-        /// <summary>
-        /// Загружает события данного устройства
-        /// </summary>
-        public ICommand LoadEventsCommand { get; set; }
+
 
         #endregion
 
@@ -88,15 +61,12 @@ namespace ArmWpfUI.ViewModels.DeviceViewModels
 
         public DeviceViewModel(Device device, IExchangeProvider exchangeProvider) : base(device, exchangeProvider)
         {
-            EventsStartDateTime = DateTime.Now.AddDays(-1).Date;
-            EventsEndDateTime = DateTime.Now.Date;
-
-            LoadEventsCommand = new AsyncCommand(LoadEvents);
 
             CurrentDataViewModel = new DeviceDataViewModel(Groups.Where(model => model.GroupCategory == GroupCategory.CurrentData).ToList(), exchangeProvider);
             ServiceDataViewModel = new DeviceDataViewModel(Groups.Where(model => model.GroupCategory == GroupCategory.Service).ToList(), exchangeProvider);
             SpecificDataViewModel = new DeviceDataViewModel(Groups.Where(model => model.GroupCategory == GroupCategory.Specific).ToList(), exchangeProvider);
             DeviceDocumentsViewModel = new DeviceDocumentsViewModel(Device.DataServer.DsGuid, DeviceGuid, exchangeProvider);
+            DeviceEventsViewModel = new DeviceEventsViewModel(Device, exchangeProvider);
         }
 
         #endregion
@@ -105,14 +75,7 @@ namespace ArmWpfUI.ViewModels.DeviceViewModels
 
         #region Implementation commands
 
-        /// <summary>
-        /// Загружает события, соответствующие данному устройству
-        /// </summary>
-        private void LoadEvents()
-        {
-            Events = ExchangeProvider.GetEvents(EventsStartDateTime, EventsEndDateTime, false, false, true,
-                new List<Tuple<ushort, uint>> {new Tuple<ushort, uint>(Device.DataServer.DsGuid, Device.DeviceGuid)});            
-        }
+
 
         #endregion
 

@@ -32,77 +32,8 @@
                 <Image Height="70" Width="70" VerticalAlignment="Center" HorizontalAlignment="Center" Source="../../Resources/3.png" />
             </TabItem.Header>
 
-            <Grid Margin="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="60" />
-                    <RowDefinition Height="30" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-
-                <Border Grid.ColumnSpan="3" Grid.Row="0" CornerRadius="3" Margin="1" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Stretch">
-                    <Border.Effect>
-                        <DropShadowEffect Color="White" Direction="0" ShadowDepth="0" BlurRadius="7"></DropShadowEffect>
-                    </Border.Effect>
-                    <StackPanel Orientation="Horizontal" >
-                        <TextBlock Margin="5" Text="Название терминала:" Foreground="#FF1A76E0" VerticalAlignment="Center" />
-                        <TextBlock Margin="5" Text="БМРЗ-КЛ" Foreground="#FFEF1212" FontSize="14" VerticalAlignment="Center"/>
-
-
-                        <Label Margin="10,0,0,0" Height="28" Width="auto" Content="Выбрать события с: " Foreground="#FF1A76E0"/>
-                        <DatePicker VerticalContentAlignment="Center" Height="30" Width="auto" SelectedDate="{Binding EventsStartDateTime}" />
-                        <Label Margin="5" Height="28" Width="auto" Content="по: " Foreground="#FF1A76E0" />
-                        <DatePicker VerticalContentAlignment="Center" Height="30" Width="auto" SelectedDate="{Binding EventsEndDateTime}" />
-
-                        <Button Content="Показать" Margin="10,0,0,0" Height="50" Width="75" Command="{Binding LoadEventsCommand}" />
-
-                    </StackPanel>
-                </Border>
-                <TextBlock  Grid.Row="1" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF1A76E0" Text="Для получения подробной информации выберите конкретное событие." FontSize="14" TextWrapping="Wrap" TextAlignment="Center" />
-                <Border CornerRadius="2" Margin="2" BorderThickness="1" BorderBrush="Black" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-
-                    <DataGrid ItemsSource="{Binding Path=Events}"
-                              Margin="2" AutoGenerateColumns="False"
-                              HorizontalAlignment="Stretch"
-                              Background="LightGray"
-                              GridLinesVisibility="All"
-                              ColumnHeaderHeight="30"
-                              IsReadOnly="True"
-                              SelectionMode="Single"
-                              Name="EventsDataGrid">
-                        
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseLeftButtonUp">
-                                <i:InvokeCommandAction Command="{Binding Path=LoadDocumentCommand}" CommandParameter="{Binding SelectedItem, ElementName=EventsDataGrid}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                        
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding EventTime,StringFormat='dd.MM.yy HH:mm:ss'}" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Header="Дата" Width="120" />
-                            <DataGridTextColumn Binding="{Binding EventText}" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Header="Событие" Width="*" />
-                            <DataGridTextColumn Binding="{Binding EventUser}" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Header="Источник" Width="Auto" Visibility="Collapsed"/>
-                            <DataGridTemplateColumn Header="Приложение" Width="auto">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Image Source="../../Resources/attachment.png" Height="20" Width="20">
-                                            <Image.Style>
-                                                <Style>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding EventDataID}" Value="-1">
-                                                            <Setter Property="Image.Visibility" Value="Collapsed" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Image.Style>
-                                        </Image>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Border>
-                <!--DataPager Grid.Row="3" Height="26" HorizontalAlignment="Left" Source="{Binding Path=ItemsSource,ElementName=dataGridEvents}" PageSize="30" Name="DataGridPager" Width="219" /-->
-            </Grid>
-
+            <deviceViews:DeviceEventsControl DataContext="{Binding Path=DeviceEventsViewModel}" />
+            
         </TabItem>
 
         <TabItem>
