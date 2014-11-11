@@ -56,7 +56,7 @@
                     <DataGridTextColumn Binding="{Binding DocumentAddDate, StringFormat='dd.MM.yy HH:mm:ss'}" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Header="Дата" Width="Auto" />
                     <DataGridTextColumn Binding="{Binding DocumentUserName}" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Header="Добавил" Width="200" />
                     <DataGridTextColumn Binding="{Binding DocumentFileName}" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Header="Документ" Width="200" />
-                    <DataGridTextColumn Binding="{Binding DocumentComment}" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Header="Комментарий" Width="Auto" />
+                    <DataGridTextColumn Binding="{Binding DocumentComment}" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Header="Комментарий" Width="*" />
 
                 </DataGrid.Columns>
             </DataGrid>
