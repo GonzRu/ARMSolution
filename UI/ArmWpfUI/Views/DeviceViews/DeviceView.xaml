@@ -130,11 +130,11 @@
 
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Loaded">
-                    <i:InvokeCommandAction Command="{Binding Path=LoadDocumentsListCommand}" />
+                    <i:InvokeCommandAction Command="{Binding Path=DeviceDocumentsViewModel.LoadDocumentsListCommand}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
 
-            <deviceViews:DeviceDocumentsControl />
+            <deviceViews:DeviceDocumentsControl DataContext="{Binding DeviceDocumentsViewModel}" />
 
         </TabItem>
     </TabControl>

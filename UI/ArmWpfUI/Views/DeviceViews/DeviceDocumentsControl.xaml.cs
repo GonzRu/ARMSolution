@@ -23,7 +23,7 @@ namespace ArmWpfUI.Views.DeviceViews
             if (!openFileDialog.ShowDialog(Application.Current.MainWindow).Value)
                 return;
 
-            var deviceViewModel = DataContext as DeviceViewModel;
+            var deviceViewModel = DataContext as DeviceDocumentsViewModel;
             deviceViewModel.UploadDocumentAsyncCommand.DoExecute(openFileDialog.FileName);
         }
 

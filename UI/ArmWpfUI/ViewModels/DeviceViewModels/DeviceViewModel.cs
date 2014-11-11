@@ -35,6 +35,11 @@ namespace ArmWpfUI.ViewModels.DeviceViewModels
         /// </summary>
         public DeviceDataViewModel SpecificDataViewModel { get; set; }
 
+        /// <summary>
+        /// Документы устройства
+        /// </summary>
+        public DeviceDocumentsViewModel DeviceDocumentsViewModel { get; set; }
+
         #endregion
 
         #region События устройства
@@ -91,6 +96,7 @@ namespace ArmWpfUI.ViewModels.DeviceViewModels
             CurrentDataViewModel = new DeviceDataViewModel(Groups.Where(model => model.GroupCategory == GroupCategory.CurrentData).ToList(), exchangeProvider);
             ServiceDataViewModel = new DeviceDataViewModel(Groups.Where(model => model.GroupCategory == GroupCategory.Service).ToList(), exchangeProvider);
             SpecificDataViewModel = new DeviceDataViewModel(Groups.Where(model => model.GroupCategory == GroupCategory.Specific).ToList(), exchangeProvider);
+            DeviceDocumentsViewModel = new DeviceDocumentsViewModel(Device.DataServer.DsGuid, DeviceGuid, exchangeProvider);
         }
 
         #endregion
