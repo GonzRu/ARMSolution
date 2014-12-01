@@ -13,8 +13,6 @@ namespace ARMConfigurator
     /// </summary>
     public partial class MainWindow
     {
-        public ConfigurationViewModel ConfigurationViewModel { get; set; }
-
         public MainWindow()
         {
             InitializeComponent();
@@ -24,9 +22,9 @@ namespace ARMConfigurator
 
             var configurationProvider = ConfigurationProvidersFactory.CreateConfigurationProvider(pathToConfigurationDirectory, false);
 
-            ConfigurationViewModel = new ConfigurationViewModel(configurationProvider);            
+            var configurationViewModel = new ConfigurationViewModel(configurationProvider);
 
-            DataContext = ConfigurationViewModel;
+            DataContext = configurationViewModel;
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

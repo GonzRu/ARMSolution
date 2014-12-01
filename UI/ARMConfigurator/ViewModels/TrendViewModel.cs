@@ -4,7 +4,7 @@ using UICore.ViewModels;
 
 namespace ARMConfigurator.ViewModels
 {
-    class TrendViewModel : ViewModelBase
+    internal sealed class TrendViewModel : ViewModelBase
     {
         public IEnumerable<Tuple<uint, object>> TrendSource { get; set; }
 

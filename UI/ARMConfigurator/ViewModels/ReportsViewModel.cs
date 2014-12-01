@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections;
+﻿using ARMConfigurator.Views;
+using CoreLib.Models.Common.Reports;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Documents;
 using System.Windows.Input;
-using ARMConfigurator.Views;
-using CoreLib.Models.Common.Reports;
 using UICore.Commands;
 using UICore.ViewModels;
 
 namespace ARMConfigurator.ViewModels
 {
-    class ReportsViewModel : ViewModelBase
+    internal sealed class ReportsViewModel : ViewModelBase
     {
         #region Costructor
 

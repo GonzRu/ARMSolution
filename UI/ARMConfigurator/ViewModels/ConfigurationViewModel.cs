@@ -8,7 +8,7 @@ using UICore.ViewModels;
 
 namespace ARMConfigurator.ViewModels
 {
-    public class ConfigurationViewModel : UICore.ViewModels.ConfigurationViewModel
+    internal sealed class ConfigurationViewModel : UICore.ViewModels.ConfigurationViewModel
     {
         #region Public properties
 
