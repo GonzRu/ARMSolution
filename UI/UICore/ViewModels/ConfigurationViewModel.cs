@@ -86,17 +86,17 @@ namespace UICore.ViewModels
         /// <summary>
         /// Загурзка и сохранение конфигурации
         /// </summary>
-        public Command LoadConfigurationCommand { get; private set; }
-        public Command SaveConfigurationCommand { get; private set; }
+        public AsyncCommand LoadConfigurationCommand { get; private set; }
+        public AsyncCommand SaveConfigurationCommand { get; private set; }
 
         /// <summary>
         /// Ручная установка значений тегов
         /// </summary>
-        public ICommand HandleSetOnDeviceStateCommand { get; private set; }
-        public ICommand HandleSetOffDeviceStateCommand { get; private set; }
-        public ICommand ReSetHandleDeviceStateCommand { get; private set; }
+        public AsyncCommand HandleSetOnDeviceStateCommand { get; private set; }
+        public AsyncCommand HandleSetOffDeviceStateCommand { get; private set; }
+        public AsyncCommand ReSetHandleDeviceStateCommand { get; private set; }
 
-        public ICommand AuthorizationCommand { get; private set; }
+        public AsyncCommand AuthorizationCommand { get; private set; }
 
         #endregion
 
