@@ -1,7 +1,4 @@
-﻿using System.Globalization;
-using System.Xml.Linq;
-using ArmWpfUI.Converters;
-using ArmWpfUI.Properties;
+﻿using ArmWpfUI.Converters;
 using ArmWpfUI.Views;
 using ArmWpfUI.Views.DeviceViews;
 using ConfigurationParsersLib;
@@ -9,18 +6,14 @@ using CoreLib.Models.Configuration;
 using SilverlightControlsLibrary;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
 using UICore.Commands;
-using UICore.ViewModels;
 
 namespace ArmWpfUI.ViewModels
 {
