@@ -1,6 +1,4 @@
-﻿using System;
-using ARMConfigurator.ViewModels;
-using ARMConfigurator.Views;
+﻿using ARMConfigurator.ViewModels;
 using ConfigurationParsersLib;
 using System.IO;
 using System.Windows;
@@ -51,12 +49,6 @@ namespace ARMConfigurator
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             PropertyGrid.SelectedObject = e.NewValue;
-        }
-
-        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            var reportWindow = new ReportsView();
-            reportWindow.ShowDialog();
         }
     }
 }
