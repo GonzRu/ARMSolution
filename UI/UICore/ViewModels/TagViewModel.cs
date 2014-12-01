@@ -116,6 +116,12 @@ namespace UICore.ViewModels
             get { return new Tuple<object, TagValueQuality>(TagValueAsObject, TagValueQuality); }
         }
 
+        /// <summary>
+        /// Полный идентификатор тега в виде строки
+        /// </summary>
+        [Browsable(false)]
+        public string TagFullGuid { get; private set; }
+
         #endregion
 
         #region Private fields
@@ -132,6 +138,7 @@ namespace UICore.ViewModels
         {
             Tag = tag;
             ExchangeProvider = exchangeProvider;
+            TagFullGuid = String.Format("{0}.{1}.{2}", tag.Device.DataServer.DsGuid, tag.Device.DeviceGuid, tag.TagGuid);
 
             Tag.TagValueChanged += (o, s, arg3, arg4) =>
             {
