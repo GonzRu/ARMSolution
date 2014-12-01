@@ -2,13 +2,12 @@
 using CoreLib.Models.Common;
 using System;
 using System.Collections.Generic;
-using System.Windows.Input;
 using UICore.Commands;
 using UICore.ViewModels;
 
 namespace ArmWpfUI.ViewModels
 {
-    class EventsPageViewModel : ViewModelBase
+    internal sealed class EventsPageViewModel : ViewModelBase
     {
         #region Public properties
 

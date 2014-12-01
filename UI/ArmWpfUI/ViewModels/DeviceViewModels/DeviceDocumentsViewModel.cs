@@ -10,7 +10,7 @@ using UICore.ViewModels;
 
 namespace ArmWpfUI.ViewModels.DeviceViewModels
 {
-    public class DeviceDocumentsViewModel : ViewModelBase
+    internal sealed class DeviceDocumentsViewModel : ViewModelBase
     {
         #region CONSTS
 

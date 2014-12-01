@@ -24,7 +24,7 @@ using UICore.ViewModels;
 
 namespace ArmWpfUI.ViewModels
 {
-    class ConfigurationViewModel : UICore.ViewModels.ConfigurationViewModel
+    internal sealed class ConfigurationViewModel : UICore.ViewModels.ConfigurationViewModel
     {
         #region Public properties
 

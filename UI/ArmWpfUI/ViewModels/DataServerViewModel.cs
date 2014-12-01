@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ArmWpfUI.ViewModels
 {
-    public class DataServerViewModel : UICore.ViewModels.DataServerViewModel
+    internal sealed class DataServerViewModel : UICore.ViewModels.DataServerViewModel
     {
         #region Constructors
 

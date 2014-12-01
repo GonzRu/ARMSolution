@@ -7,7 +7,7 @@ using CoreLib.ExchangeProviders;
 
 namespace ArmWpfUI.ViewModels
 {
-    class AuthorizationViewModel
+    internal sealed class AuthorizationViewModel
     {
         #region Private fields
 

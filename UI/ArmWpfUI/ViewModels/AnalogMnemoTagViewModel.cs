@@ -4,7 +4,7 @@ using UICore.ViewModels;
 
 namespace ArmWpfUI.ViewModels
 {
-    class AnalogMnemoTagViewModel : ViewModelBase
+    internal sealed class AnalogMnemoTagViewModel : ViewModelBase
     {
         private Tag _tag;
 

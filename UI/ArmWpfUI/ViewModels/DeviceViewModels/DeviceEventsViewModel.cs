@@ -8,7 +8,7 @@ using UICore.ViewModels;
 
 namespace ArmWpfUI.ViewModels.DeviceViewModels
 {
-    public class DeviceEventsViewModel : ViewModelBase
+    internal sealed class DeviceEventsViewModel : ViewModelBase
     {
         #region Public Properties
 

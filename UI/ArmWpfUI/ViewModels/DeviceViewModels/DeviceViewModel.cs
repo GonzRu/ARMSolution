@@ -1,18 +1,10 @@
 ﻿using CoreLib.ExchangeProviders;
-using CoreLib.Models.Common;
 using CoreLib.Models.Configuration;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using System.Windows.Input;
-using UICore.Commands;
-using UICore.ViewModels;
 
 namespace ArmWpfUI.ViewModels.DeviceViewModels
 {
-    public class DeviceViewModel : UICore.ViewModels.DeviceViewModel
+    internal sealed class DeviceViewModel : UICore.ViewModels.DeviceViewModel
     {
         #region Public properties
 

@@ -5,9 +5,8 @@ using UICore.ViewModels;
 
 namespace ArmWpfUI.ViewModels.DeviceViewModels
 {
-    public class DeviceDataViewModel : ViewModelBase
+    internal sealed class DeviceDataViewModel : ViewModelBase
     {
-
         #region Public properties
 
         /// <summary>
