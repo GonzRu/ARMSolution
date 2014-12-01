@@ -11,6 +11,15 @@
       d:DesignHeight="300" d:DesignWidth="900"
 	  Title="{Binding Path=DeviceDescription}">
 
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Path=SubscribeToAllTagsAsyncCommand}" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding Path=UnSubscribeFromAllTagsAsyncCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <TabControl>
         <TabItem>
             <TabItem.Header>

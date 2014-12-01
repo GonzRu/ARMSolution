@@ -1,14 +1,18 @@
-﻿using CoreLib.ExchangeProviders;
+﻿using System.Linq;
+using CoreLib.ExchangeProviders;
 using CoreLib.Models.Configuration;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using UICore.Commands;
 
 namespace UICore.ViewModels
 {
     public class DeviceViewModel : ViewModelBase
     {
         #region Public properties
+
+        #region Properties
 
         /// <summary>
         /// Номер устройства
@@ -54,7 +58,23 @@ namespace UICore.ViewModels
         /// Список всех тегов устройства
         /// </summary>
         [Browsable(false)]
-        public List<TagViewModel> Tags { get; set; } 
+        public List<TagViewModel> Tags { get; set; }
+
+        #endregion
+
+        #region Commands
+
+        /// <summary>
+        /// Подписаться на обновление всех тегов данного устройства
+        /// </summary>
+        public AsyncCommand SubscribeToAllTagsAsyncCommand { get; set; }
+
+        /// <summary>
+        /// Отписаться от обновления всех тегов
+        /// </summary>
+        public AsyncCommand UnSubscribeFromAllTagsAsyncCommand { get; set; }
+
+        #endregion
 
         #endregion
 
@@ -88,11 +108,30 @@ namespace UICore.ViewModels
 
                 Tags.AddRange(GetGroupTags(groupViewModel));
             }
+
+            SubscribeToAllTagsAsyncCommand = new AsyncCommand(SubscribeToAllTags);
+            UnSubscribeFromAllTagsAsyncCommand = new AsyncCommand(UnSubscribeFromAllTags);
         }
 
         #endregion
 
         #region Private metods
+
+        #region Implementation commands
+
+        private void SubscribeToAllTags()
+        {
+            ExchangeProvider.SubscribeToTagsValuesUpdate(Tags.Select(model => model.TagFullGuid).ToList());
+        }
+
+        private void UnSubscribeFromAllTags()
+        {
+            ExchangeProvider.UnSubscribeToTagsValuesUpdate(Tags.Select(model => model.TagFullGuid).ToList());
+        }
+
+        #endregion
+
+        #region Вспомогательные методы
 
         private List<TagViewModel> GetGroupTags(GroupViewModel groupViewModel)
         {
@@ -108,6 +147,8 @@ namespace UICore.ViewModels
 
             return result;
         }
+
+        #endregion
 
         #endregion
     }
