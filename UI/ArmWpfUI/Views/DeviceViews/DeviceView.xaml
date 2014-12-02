@@ -34,6 +34,9 @@
             <TabItem.Header>
                 <Image Height="70" Width="70" VerticalAlignment="Center" HorizontalAlignment="Center" Source="../../Resources/2.png" />
             </TabItem.Header>
+            
+            <deviceViews:DeviceSettingsControl DataContext="{Binding Path=DeviceSettingsViewModel}" />
+            
         </TabItem>
 
         <TabItem>
