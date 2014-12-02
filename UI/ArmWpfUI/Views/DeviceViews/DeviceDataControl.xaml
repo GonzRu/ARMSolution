@@ -7,11 +7,7 @@
              mc:Ignorable="d">
 
     <Grid x:Name="LayoutRoot" Margin="2">
-        <Grid.Resources>
-            <!--<local:VisibleConverterFromDataTypeNotBool x:Key="VisConverterFromDataTypeNotBool" />
-                    <local:VisibleConverterFromDataTypeBool x:Key="VisConverterFromDataTypeBool" />-->
-        </Grid.Resources>
-
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150*"></ColumnDefinition>
             <ColumnDefinition Width="300*"></ColumnDefinition>
@@ -39,20 +35,11 @@
                           GridLinesVisibility="All"
                           ColumnHeaderHeight="30"
                           IsReadOnly="True">
-            <!--Style="{StaticResource DataGridStyleLargeScroll}"-->
 
-            <!--<i:Interaction.Triggers>
-                        <i:EventTrigger EventName="DataContextChanged">
-                            <i:InvokeCommandAction Command="{Binding Path=SubscribeToTagsValueUpdateAsyncCommand}" CommandParameter="{Binding}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>-->
-
-            <!--Style="{StaticResource DataGridStyleLargeScroll}"-->
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding TagGuid}" CanUserReorder="False" CanUserResize="False" CanUserSort="True" Header="Адрес тега" Width="Auto" Visibility="Collapsed" />
-                <DataGridTextColumn Binding="{Binding TagName}" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Header="Название" Width="Auto" />
-                <DataGridTextColumn CanUserReorder="True" CanUserResize="True" CanUserSort="True" Header="Значение" Width="Auto" IsReadOnly="True" Binding="{Binding TagValueAsObject}" />
-                <DataGridTextColumn Binding="{Binding Dim}" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Header="Единицы измерения" Width="Auto" />
+                <DataGridTextColumn Binding="{Binding TagName, Mode=OneTime}" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Header="Название" Width="Auto" />
+                <DataGridTextColumn Binding="{Binding TagValueAsObject}" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Header="Значение" Width="Auto" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding Dim, Mode=OneTime}" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Header="Единицы измерения" Width="Auto" />
             </DataGrid.Columns>
         </DataGrid>
 
