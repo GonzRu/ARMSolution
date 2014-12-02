@@ -63,5 +63,7 @@
             <Button Content="Записать уставки" Visibility="{Binding Path=IsEditSettingsModeEnable, Converter={converters:BooleanToVisibilityConverter}}" Command="{Binding Path=SaveSettingsSetAsyncCommand}" Height="30" Margin="50,5,5,5" />
         </StackPanel>
 
+        <GridSplitter Grid.Column="0" Grid.Row="0"  HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="10" />
+
     </Grid>
 </UserControl>
