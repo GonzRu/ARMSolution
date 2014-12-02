@@ -79,7 +79,7 @@ namespace ARMConfigurator.ViewModels
                 var tagsToRequest = new List<string>();
                 foreach (var tagViewModel in group.Tags)
                 {
-                    tagsToRequest.Add(String.Format("{0}.{1}.{2}", tagViewModel.DsGuid, tagViewModel.DeviceGuid, tagViewModel.TagGuid));
+                    tagsToRequest.Add(tagViewModel.TagFullGuid);
                 }
 
                 Configuration.DsRouterProvider.SubscribeToTagsValuesUpdate(tagsToRequest);
@@ -97,7 +97,7 @@ namespace ARMConfigurator.ViewModels
                 var tagsToRequest = new List<string>();
                 foreach (var tagViewModel in group.Tags)
                 {
-                    tagsToRequest.Add(String.Format("{0}.{1}.{2}", tagViewModel.DsGuid, tagViewModel.DeviceGuid, tagViewModel.TagGuid));
+                    tagsToRequest.Add(tagViewModel.TagFullGuid);
                 }
 
                 Configuration.DsRouterProvider.UnSubscribeToTagsValuesUpdate(tagsToRequest);
