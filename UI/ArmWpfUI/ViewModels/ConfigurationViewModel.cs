@@ -532,7 +532,7 @@ namespace ArmWpfUI.ViewModels
                                 currentDataControl.ASUTagUOM = tmpTag is TagAnalog ? (tmpTag as TagAnalog).Dim : String.Empty;
                                 currentDataControl.ASUTagType = tmpTag.GetTypeAsString();
 
-                                //CreateBinding(cc, CBaseControl.ASUContentValueProperty, tagIDFull, null);
+                                CreateBinding(currentDataControl, CBaseControl.ASUContentValueProperty, tagIDFull, "TagValueAsString", null);
                                 if (!tagsToSubscribe.Contains(tagIDFull))
                                     tagsToSubscribe.Add(tagIDFull);
 
