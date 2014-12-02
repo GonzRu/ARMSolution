@@ -26,6 +26,20 @@ namespace ArmWpfUI.ViewModels.DeviceViewModels
         private DeviceDataViewModel _currentDataViewModel;
 
         /// <summary>
+        /// Уставки
+        /// </summary>
+        public DeviceSettingsViewModel DeviceSettingsViewModel
+        {
+            get
+            {
+                if (_deviceSettingsViewModel == null)
+                    _deviceSettingsViewModel = new DeviceSettingsViewModel(Device, Groups.Where(model => model.GroupCategory == GroupCategory.Ustavki).ToList(), ExchangeProvider);
+                return _deviceSettingsViewModel;
+            }
+        }
+        private DeviceSettingsViewModel _deviceSettingsViewModel;
+
+        /// <summary>
         /// Служебные данные
         /// </summary>
         public DeviceDataViewModel ServiceDataViewModel

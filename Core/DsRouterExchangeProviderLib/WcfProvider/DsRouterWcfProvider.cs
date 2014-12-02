@@ -825,6 +825,83 @@ namespace DsRouterExchangeProviderLib.WcfProvider
 
         #endregion
 
+        #region Уставки
+
+        /// <summary>
+        /// Получение списка архивных записей уставок для устройства
+        /// </summary>
+        public List<SettingsSet> GetSettingsSetsList(UInt16 dsGuid, UInt32 devGuid)
+        {
+            List<SettingsSet> result = null;
+
+            try
+            {
+                var dsRouterSettingsSetsList = _dsRouterProxy.GetSettingsSetsList(dsGuid, devGuid);
+
+                result =
+                    dsRouterSettingsSetsList.Select(
+                        set =>
+                            new SettingsSet
+                            {
+                                SettingsSetId = set.SettingsSetID,
+                                SettingsSetComment = set.SettingsSetComment,
+                                SettingsSetDateTime = set.SettingsSetDateTime
+                            }).ToList();
+            }
+            catch (Exception)
+            {
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Получение значений для указанных тегов из конкретного архивного набора уставок
+        /// </summary>
+        public Dictionary<String, TagValue> GetValuesFromSettingsSet(UInt16 dsGuid, Int32 settingsSetId)
+        {
+            Dictionary<String, TagValue> result = null;
+
+            try
+            {
+                result = _dsRouterProxy.GetValuesFromSettingsSet(dsGuid, settingsSetId)
+                    .ToDictionary(pair => pair.Key, pair => new TagValue()
+                    {
+                        TagValueAsObject = pair.Value.VarValueAsObject,
+                        TagValueQuality = (TagValueQuality) pair.Value.VarQuality
+                    });
+            }
+            catch (Exception)
+            {
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Запись набора уставкок в устройство
+        /// </summary>
+        public void SaveSettingsToDevice(UInt16 dsGuid, UInt32 devGuid, Dictionary<string, TagValue> tagsValues)
+        {
+            try
+            {
+                Dictionary<string, DSRouterTagValue> dsRouterTagsValues = tagsValues.ToDictionary(pair => pair.Key,
+                    pair =>
+                        new DSRouterTagValue
+                        {
+                            VarValueAsObject = pair.Value.TagValueAsObject,
+                            VarQuality = (uint) pair.Value.TagValueQuality
+                        });
+
+                _dsRouterProxy.SaveSettingsToDevice(dsGuid, devGuid, dsRouterTagsValues);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region Private metods

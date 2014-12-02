@@ -47,6 +47,7 @@
     <Compile Include="Models\Common\Reports\TagsReportSettings.cs" />
     <Compile Include="Models\Common\Reports\User.cs" />
     <Compile Include="Models\Common\Reports\UserGroup.cs" />
+    <Compile Include="Models\Common\SettingsSet.cs" />
     <Compile Include="Models\Common\TagValue.cs" />
     <Compile Include="Models\Common\TrendSettings.cs" />
     <Compile Include="Models\Configuration\Configuration.cs" />
